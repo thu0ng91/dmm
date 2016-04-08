@@ -1,0 +1,159 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-1-19, 8:30:39
+    Author     : joe
+*/
+body {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin-right: 1px;
+    background: url(../images/bg.png) transparent;
+}
+
+.navbar-inverse {
+    background-color: #033465;
+}
+
+.message {
+    position: absolute;
+    margin: 0px auto;
+    width: 400px;
+    z-index: 999;
+}
+
+.message-icon {
+    font-size: 18px;
+}
+
+.main {
+    margin-top: 50px;
+    padding: 5px 0px 0px 5px;
+    width: 99%;
+}
+
+.close-tab {
+    font-size: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding-left: 25px;
+    z-index: 100;
+    cursor: hand;
+    cursor: pointer;
+    color: #94A6B0;
+}
+
+.topbar-collapse {
+    float: right;
+}
+
+.boxmsg {
+    position: absolute;
+    top: 30%;
+    left: 47%;
+    min-width: 500px;
+    min-height: 64px;
+    margin-left: -200px;
+    padding-left: 60px;
+    font-size: 16px;
+    z-index: 999;
+}
+
+.iframe-main {
+    margin-top: 15px;
+}
+
+.iframeClass {
+    z-index: 1;
+    visibility: inherit;
+    width: 100%;
+    frameborder: no;
+    border: 0;
+    marginwidth: 0;
+    marginheight: 0;
+    scrolling-x: no;
+    scrolling-y: auto;
+    allowtransparency: true;
+}
+
+.chapter {
+    width: 980px;
+    margin: 0 auto;
+}
+
+/*------------气泡----------------------*/
+.tag {
+    width: 75%;
+    min-height: 30px;
+    border: 1px solid #eee;
+    position: relative;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    margin-left: 15px;
+    -moz-box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.3);
+    -webkit-box-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.3);
+    box-shadow: 1px 1px 5px hsla(0, 0%, 0%, 0.3);
+}
+
+.tag:before, .tag:after {
+    position: absolute;
+    content: "\00a0";
+    width: 0px;
+    height: 0px;
+    border-width: 8px 18px 8px 0;
+    border-style: solid;
+    border-color: transparent #ddd transparent transparent;
+    top: 5px;
+    left: -18px;
+
+}
+
+.tag:after {
+    bottom: -33px;
+    border-color: #FFF transparent transparent;
+}
+
+.feedback {
+    margin-bottom: 15px;
+}
+
+.ui-timepicker-div .ui-widget-header {
+    margin-bottom: 8px;
+}
+
+.ui-timepicker-div dl {
+    text-align: left;
+}
+
+.ui-timepicker-div dl dt {
+    height: 25px;
+    margin-bottom: -25px;
+}
+
+.ui-timepicker-div dl dd {
+    margin: 0 10px 10px 65px;
+}
+
+.ui-timepicker-div td {
+    font-size: 90%;
+}
+
+.ui-tpicker-grid-label {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui_tpicker_hour_label, .ui_tpicker_minute_label, .ui_tpicker_second_label,
+.ui_tpicker_millisec_label, .ui_tpicker_time_label {
+    padding-left: 20px
+}

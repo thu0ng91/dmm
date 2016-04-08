@@ -1,0 +1,57 @@
+.panel {
+    margin-bottom: 0;
+}
+
+.panel-body {
+    padding-top: 0;
+    padding-bottom: 0;
+    background: url('../images/bg.png');
+}
+
+.chapter-list {
+    width: 240px;
+    position: absolute;
+    top: 60px;
+    left: -240px;
+    height: 800px;
+    overflow-y: auto;
+}
+.mycontent {
+    position: relative;
+    overflow-x: hidden;
+    word-break: break-all;
+    column-gap: 50px;
+    -moz-column-gap: 50px;
+    -webkit-column-gap: 50px;
+}
+
+.mycontent p {
+    text-indent: 2em;
+}
+
+#cPage {
+    width: 100%;
+    text-align: right;
+}
+
+.pagination {
+    position: absolute;
+    height: 80%;
+    width: 980px;
+    top: 160px;
+    margin: 0 auto;
+}
+
+#prev, #cent, #next {
+    width: 32%;
+    height: 100%;
+    float: left;
+}
+
+#prev {
+    cursor: url("../images/cur1.cur"), auto;
+}
+
+#next {
+    cursor: url("../images/cur2.cur"), auto;
+}

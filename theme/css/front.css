@@ -1,0 +1,54 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-8-28, 17:38:48
+    Author     : joe
+*/
+
+body {    
+    margin: 0 auto; 
+}
+
+.main {
+    margin-top: 20px;
+}
+
+.header-back {
+    background-color: #194C7E;
+}
+
+/*************瀑布流样式表****************/
+#masonry { 
+    padding: 0; 
+    min-height: 450px; 
+    margin: 0 auto; 
+} 
+
+.container-fluid {
+  padding: 20px;
+}
+.box {
+  margin: 10px;
+  float: left;
+  width: 200px;
+  border: 1px #000 solid;
+  padding: 2px;
+  
+}
+.box img {
+  max-width: 100%
+}
+
+/*************公告***************/
+.notice {
+    width: 260px;
+}
+
+.notice-content {    
+    max-height: 260px;
+    overflow-y: auto;
+}
+
