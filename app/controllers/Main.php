@@ -11,9 +11,14 @@ class Main extends CI_Controller {
 
     public function index() {
         $this->load->model('update_model', 'update');
-        $data['user']   = '';
-        $data['title']  = $this->title['value'];
-        $data['update'] = $this->update->get(10);
+        $this->load->model('Category_model', 'category');
+        $this->load->model('story_model', 'story');
+
+        $data['user']      = '';
+        $data['title']     = $this->title['value'];
+        $data['update']    = $this->update->get(10);
+        $data['categorys'] = $this->category->get();
+        $data['story']    = $this->story->get(null,20);
 
         $this->load->view('main', $data);
     }

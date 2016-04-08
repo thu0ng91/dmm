@@ -88,6 +88,13 @@ body {
     margin: 0 auto;
 }
 
+.story-list {
+    position: relative;
+    float:left;
+    width: 195px;
+    margin: 5px;
+    text-align: center;
+}
 /*------------气泡----------------------*/
 .tag {
     width: 75%;

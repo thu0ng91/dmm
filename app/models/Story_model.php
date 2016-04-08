@@ -21,6 +21,7 @@ class Story_model extends CI_Model {
             $this->db->limit($num,$offset);
         }
 
+        $this->db->order_by('id','DESC');
         return $this->db->get('story')->result_array();
     }
 }

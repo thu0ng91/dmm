@@ -58,3 +58,5 @@ $route['logout']         = 'main/logout';
 $route['register']       = 'main/register';
 $route['story/(:num)']   = 'story/index/$1';
 $route['chapter/(:num)'] = 'story/view/$1';
+
+$route['category/(:num)'] = 'category/index/$1';

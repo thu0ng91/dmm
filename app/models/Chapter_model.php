@@ -10,6 +10,7 @@ class Chapter_model extends CI_Model {
 
     public function __construct() {
         $this->load->database();
+        $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
     }
 
     /**
@@ -22,7 +23,11 @@ class Chapter_model extends CI_Model {
      */
     public function get($id = null, $story_id = null) {
         if ($id) {
-            return $this->db->get_where('chapter', array('id' => $id))->row_array();
+            if (!$chapter = $this->cache->get('chapter_' . $id)) {//检查缓存
+                $chapter = $this->db->get_where('chapter', array('id' => $id))->row_array();
+                $this->cache->save('chapter_' . $id, $chapter, 30000);//存入缓存
+            }
+            return $chapter;
         }
 
         if ($story_id) {
@@ -41,20 +46,26 @@ class Chapter_model extends CI_Model {
      * @return array
      */
     public function get_pn($id) {
-        $this->db->select('id,story_id');
-        $c = $this->db->get_where('chapter', array('id' => $id))->row_array();
+        if (!$prev_next = $this->cache->get('chapter_prev_next_' . $id)) {//检查缓存
+            $this->db->select('id,story_id');
+            $c = $this->db->get_where('chapter', array('id' => $id))->row_array();
 
-        $this->db->select('id');
-        $this->db->where(array('id >' => $id, 'story_id' => $c['story_id']));
-        $this->db->limit(1);
-        $next = $this->db->get('chapter')->row_array();
+            $this->db->select('id');
+            $this->db->where(array('id >' => $id, 'story_id' => $c['story_id']));
+            $this->db->limit(1);
+            $next = $this->db->get('chapter')->row_array();
 
-        $this->db->select('id');
-        $this->db->where(array('id <' => $id, 'story_id' => $c['story_id']));
-        $this->db->order_by('id','DESC');
-        $this->db->limit(1);
-        $prev = $this->db->get('chapter')->row_array();
+            $this->db->select('id');
+            $this->db->where(array('id <' => $id, 'story_id' => $c['story_id']));
+            $this->db->order_by('id', 'DESC');
+            $this->db->limit(1);
+            $prev = $this->db->get('chapter')->row_array();
 
-        return array('next' => $next['id'], 'prev' => $prev['id'], 'story_id' => $c['story_id']);
+            $prev_next = array('next' => $next['id'], 'prev' => $prev['id'], 'story_id' => $c['story_id']);
+
+            $this->cache->save('chapter_prev_next_' . $id, $prev_next, 30000);//存入缓存
+        }
+
+        return $prev_next;
     }
 }

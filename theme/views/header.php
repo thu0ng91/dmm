@@ -36,7 +36,6 @@
     <div>
         <ul class="nav navbar-nav">
             <li><a href="/Novel">首页</a></li>
-            <li><a target="_blank" href="/bbs2/">论坛交流</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
