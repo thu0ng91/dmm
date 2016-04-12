@@ -14,14 +14,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">分类</a>
+                    <a class="navbar-brand" href="<?=SITEPATH?>">分类</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <?php foreach ($categorys as $c): ?>
-                            <li><a href="<?= SITEPATH ?>/category/<?= $c['id'] ?>"><?= $c['title'] ?></a></li>
+                            <li class='<?= isset($id) && ($id == $c['id']) ? 'active' : '' ?>'>
+                                <a href="<?= SITEPATH ?>/category/<?= $c['id'] ?>"><?= $c['title'] ?></a>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
 
@@ -37,11 +39,12 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>">
-                                <img src="<?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" height="200px" title="<?= $s['desc'] ?>"/>
+                                <img src="<?=SITEPATH?>/<?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" width="160px" height="200px" title="<?= $s['desc'] ?>"/>
                             </a>
+
                             <p>
                                 <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>">
-                                    <?= $s['title'] ?>
+                                    <b><?= $s['title'] ?></b>
                                 </a>
                             </p>
                         </div>

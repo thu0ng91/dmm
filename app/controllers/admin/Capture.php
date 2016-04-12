@@ -56,7 +56,7 @@ class Capture extends CI_Controller {
             return;
         }
 
-        $img = grab_image($book['item']['img'], null, 'books/' . $book['category_id'] . '/');
+        if ($book['itemt']['img']) $img = grab_image($book['item']['img'], null, 'books/' . $book['category_id'] . '/');
 
         $story = array(
             'title'    => $book['item']['title'],

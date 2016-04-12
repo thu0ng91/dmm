@@ -1,3 +1,7 @@
+body {
+    background: url(../images/bg.png) transparent;
+}
+
 .panel {
     margin-bottom: 0;
 }

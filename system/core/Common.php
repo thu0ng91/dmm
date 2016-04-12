@@ -358,7 +358,7 @@ if (!function_exists('show_error')) {
      *
      * @return    void
      */
-    function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered') {
+    function show_error($message, $status_code = 500, $heading = '发生错误') {
         $status_code = abs($status_code);
         if ($status_code < 100) {
             $exit_status = $status_code + 9; // 9 is EXIT__AUTO_MIN
@@ -800,7 +800,7 @@ if (!function_exists('grab_image')) {
 
         if ($directory) {
             mkdirs($directory);
-            $filename = $directory  . $filename;
+            $filename = $directory . $filename;
         }
         ob_start(); //打开浏览器的缓冲区
         readfile($url); //将图片读入缓冲区
@@ -810,5 +810,45 @@ if (!function_exists('grab_image')) {
         fwrite($fp, $img); //写入文件
         fclose($fp); //关闭文件之争
         return $filename;
+    }
+}
+
+if (!function_exists('show_json')) {
+    /**
+     * @param string /array $message
+     * @param null $stat
+     */
+    function show_json($message, $stat = null) {
+
+        $show_message['message'] = $message;
+        if ($stat) $show_message['stat'] = $stat;
+
+        echo json_encode($show_message, JSON_UNESCAPED_UNICODE);
+    }
+}
+
+if (!function_exists('dump_data')) {
+    /**
+     * @param string /array $data
+     */
+    function dump_data($data) {
+        echo '<pre>';
+        var_dump($data);
+        echo '</pre>';
+    }
+}
+
+if (!function_exists('get_encoding')) {
+    /**
+     * @param string $data
+     * @param string $to 输出字符串编码,默认'utf-8'
+     *
+     * @return string
+     */
+    function get_encoding($data, $to='UTF-8') {
+        $encode_arr = array('UTF-8', 'ASCII', 'GBK', 'GB2312', 'BIG5', 'JIS', 'eucjp-win', 'sjis-win', 'EUC-JP');
+        $encoded    = mb_detect_encoding($data, $encode_arr);
+        $data       = mb_convert_encoding($data, $to, $encoded);
+        return $data;
     }
 }
