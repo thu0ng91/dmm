@@ -9,7 +9,8 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
         <div class="panel-body">
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/add" method="post">
+            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/add" method="post" id="addStory">
+                <input type="hidden" name="id" id="story_id" value=""/>
 
                 <div class="form-group">
                     <label for="book_id" class="col-sm-2 control-label">书名：</label>
@@ -43,13 +44,14 @@
                     <label for="book_id" class="col-sm-2 control-label">描述：</label>
 
                     <div class="col-sm-10">
-                        <textarea class="form-control" id="desc"></textarea>
+                        <textarea class="form-control" id="desc" name="desc"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
+                    <div class="col-sm-offset-2 col-sm-10 btn-group" role="group">
                         <button type="submit" class="btn btn-success">增加</button>
+                        <button type="reset" class="btn btn-info">取消</button>
                     </div>
                 </div>
 
@@ -74,7 +76,7 @@
 
             <p>&nbsp;</p>
 
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/upload" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/upload" method="post" enctype="multipart/form-data" id="addTxt">
 
                 <div class="input-group">
                     <div class="input-group-btn">
@@ -92,7 +94,6 @@
                     <input class="form-control" type="hidden" name="category" id="category"/>
                     <span class="input-group-btn">
                         <button type="button" class="bg-primary btn" id="selectFile">选择文件</button>
-
                         <button type="submit" class="btn-success btn">上传文件</button>
                     </span>
                 </div>
@@ -113,13 +114,30 @@
         </thead>
         <tbody>
         <?php foreach ($storys as $s): ?>
-            <tr>
+            <tr id="<?= $s['id'] ?>">
                 <td><?= $s['id'] ?></td>
-                <td>[<?=$categorys[$s['category']-1]['title']?>] <?= $s['title'] ?></td>
+                <td>
+                    [<?= $categorys[$s['category'] - 1]['title'] ?>]
+                    <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>">
+                        <?= $s['title'] ?>
+                    </a>
+                </td>
                 <td><?= $s['author'] ?></td>
                 <td><?= $s['time'] ?></td>
                 <td><?= $s['last_update'] ?></td>
-                <td></td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary editStory" title="编辑">
+                            <i class="icon-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-success deleteStory" title="删除">
+                            <i class="icon-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info updateStory" title="更新">
+                            <i class="icon-cloud-download"></i>
+                        </button>
+                    </div>
+                </td>
             </tr>
         <?php endforeach ?>
         </tbody>
@@ -132,9 +150,8 @@
 
 <script type="text/javascript">
     $(function () {
-
         $('#desc').redactor();
-
+        //上传文本小说
         $('#selectFile').click(function () {
             $('input[id=lefile]').click();
         });
@@ -142,11 +159,40 @@
         $('#lefile').change(function () {
             $('#fileLoad').val($(this).val());
         });
-
+        //选择分类
         $('#selectCategory a').click(function () {
             var id = $(this).parent('li').attr('id');
             $('#category').val(id);
             $('#selectCategoryName').html($(this).text() + ' <span class="caret"></span>');
+        })
+
+        //编辑小说
+        $('.editStory').click(function () {
+            var id = $(this).parents('tr').attr('id');
+
+            $('#collapseOne').collapse('show');
+
+            $.get('<?=SITEPATH?>/admin/story/get/' + id, function (data) {
+                var story = $.parseJSON(data).message;
+                $('#addStory input[name=id]').val(story.id);
+                $('#addStory input[name=title]').val(story.title);
+                $('#addStory input[name=author]').val(story.author);
+                $('#addStory select[name=category]').val(story.category);
+                $('#desc').val(story.desc);
+                $('#desc').setCode(story.desc);
+            });
+        });
+        //删除小说
+        $('.deleteStory').click(function () {
+            if (!confirm('删除小说将同时删除所有章节！\r\n是否确认删除？')) return;
+            var id = $(this).parents('tr').attr('id');
+
+            $.get('<?=SITEPATH?>/admin/story/delete/' + id, function (data) {
+                var message = $.parseJSON(data).message;
+                if (message) {
+                    show_error(message);
+                }
+            })
         })
     })
 </script>

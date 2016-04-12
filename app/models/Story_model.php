@@ -33,7 +33,7 @@ class Story_model extends CI_Model {
         if (!$data) return;
 
         preg_match('/(?:<|《)(.*)(?:>|》)(?:作者:|：){0,}([A-Za-z0-9_\x80-\xff\s]{0,})\.txt/', get_encoding($data['orig_name']), $match);
-        dump_data($match);
+
         if (!$match || !isset($match[1])) {
             unlink($data['full_path']);
             show_error('文件名无法解析，请按照示范更改文件名！');
@@ -56,6 +56,8 @@ class Story_model extends CI_Model {
         if ($match[0]) {
             $c = preg_split('/(第.*?[章节]\s*?.*\r\n)/iu', $content);
 
+            $chapter['desc'] = $c[0];
+
             for ($i = 0; $i < count($match[0]); $i++) {
                 $chapter[] = array(
                     'title'   => $match[0][$i],
@@ -63,6 +65,8 @@ class Story_model extends CI_Model {
                 );
             }
         } else {
+            $chapter['desc'] = substr($content, 0, 500);
+
             $chapter[] = array(
                 'title'   => '正文',
                 'content' => $content
