@@ -37,40 +37,42 @@
     <th>ID</th>
     <th width="80%">分类标题</th>
     <th width="10%">操作</th>
-</thead>
-<tbody>
+    </thead>
+    <tbody>
     <?php foreach ($categorys as $c): ?>
         <tr id="<?= $c['id'] ?>">
             <td><?= $c['id'] ?></td>
             <td><?= $c['title'] ?></td>
             <td>
-                <button class="btn btn-xs btn-primary edit" title="编辑"><i class="icon-edit"></i></button>
-                <button class="btn btn-xs btn-danger delete" title="删除"><i class="icon-trash"></i></button>
+                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                    <button class="btn btn-primary editCategory" title="编辑"><i class="icon-edit"></i></button>
+                    <button class="btn btn-success deleteCategory" title="删除"><i class="icon-trash"></i></button>
+                </div>
             </td>
         </tr>
     <?php endforeach; ?>
-</tbody>
+    </tbody>
 </table>
 
 <script type="text/javascript">
     $(function () {
 
-        $('.edit').click(function () {
-            var $title_td = $(this).parent('td').prev(); //需要编辑的标题所在td
+        $('.editCategory').click(function () {
+            var $title_td = $(this).parents('td').prev(); //需要编辑的标题所在td
             var $id = $(this).parents('tr').attr('id'); //需要编辑的分类ID
             var $title = $title_td.text(); //需要编辑的分类title
 
 
-            var $form = '<form class="form-inline" action="<?= SITEPATH ?>/admin/category/add" method="post">'+
-                    '<div class="form-group">'+
-                    '<div class="input-group">' +
-                    '<input type = "text" class = "form-control" name="title" value="' + $title + '" />' +
-                    
-                    '<span class="input-group-btn">' +
-                    '<button class="btn btn-success" type="submit"><i class="icon-ok"></i></button>' +
-                    '</span></div>' +
-                    '<input type="hidden" name="id" value="'+$id+'" />'+
-                    '</div></form>';
+            var $form = '<form class="form-inline" action="<?= SITEPATH ?>/admin/category/add" method="post">' +
+                '<div class="form-group">' +
+                '<div class="input-group">' +
+                '<input type = "text" class = "form-control" name="title" value="' + $title + '" />' +
+
+                '<span class="input-group-btn">' +
+                '<button class="btn btn-success" type="submit"><i class="icon-ok"></i></button>' +
+                '</span></div>' +
+                '<input type="hidden" name="id" value="' + $id + '" />' +
+                '</div></form>';
 
             $title_td.html($form);
         });

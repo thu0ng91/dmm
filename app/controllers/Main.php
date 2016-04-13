@@ -15,7 +15,7 @@ class Main extends CI_Controller {
         $this->load->model('story_model', 'story');
 
         $data['user']      = '';
-        $data['title']     = $this->title['value'];
+        $data['title']     = $this->title;
         $data['update']    = $this->update->get(10);
         $data['categorys'] = $this->category->get();
         $data['story']    = $this->story->get(null,20);

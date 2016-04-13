@@ -32,8 +32,8 @@
 <ol class="breadcrumb">
     <li><a href="<?= SITEPATH ?>">首页</a></li>
     <li><a href="<?= SITEPATH ?>/category/<?= $category['id']?>"><?=$category['title']?></a></li>
-    <li class="active"><a href=" <?= SITEPATH . '/story/' . $prev_next['story_id'] ?>"><?= $story['title'] ?></a></li>
-    <li class="active"><?= $chapter['title'] ?></li>
+    <li><a href=" <?= SITEPATH . '/story/' . $prev_next['story_id'] ?>"><?= $story['title'] ?></a></li>
+    <li class="active"><b><?= $chapter['title'] ?></b></li>
 
     <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
         <a class="btn btn-default" href="<?= $prev_next['prev'] ? SITEPATH . '/chapter/' . $prev_next['prev'] : SITEPATH . '/story/' . $prev_next['story_id'] ?>" id="prev_url">

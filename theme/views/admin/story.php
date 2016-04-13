@@ -128,7 +128,7 @@
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
                         <button type="button" class="btn btn-primary editStory" title="编辑">
-                            <i class="icon-pencil"></i>
+                            <i class="icon-edit"></i>
                         </button>
                         <button type="button" class="btn btn-success deleteStory" title="删除">
                             <i class="icon-trash"></i>
@@ -191,6 +191,8 @@
                 var message = $.parseJSON(data).message;
                 if (message) {
                     show_error(message);
+                } else {
+                    window.location.href='<?=SITEPATH?>/admin/story'
                 }
             })
         })

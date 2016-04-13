@@ -29,6 +29,7 @@ class Story_model extends CI_Model {
         return $this->db->get('story')->result_array();
     }
 
+    //解析TXT文本文件名，获取小说名、作者
     public function parse_file($data) {
         if (!$data) return;
 
@@ -45,31 +46,30 @@ class Story_model extends CI_Model {
         return $story;
     }
 
+    //解析TXT文本中的章节
     public function parse_chapter($path) {
         if (!file_exists($path)) {
             show_error('文件不存在，请检查后重新读取');
         }
+
         $content = get_encoding(file_get_contents($path));
 
-        preg_match_all('/(第.*?[章节]\s*?.*\r\n)/iu', $content, $match);
+        preg_match_all('/(第[0-9零一二三四五六七八九十百千万]+章\s+?.*\s+)/', $content, $match);
 
         if ($match[0]) {
-            $c = preg_split('/(第.*?[章节]\s*?.*\r\n)/iu', $content);
-
-            $chapter['desc'] = $c[0];
-
+            $c               = preg_split('/(第[0-9零一二三四五六七八九十百千万]+章\s+?.*\s+)/', $content);
+            $chapter['desc'] = $c[0]; //第一章前内容为简介
             for ($i = 0; $i < count($match[0]); $i++) {
                 $chapter[] = array(
                     'title'   => $match[0][$i],
-                    'content' => preg_replace('/(\r\n\r\n)/u', '<br/><br/>', $c[$i + 1])
+                    'content' => preg_replace('/(\r\n)/', '<br/>', $c[$i + 1])
                 );
             }
-        } else {
+        } else {//如果没有分章，全部放到正文内
             $chapter['desc'] = substr($content, 0, 500);
-
-            $chapter[] = array(
-                'title'   => '正文',
-                'content' => $content
+            $chapter[]       = array(
+                'title' => '正文',
+                'content' => preg_replace('/(\r\n)/', '<br/>', $content)
             );
         }
 

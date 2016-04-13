@@ -10,8 +10,6 @@ class Category extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('setting_model', 'setting');
-        $this->title = $this->setting->get('title');
     }
 
     function index($id) {

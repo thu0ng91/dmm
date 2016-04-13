@@ -8,8 +8,13 @@
  */
 class Chapter_model extends CI_Model {
 
+    private $chapter_cache_time=30000;
+
     public function __construct() {
         $this->load->database();
+        $this->load->model('setting_model', 'setting');
+        //读取设置中的缓存时间
+        $this->chapter_cache_time=$this->setting->get('chapter_cache_time');
         $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
     }
 
@@ -25,7 +30,7 @@ class Chapter_model extends CI_Model {
         if ($id) {
             if (!$chapter = $this->cache->get('chapter_' . $id)) {//检查缓存
                 $chapter = $this->db->get_where('chapter', array('id' => $id))->row_array();
-                $this->cache->save('chapter_' . $id, $chapter, 30000);//存入缓存
+                $this->cache->save('chapter_' . $id, $chapter, $this->chapter_cache_time);//存入缓存
             }
             return $chapter;
         }
@@ -63,7 +68,7 @@ class Chapter_model extends CI_Model {
 
             $prev_next = array('next' => $next['id'], 'prev' => $prev['id'], 'story_id' => $c['story_id']);
 
-            $this->cache->save('chapter_prev_next_' . $id, $prev_next, 30000);//存入缓存
+            $this->cache->save('chapter_prev_next_' . $id, $prev_next, $this->chapter_cache_time);//存入缓存
         }
 
         return $prev_next;

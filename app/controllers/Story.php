@@ -12,8 +12,6 @@ class Story extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('setting_model');
-        $this->title = $this->setting_model->get('title');
         $this->load->model('story_model', 'story');
         $this->load->model('chapter_model', 'chapter');
     }
@@ -21,12 +19,11 @@ class Story extends CI_Controller {
     public function index($id) {
         if (!$id) {
             show_error('请输入书号');
-            return;
         }
 
         $data['user']     = '';
-        $data['title']    = $this->title['value'];
         $data['story']    = $this->story->get($id);
+        $data['title']    = $data['story']['title'];
         $data['chapters'] = $this->chapter->get(null, $id);
 
         $this->load->view('story', $data);

@@ -12,14 +12,18 @@ class Setting_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($title = null) {
-        if ($title == false) {
-            $query = $this->db->get('setting');
-            return $query->result_array();
+    public function get($title = null, $id = null) {
+        if ($title) {
+            $query = $this->db->get_where('setting', array('title' => $title))->row_array();
+            return $query['value'];
         }
-        //否则获取id的用户
-        $query = $this->db->get_where('setting', array('title' => $title));
-        return $query->row_array();
+
+        if ($id) {
+            $query = $this->db->get_where('setting', array('title' => $title));
+            return $query->row_array();
+        }
+
+        return $this->db->get('setting')->result_array();
     }
 
 }

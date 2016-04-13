@@ -13,7 +13,7 @@ class Main extends CI_Controller {
 
     public function index() {
         $data['user']='';
-        $data['title']=$this->title['value'];
+        $data['title']=$this->title;
         $this->load->view('admin/main',$data);
     }
 }
