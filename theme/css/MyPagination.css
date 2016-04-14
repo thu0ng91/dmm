@@ -38,10 +38,6 @@ body {
     text-indent: 2em;
 }
 
-#cPage {
-    width: 100%;
-    text-align: right;
-}
 
 .pagination {
     position: absolute;
