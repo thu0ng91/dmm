@@ -17,9 +17,14 @@ body {
     position: absolute;
     top: 60px;
     left: -240px;
-    height: 800px;
     overflow-y: auto;
+    z-index: 101;
 }
+
+.chapter {
+    margin: 0 auto;
+}
+
 .mycontent {
     position: relative;
     overflow-x: hidden;
@@ -41,9 +46,9 @@ body {
 .pagination {
     position: absolute;
     height: 80%;
-    width: 980px;
     top: 160px;
     margin: 0 auto;
+    z-index: 100;
 }
 
 #prev, #cent, #next {

@@ -83,11 +83,6 @@ body {
     allowtransparency: true;
 }
 
-.chapter {
-    width: 980px;
-    margin: 0 auto;
-}
-
 .story-list {
     position: relative;
     float:left;

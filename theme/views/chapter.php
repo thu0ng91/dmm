@@ -31,7 +31,7 @@
 
 <ol class="breadcrumb">
     <li><a href="<?= SITEPATH ?>">首页</a></li>
-    <li><a href="<?= SITEPATH ?>/category/<?= $category['id']?>"><?=$category['title']?></a></li>
+    <li><a href="<?= SITEPATH ?>/category/<?= $category['id'] ?>"><?= $category['title'] ?></a></li>
     <li><a href=" <?= SITEPATH . '/story/' . $prev_next['story_id'] ?>"><?= $story['title'] ?></a></li>
     <li class="active"><b><?= $chapter['title'] ?></b></li>
 
@@ -52,10 +52,12 @@
 </ol>
 
 <div class="chapter-list">
-    <div class="list-group">
-        <?php foreach ($chapters as $c): ?>
-            <a href="<?= SITEPATH ?>/chapter/<?= $c['id'] ?>" class="list-group-item <?= $c['id'] == $chapter['id'] ? 'active' : '' ?>"><?= $c['title'] ?></a>
-        <?php endforeach; ?>
+    <div class="panel panel-default">
+        <div class="list-group">
+            <?php foreach ($chapters as $c): ?>
+                <a href="<?= SITEPATH ?>/chapter/<?= $c['id'] ?>" class="list-group-item <?= $c['id'] == $chapter['id'] ? 'active' : '' ?>"><?= $c['title'] ?></a>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
 
@@ -82,7 +84,11 @@
 <script type="text/javascript">
     $(function () {
         var height = parseInt($(window).height()) - 90;
-        $('#content').MyPagination({height: height});
+        var width = parseInt($(window).width()) > 980 ? 980 : parseInt($(window).width());
+        $('.chapter-list').height(height - 52);
+        $('.chapter').width(width);
+        $('.pagination').width(width);
+        $('#content').MyPagination({height: height, width: width});
 
         var container = $('.chapter-list'),
             scrollTo = $('.chapter-list .active');
