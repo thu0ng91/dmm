@@ -13,7 +13,19 @@
 - 章节进行分页，不再一个页面到底，使用鼠标、左右按键进行翻页（低版本的IE不支持，让我们一起消灭它们）
 - 其他一时想不起来了...
 
+#安装
+
+- 建立目录，上传所有文件
+- 将book、uploads、app/cache、app/logs设置为777
+- 建立MySQL数据库 novel,导入novel.sql
+- 修改app/config/config.php中$config['base_url'] = '/DMNovel/'
+- 修改app/config/database.php中'username' => 'root','password' => '123456',
+- 运行 http://ip/DMNovel
+- 后台 http://ip/DMNovel/admin
+
 #截图
+
+前台
 
 ![首页](http://git.oschina.net/uploads/images/2016/0412/170430_3e0b7115_62743.png "首页")
 ![小说页面](http://git.oschina.net/uploads/images/2016/0412/170543_4523e424_62743.png "小说页面")
