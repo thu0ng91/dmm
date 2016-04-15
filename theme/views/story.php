@@ -25,13 +25,12 @@
                     if ($i == 5) {
                         echo '</tr><tr>';
                         $i = 0;
-                    } else {
-                        ?>
-                        <td>
-                            <a href="<?= SITEPATH ?>/chapter/<?= $c['id'] ?>"><?= $c['title'] ?></a>
-                        </td>
-                        <?php
                     }
+                    ?>
+                    <td>
+                        <a href="<?= SITEPATH ?>/chapter/<?= $c['id'] ?>"><?= $c['title'] ?></a>
+                    </td>
+                    <?php
                 }
                 ?>
             </tr>

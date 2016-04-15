@@ -18,7 +18,7 @@ class Main extends CI_Controller {
         $data['title']     = $this->title;
         $data['update']    = $this->update->get(10);
         $data['categorys'] = $this->category->get();
-        $data['story']    = $this->story->get(null,20);
+        $data['storys']    = $this->story->get(null,20);
 
         $this->load->view('main', $data);
     }

@@ -60,3 +60,7 @@ $route['story/(:num)']   = 'story/index/$1';
 $route['chapter/(:num)'] = 'story/view/$1';
 
 $route['category/(:num)'] = 'category/index/$1';
+
+$route['admin/story/(:num)']   = 'admin/story/index/$1';
+$route['admin/chapter/(:num)'] = 'admin/chapter/index/$1';
+$route['admin/chapter/list'] = 'admin/chapter/list_chapter';

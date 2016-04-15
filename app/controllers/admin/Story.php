@@ -14,11 +14,22 @@ class Story extends CI_Controller {
         $this->load->model('story_model', 'story');
     }
 
-    function index() {
+    function index($page = 0) {
+        $this->load->library('pagination');
         $this->load->model('category_model', 'category');
+        //每页分几项
+        $per_page = 10;
+        //分页配置
+        $this->config->load('pagination');
+        $config['base_url']   = site_url('admin/story');
+        $config['total_rows'] = $this->story->all();
+        $config['per_page']   = $per_page;
+        //调用分页
+        $this->pagination->initialize($config);
 
         $data['categorys'] = $this->category->get();
-        $data['storys']    = $this->story->get(null, 20);
+        $data['storys']    = $this->story->get(null, $per_page, $page);
+        $data['pages']     = $this->pagination->create_links(); //创建分页
 
         $this->load->view('admin/story', $data);
     }
@@ -31,15 +42,15 @@ class Story extends CI_Controller {
     }
 
     function add() {
-        $story=array(
-            'id' => $this->input->post('id'),
-            'title' => $this->input->post('title'),
-            'author' => $this->input->post('author'),
+        $story = array(
+            'id'       => $this->input->post('id'),
+            'title'    => $this->input->post('title'),
+            'author'   => $this->input->post('author'),
             'category' => $this->input->post('category'),
-            'desc' => $this->input->post('desc')
+            'desc'     => $this->input->post('desc')
         );
         if (!$story['title']) show_error('小说标题没有输入，请返回重新填写。');
-        $this->db->replace('story',$story);
+        $this->db->replace('story', $story);
         redirect('/admin/story');
     }
 
@@ -73,7 +84,7 @@ class Story extends CI_Controller {
 
             $chapters = $this->story->parse_chapter($data["upload_data"]['full_path']);
 
-            $story['desc']=$chapters['desc'];
+            $story['desc'] = $chapters['desc'];
 
             $this->db->replace('story', $story);
             $story_id = $this->db->insert_id();

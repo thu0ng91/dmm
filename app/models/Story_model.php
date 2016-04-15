@@ -29,6 +29,13 @@ class Story_model extends CI_Model {
         return $this->db->get('story')->result_array();
     }
 
+    public function all($where=null) {
+        if ($where) {
+            $this->db->where($where);
+        }
+        return $this->db->count_all_results('story');
+    }
+
     //解析TXT文本文件名，获取小说名、作者
     public function parse_file($data) {
         if (!$data) return;

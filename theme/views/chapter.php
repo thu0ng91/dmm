@@ -73,7 +73,7 @@
                 <dd id="next"></dd>
             </div>
         </div>
-        <div id="cPage"></div>
+        <span id="cPage" class="text-center"></span>
 
     </div>
 </div>

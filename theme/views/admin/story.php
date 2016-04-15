@@ -60,7 +60,7 @@
     </div>
 
     <div class="panel-heading" id="headingTwo">
-        <i class="icon-plus-sign-alt icon-large"></i>
+        <i class="icon-upload-alt icon-large"></i>
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">上传文本文件</a>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -100,48 +100,57 @@
             </form>
         </div>
     </div>
+</div>
 
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>书名</th>
-            <th>作者</th>
-            <th>创建时间</th>
-            <th>最后更新</th>
-            <th>操作</th>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>书名</th>
+        <th>作者</th>
+        <th>创建时间</th>
+        <th>最后更新</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($storys as $s): ?>
+        <tr id="<?= $s['id'] ?>">
+            <td><?= $s['id'] ?></td>
+            <td>
+                [<?= $categorys[$s['category'] - 1]['title'] ?>]
+                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" target="_blank">
+                    <?= $s['title'] ?>
+                </a>
+            </td>
+            <td><?= $s['author'] ?></td>
+            <td><?= $s['time'] ?></td>
+            <td><?= $s['last_update'] ?></td>
+            <td>
+                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                    <button type="button" class="btn btn-warning addChapter" title="章节列表">
+                        <i class="icon-list-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-default addChapter" title="增加章节">
+                        <i class="icon-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary editStory" title="编辑">
+                        <i class="icon-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-success deleteStory" title="删除">
+                        <i class="icon-trash"></i>
+                    </button>
+                    <button type="button" class="btn btn-info updateStory" title="更新">
+                        <i class="icon-cloud-download"></i>
+                    </button>
+                </div>
+            </td>
         </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($storys as $s): ?>
-            <tr id="<?= $s['id'] ?>">
-                <td><?= $s['id'] ?></td>
-                <td>
-                    [<?= $categorys[$s['category'] - 1]['title'] ?>]
-                    <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>">
-                        <?= $s['title'] ?>
-                    </a>
-                </td>
-                <td><?= $s['author'] ?></td>
-                <td><?= $s['time'] ?></td>
-                <td><?= $s['last_update'] ?></td>
-                <td>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                        <button type="button" class="btn btn-primary editStory" title="编辑">
-                            <i class="icon-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-success deleteStory" title="删除">
-                            <i class="icon-trash"></i>
-                        </button>
-                        <button type="button" class="btn btn-info updateStory" title="更新">
-                            <i class="icon-cloud-download"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        <?php endforeach ?>
-        </tbody>
-    </table>
+    <?php endforeach ?>
+    </tbody>
+</table>
+<div class="text-right">
+    <?= $pages ?>
 </div>
 
 <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/redactor.css"/>
@@ -192,9 +201,16 @@
                 if (message) {
                     show_error(message);
                 } else {
-                    window.location.href='<?=SITEPATH?>/admin/story'
+                    window.location.href = '<?=SITEPATH?>/admin/story';
                 }
             })
+        });
+        //增加章节
+        $('.addChapter').click(function () {
+            var id = $(this).parents('tr').attr('id');
+            var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
+            chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/' + id);
+            chapter_btn.trigger("click");
         })
     })
 </script>

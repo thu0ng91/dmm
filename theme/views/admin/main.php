@@ -20,6 +20,10 @@
                 <i class="icon-book"></i>
                 发布小说
             </a>
+            <a href="#" class="list-group-item" data-addtab="chapter" url="<?=SITEPATH?>/admin/chapter/list">
+                <i class="icon-list-alt"></i>
+                章节列表
+            </a>
             <a href="#" class="list-group-item" data-addtab="chapter" url="<?=SITEPATH?>/admin/chapter">
                 <i class="icon-file-text-alt"></i>
                 发布章节

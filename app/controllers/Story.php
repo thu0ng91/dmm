@@ -21,10 +21,13 @@ class Story extends CI_Controller {
             show_error('请输入书号');
         }
 
-        $data['user']     = '';
-        $data['story']    = $this->story->get($id);
-        $data['title']    = $data['story']['title'];
-        $data['chapters'] = $this->chapter->get(null, $id);
+        $this->load->model('category_model', 'category');
+
+        $data['categorys'] = $this->category->get();
+        $data['user']      = '';
+        $data['story']     = $this->story->get($id);
+        $data['title']     = $data['story']['title'];
+        $data['chapters']  = $this->chapter->get(null, $id);
 
         $this->load->view('story', $data);
     }
@@ -39,9 +42,9 @@ class Story extends CI_Controller {
         $data['title']     = $data['chapter']['title'];
         $data['prev_next'] = $this->chapter->get_pn($id);
         $data['story']     = $this->story->get($data['chapter']['story_id']);
-        $data['chapters']  = $this->chapter->get(null,$data['chapter']['story_id']);
-        $this->load->model('category_model','category');
-        $data['category']=$this->category->get($data['story']['category']);
+        $data['chapters']  = $this->chapter->get(null, $data['chapter']['story_id']);
+        $this->load->model('category_model', 'category');
+        $data['category'] = $this->category->get($data['story']['category']);
 
         $this->load->view('chapter', $data);
     }

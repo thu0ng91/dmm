@@ -12,7 +12,7 @@
                     <td>
                         <a href="<?= SITEPATH ?>/story/<?= $u['story_id'] ?>"><?= $u['story_title'] ?></a>
                     </td>
-                    <td class="text-right"><?= $u['time'] ?></td>
+                    <td class="text-right"><?= date('Y-m-d',$u['time']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -22,7 +22,7 @@
 
 <div class="col-md-10">
     <div id="story_list">
-        <?php foreach ($story as $s): ?>
+        <?php foreach ($storys as $s): ?>
             <div class="story-list pull-left">
                 <div class="panel panel-default">
                     <div class="panel-body">
