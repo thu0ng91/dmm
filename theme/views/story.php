@@ -21,16 +21,17 @@
                 <?php
                 $i = 0;
                 foreach ($chapters as $c) {
-                    $i++;
-                    if ($i == 5) {
-                        echo '</tr><tr>';
-                        $i = 0;
-                    }
                     ?>
                     <td>
                         <a href="<?= SITEPATH ?>/chapter/<?= $c['id'] ?>"><?= $c['title'] ?></a>
                     </td>
                     <?php
+                    $i++;
+                    if ($i == 5) {
+                        echo '</tr><tr>';
+                        $i = 0;
+                    }
+
                 }
                 ?>
             </tr>
