@@ -135,7 +135,7 @@
                         <i class="icon-list-alt"></i>
                     </button>
                     <button type="button" class="btn btn-default addChapter" title="增加章节">
-                        <i class="icon-pencil"></i>
+                        <i class="icon-plus"></i>
                     </button>
                     <button type="button" class="btn btn-primary editStory" title="编辑">
                         <i class="icon-edit"></i>
