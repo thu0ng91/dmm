@@ -128,7 +128,7 @@
             <td><?= $s['last_update'] ?></td>
             <td>
                 <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning addChapter" title="章节列表">
+                    <button type="button" class="btn btn-warning listChapter" title="章节列表">
                         <i class="icon-list-alt"></i>
                     </button>
                     <button type="button" class="btn btn-default addChapter" title="增加章节">
@@ -211,8 +211,15 @@
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
             chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/' + id);
             chapter_btn.trigger("click");
-        })
-    })
+        });
+        //打开章节列表
+        $('.listChapter').click(function () {
+            var id = $(this).parents('tr').attr('id');
+            var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter_list']");//触发父窗口按钮
+            chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/list/' + id);
+            chapter_btn.trigger("click");
+        });
+    });
 </script>
 
 <?php include VIEWPATH . "admin/iframe_footer.php" ?>

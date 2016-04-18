@@ -55,7 +55,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#content').redactor();
+        $('#content').redactor({minHeight:350});
     });
 </script>
 <?php include VIEWPATH . "admin/iframe_footer.php" ?>

@@ -8,13 +8,13 @@
  */
 class Chapter_model extends CI_Model {
 
-    private $chapter_cache_time=30000;
+    private $chapter_cache_time = 30000;
 
     public function __construct() {
         $this->load->database();
         $this->load->model('setting_model', 'setting');
         //读取设置中的缓存时间
-        $this->chapter_cache_time=$this->setting->get('chapter_cache_time');
+        $this->chapter_cache_time = $this->setting->get('chapter_cache_time');
         $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
     }
 
@@ -26,7 +26,11 @@ class Chapter_model extends CI_Model {
      *
      * @return array
      */
-    public function get($id = null, $story_id = null) {
+    public function get($id = null, $story_id = null, $num = null, $offset = null, $where = null) {
+        if ($where != null) {
+            $this->db->where($where);
+        }
+
         if ($id) {
             if (!$chapter = $this->cache->get('chapter_' . $id)) {//检查缓存
                 $chapter = $this->db->get_where('chapter', array('id' => $id))->row_array();
@@ -40,7 +44,27 @@ class Chapter_model extends CI_Model {
             $this->db->where('story_id', $story_id);
         }
 
+        if ($num || $offset) {
+            $this->db->limit($num, $offset);
+        }
+
         return $this->db->get('chapter')->result_array();
+    }
+
+    /**
+     * @param null $story_id
+     * @param null $where
+     *
+     * @return mixed
+     */
+    public function all($story_id=null,$where=null) {
+        if ($where) {
+            $this->db->where($where);
+        }
+        if ($story_id) {
+            $this->db->where('story_id', $story_id);
+        }
+        return $this->db->count_all_results('chapter');
     }
 
     /**

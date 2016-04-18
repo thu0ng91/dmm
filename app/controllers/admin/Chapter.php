@@ -50,7 +50,21 @@ class Chapter extends CI_Controller {
         redirect('/admin/chapter/' . $story['id']);
     }
 
-    function list_chapter($story_id=null) {
+    function list_chapter($story_id = null, $page = 0) {
+        $this->load->library('pagination');
+        //每页分几项
+        $per_page = 15;
+        //分页配置
+        $this->config->load('pagination');
+        $config['base_url']   = site_url('admin/chapter/list/'.$story_id);
+        $config['total_rows'] = $this->chapter->all($story_id);
+        $config['per_page']   = $per_page;
+        //调用分页
+        $this->pagination->initialize($config);
 
+        $data['story']    = $this->story->get($story_id);
+        $data['chapters'] = $this->chapter->get(null, $story_id, $per_page, $page);
+        $data['pages']     = $this->pagination->create_links(); //创建分页
+        $this->load->view('admin/chapter_list', $data);
     }
 }

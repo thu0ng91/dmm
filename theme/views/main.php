@@ -12,7 +12,7 @@
                     <td>
                         <a href="<?= SITEPATH ?>/story/<?= $u['story_id'] ?>"><?= $u['story_title'] ?></a>
                     </td>
-                    <td class="text-right"><?= date('Y-m-d',$u['time']) ?></td>
+                    <td class="text-right"><?= $u['time'] ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
