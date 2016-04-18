@@ -9,6 +9,7 @@
                         <?= $story['title'] ?>
                     <button type="submit" class="bg-info btn" id="addChapter" title="增加新章节" data-story-id="<?=$story['id']?>">
                         <i class="icon-plus-sign-alt"></i>
+                        增加新章节
                     </button>
                     </h4>
                 </div>

@@ -18,7 +18,7 @@
             </a>
             <a href="#" class="list-group-item" data-addtab="story" url="<?=SITEPATH?>/admin/story">
                 <i class="icon-book"></i>
-                发布小说
+                小说列表
             </a>
             <a href="#" class="list-group-item" data-addtab="chapter_list" url="<?=SITEPATH?>/admin/chapter/list">
                 <i class="icon-list-alt"></i>

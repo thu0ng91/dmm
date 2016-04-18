@@ -1,5 +1,3 @@
-<?php include VIEWPATH . "admin/iframe_header.php" ?>
-
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -59,4 +57,4 @@
         $('#content').redactor({minHeight:350});
     });
 </script>
-<?php include VIEWPATH . "admin/iframe_footer.php" ?>
+
