@@ -50,20 +50,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | Examples:	my-controller/index	-> my_controller/index
   |		my-controller/my-method	-> my_controller/my_method
  */
-$route['default_controller'] = 'main';
-$route['404_override'] = '';
+$route['default_controller']   = 'main';
+$route['404_override']         = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['login'] = 'main/login';
-$route['logout'] = 'main/logout';
-$route['register'] = 'main/register';
-$route['story/(:num)'] = 'story/index/$1';
+$route['login']          = 'main/login';
+$route['logout']         = 'main/logout';
+$route['register']       = 'main/register';
+$route['story/(:num)']   = 'story/index/$1';
 $route['chapter/(:num)'] = 'story/view/$1';
 
 $route['category/(:num)'] = 'category/index/$1';
 
-$route['admin/story/(:num)'] = 'admin/story/index/$1';
-$route['admin/chapter/(:num)'] = 'admin/chapter/index/$1';
-$route['admin/chapter/list'] = 'admin/chapter/list_chapter';
-$route['admin/chapter/list/(:num)'] = 'admin/chapter/list_chapter/$1';
-$route['admin/chapter/list/(:num)/(:num)'] = 'admin/chapter/list_chapter/$1/$2';
+$route['admin/story/(:num)']                      = 'admin/story/index/$1';
+$route['admin/chapter/(:num)']                    = 'admin/chapter/index/$1';
+$route['admin/chapter/(:num)/(:num)']             = 'admin/chapter/index/$1/$2';
+$route['admin/chapter/list']                      = 'admin/chapter/list_chapter';
+$route['admin/chapter/list/(:num)']               = 'admin/chapter/list_chapter/$1';
+$route['admin/chapter/list/(:num)/(:num)']        = 'admin/chapter/list_chapter/$1/$2';
+$route['admin/chapter/list/(:num)/(:num)/(:any)'] = 'admin/chapter/list_chapter/$1/$2';

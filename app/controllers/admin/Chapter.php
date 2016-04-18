@@ -14,13 +14,21 @@ class Chapter extends CI_Controller {
         $this->load->model('chapter_model', 'chapter');
     }
 
-    function index($story_id = null) {
+    function index($story_id = null, $chapter_id = null) {
         if ($story_id) {
             $data['story'] = $this->story->get($story_id);
+            if ($chapter_id) {
+                $data['chapter'] = $this->chapter->get($chapter_id);
+                $this->load->view('admin/chapter', $data);
+                return;
+            }
         } else {
             $data['storys'] = $this->story->get();
         }
+
+        $this->load->view('admin/iframe_header');
         $this->load->view('admin/chapter', $data);
+        $this->load->view('admin/iframe_footer');
     }
 
     function add() {
@@ -47,24 +55,35 @@ class Chapter extends CI_Controller {
             'time'          => time()
         );
         $this->db->replace('update', $update);
-        redirect('/admin/chapter/' . $story['id']);
+        redirect('/admin/chapter/list/' . $story['id']);
     }
 
     function list_chapter($story_id = null, $page = 0) {
+        if (!$story_id) show_error('没有选择小说，请从发布小说中查看章节列表');
+        $where  = null;
+        $search = $this->input->get('search');
+        $type   = $this->input->get('type');
+
+        if ($search) {
+            if ($type == 'id') $where = array('id' => $search); else $where = "`title` like '%{$search}%'";
+        }
         $this->load->library('pagination');
         //每页分几项
-        $per_page = 15;
+        $per_page = 10;
         //分页配置
         $this->config->load('pagination');
-        $config['base_url']   = site_url('admin/chapter/list/'.$story_id);
-        $config['total_rows'] = $this->chapter->all($story_id);
+        $config['base_url']   = site_url('admin/chapter/list/' . $story_id);
+        $config['total_rows'] = $this->chapter->all($story_id, $where);
+        $config['suffix']     = '?type=' . $type . '&search=' . urlencode($search);
         $config['per_page']   = $per_page;
+        $config['cur_page']   = $page;
         //调用分页
         $this->pagination->initialize($config);
 
         $data['story']    = $this->story->get($story_id);
-        $data['chapters'] = $this->chapter->get(null, $story_id, $per_page, $page);
-        $data['pages']     = $this->pagination->create_links(); //创建分页
+        $data['chapters'] = $this->chapter->get(null, $story_id, $per_page, $page, $where);
+        $data['pages']    = $this->pagination->create_links(); //创建分页
         $this->load->view('admin/chapter_list', $data);
     }
+
 }

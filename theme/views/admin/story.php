@@ -71,7 +71,10 @@
                 <i class="icon-book"></i>
                 文件名示范: 《我是小说》作者：123.txt 《我是小说》.txt<br/>
                 <i class="icon-list-alt"></i>
-                章节示范： 第××章 &lt;回车&gt;
+                章节示范： <br />
+                内容简介: XXXXXXXXX <br />
+                第××章 XXXXXX &lt;回车&gt;<br />
+                &nbsp;&nbsp;XXXXXXXXXX
             </p>
 
             <p>&nbsp;</p>

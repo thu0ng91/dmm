@@ -9,10 +9,12 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/bootstrap-dialog.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/custom.css"/>
 
     <script src="<?= THEMEPATH ?>/js/jquery.min.js"></script>
     <script src="<?= THEMEPATH ?>/js/bootstrap.min.js"></script>
+    <script src="<?= THEMEPATH ?>/js/bootstrap-dialog.js"></script>
     <script src="<?= THEMEPATH ?>/js/custom.js"></script>
 
     <!--[if lt IE 9]>
