@@ -16,13 +16,7 @@
 
 #安装
 
-- 建立目录，上传所有文件
-- 将book、uploads、app/cache、app/logs设置为777
-- 建立MySQL数据库 novel,导入novel.sql
-- 修改app/config/config.php中$config['base_url'] = '/DMNovel/'
-- 修改app/config/database.php中'username' => 'root','password' => '123456',
-- 运行 http://ip/DMNovel
-- 后台 http://ip/DMNovel/admin
+- 打开地址http:// you ip /dmnovel/install/
 
 #截图
 
