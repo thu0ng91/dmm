@@ -40,7 +40,7 @@
             <div class="form-group">
                 <div class="col-sm-12 text-center btn-group">
                     <button type="submit" class="btn btn-primary"><?=isset($chapter)?'编辑':'增加'?></button>
-                    <button type="reset" class="btn btn-success">取消</button>
+                    <button type="reset" class="btn btn-success" onclick="BootstrapDialog.closeAll();">取消</button>
                 </div>
             </div>
         </form>
