@@ -34,11 +34,13 @@ class Story extends CI_Controller {
         $this->load->view('admin/story', $data);
     }
 
-    function get($id) {
-        if (!$id) show_error('没有选择书号.');
-
-        $story = $this->story->get($id);
-        show_json($story);
+    function edit($id = null) {
+        $this->load->model('category_model', 'category');
+        $data['categorys'] = $this->category->get();
+        if ($id) {
+            $data['story'] = $this->story->get($id);
+        }
+        $this->load->view('admin/story_edit', $data);
     }
 
     function add() {
@@ -47,6 +49,7 @@ class Story extends CI_Controller {
             'title'    => $this->input->post('title'),
             'author'   => $this->input->post('author'),
             'category' => $this->input->post('category'),
+            'image'    => $this->input->post('image'),
             'desc'     => $this->input->post('desc')
         );
         if (!$story['title']) show_error('小说标题没有输入，请返回重新填写。');
@@ -61,6 +64,29 @@ class Story extends CI_Controller {
         $this->db->delete('chapter', array('story_id' => $id));//删除章节
         $this->db->delete('update', array('story_id' => $id));//删除更新
         redirect('/admin/story');
+    }
+
+    function image() {
+        $config['upload_path']   = './books/' . date('Y', time());
+        $config['allowed_types'] = 'jpg|png|bmp|gif|jpeg';
+        $config['max_size']      = 500;
+        $config['encrypt_name']  = true;
+        //创建目录
+        mkdirs($config['upload_path']);
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('imageUpload')) {
+            show_error($this->upload->display_errors());
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+
+            $message = array(
+                'path'    => $config['upload_path'],
+                'profile' => $data['upload_data']
+            );
+            show_json($message);
+        }
     }
 
     function upload() {

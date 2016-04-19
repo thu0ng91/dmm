@@ -3,65 +3,17 @@
 
 <div class="panel panel-default" id="accordion" role="tablist" aria-multiselectable="true">
 
-    <div class="panel-heading" id="headingOne">
-        <i class="icon-plus-sign-alt icon-large"></i>
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">发布新小说</a>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-        <div class="panel-body">
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/add" method="post" id="addStory">
-                <input type="hidden" name="id" id="story_id" value=""/>
-
-                <div class="form-group">
-                    <label for="book_id" class="col-sm-2 control-label">书名：</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Title">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="book_id" class="col-sm-2 control-label">作者：</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="author" id="author" placeholder="留空为当前用户">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="category" class="col-sm-2 control-label">分类:</label>
-
-                    <div class="col-sm-10">
-                        <select class="form-control" name='category'>
-                            <?php foreach ($categorys as $c): ?>
-                                <option value="<?= $c['id'] ?>"><?= $c['title'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="book_id" class="col-sm-2 control-label">描述：</label>
-
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="desc" name="desc"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10 btn-group" role="group">
-                        <button type="submit" class="btn btn-success">增加</button>
-                        <button type="reset" class="btn btn-info">取消</button>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </div>
-
     <div class="panel-heading" id="headingTwo">
-        <i class="icon-upload-alt icon-large"></i>
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">上传文本文件</a>
+        <div class="btn-group">
+            <button class="btn btn-primary" id="addStory">
+                <i class="icon-plus-sign-alt icon-large"></i>
+                发布新小说
+            </button>
+            <a role="button" class="btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <i class="icon-upload-alt icon-large"></i>
+                上传文本文件
+            </a>
+        </div>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
         <div class="panel-body">
@@ -71,9 +23,9 @@
                 <i class="icon-book"></i>
                 文件名示范: 《我是小说》作者：123.txt 《我是小说》.txt<br/>
                 <i class="icon-list-alt"></i>
-                章节示范： <br />
-                内容简介: XXXXXXXXX <br />
-                第××章 XXXXXX &lt;回车&gt;<br />
+                章节示范： <br/>
+                内容简介: XXXXXXXXX <br/>
+                第××章 XXXXXX &lt;回车&gt;<br/>
                 &nbsp;&nbsp;XXXXXXXXXX
             </p>
 
@@ -156,13 +108,16 @@
     <?= $pages ?>
 </div>
 
-<link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/redactor.css"/>
-
-<script src="<?= THEMEPATH ?>/js/redactor.js"></script>
 
 <script type="text/javascript">
     $(function () {
-        $('#desc').redactor();
+        //打开新增小说窗口
+        $('#addStory').click(function() {
+            BootstrapDialog.show({
+                title: '发布新小说',
+                message: $('<div></div>').load('<?=SITEPATH?>/admin/story/edit/')
+            });
+        });
         //上传文本小说
         $('#selectFile').click(function () {
             $('input[id=lefile]').click();
@@ -181,17 +136,9 @@
         //编辑小说
         $('.editStory').click(function () {
             var id = $(this).parents('tr').attr('id');
-
-            $('#collapseOne').collapse('show');
-
-            $.get('<?=SITEPATH?>/admin/story/get/' + id, function (data) {
-                var story = $.parseJSON(data).message;
-                $('#addStory input[name=id]').val(story.id);
-                $('#addStory input[name=title]').val(story.title);
-                $('#addStory input[name=author]').val(story.author);
-                $('#addStory select[name=category]').val(story.category);
-                $('#desc').val(story.desc);
-                $('#desc').setCode(story.desc);
+            BootstrapDialog.show({
+                title: '编辑小说',
+                message: $('<div></div>').load('<?=SITEPATH?>/admin/story/edit/' + id)
             });
         });
         //删除小说
