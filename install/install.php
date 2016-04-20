@@ -1,9 +1,4 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 define('INSTALLPATH', dirname($_SERVER["SCRIPT_FILENAME"]) . '/');
@@ -27,7 +22,7 @@ switch ($_GET['step']) {
         import_database();
         break;
     case 4:
-        finsh_install();
+        finish_install();
         break;
     case 5:
         set_config();
@@ -187,7 +182,7 @@ function import_database() {
     ob_start();
 
     foreach ($sqls as $sql) {
-        if (preg_match('/(CREATE|insert).*`(' . $config['db_pref'] . '\w+)`/i', $sql, $match)) {
+        if (preg_match('/(CREATE|insert).*`(' . $db['default']['dbprefix'] . '\w+)`/i', $sql, $match)) {
             echo str_pad('', 4096) . "\n";
             switch (strtolower($match[1])) {
                 case 'create':
@@ -216,6 +211,16 @@ function import_database() {
     <?php
 }
 
-function finsh_install() {
-    
+function finish_install() {
+    ?>
+    <h2>恭喜：）  已经完成安装。</h2>
+    <div class="well">
+        <h4>
+            <li><a href="<?=SITEURL?>">首页</a></li>
+            <li><a href="<?=SITEURL?>admin">后台</li>
+        </h4>
+    </div>
+<?php
 }
+?>
+
