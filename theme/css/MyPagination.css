@@ -27,7 +27,7 @@ body {
 
 .mycontent {
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
     word-break: break-all;
     column-gap: 50px;
     -moz-column-gap: 50px;

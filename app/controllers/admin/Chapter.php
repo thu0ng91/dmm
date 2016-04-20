@@ -32,6 +32,7 @@ class Chapter extends CI_Controller {
     }
 
     function add() {
+        $type    = $this->input->post('type');
         $chapter = array(
             'id'       => $this->input->post('id'),
             'title'    => $this->input->post('title'),
@@ -52,10 +53,10 @@ class Chapter extends CI_Controller {
             'story_title'   => $story['title'],
             'chapter_id'    => $chapter_id,
             'chapter_title' => $chapter['title'],
-            'time'          => date('Y-m-d H:i:s',time())
+            'time'          => date('Y-m-d H:i:s', time())
         );
         $this->db->replace('update', $update);
-        redirect('/admin/chapter/list/' . $story['id']);
+        redirect('/admin/chapter/' . $type . '/' . $story['id']);
     }
 
     function list_chapter($story_id = null, $page = 0) {
@@ -72,11 +73,11 @@ class Chapter extends CI_Controller {
         $per_page = 10;
         //分页配置
         $this->config->load('pagination');
-        $config['base_url']   = site_url('admin/chapter/list/' . $story_id);
-        $config['total_rows'] = $this->chapter->all($story_id, $where);
-        $config['suffix']     = '?type=' . $type . '&search=' . urlencode($search);
-        $config['per_page']   = $per_page;
-        $config['cur_page']   = $page;
+        $config['base_url']           = site_url('admin/chapter/list/' . $story_id);
+        $config['total_rows']         = $this->chapter->all($story_id, $where);
+        $config['reuse_query_string'] = true;
+        //$config['suffix']     = '?type=' . $type . '&search=' . urlencode($search);
+        $config['per_page'] = $per_page;
         //调用分页
         $this->pagination->initialize($config);
 

@@ -36,6 +36,7 @@
             </div>
             <?php if (isset($chapter['id'])):?>
                 <input type="hidden" name="id" value="<?=$chapter['id']?>" />
+                <input type="hidden" name="type" value="list" />
             <?php endif;?>
             <div class="form-group">
                 <div class="col-sm-12 text-center btn-group">

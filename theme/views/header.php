@@ -24,7 +24,20 @@
     <script src="<?=THEMEPATH?>/js/respond.min.js"></script>
     <script src="<?=THEMEPATH?>/css/font-awesome-ie7.min.js"></script>
     <![endif]-->
-
+    <script type="text/javascript">
+        $(function () {
+            $('#searchStory').click(function(){
+                var search=$('#search').val();
+                if (!search) {
+                    alert('请输入搜索内容');
+                    return;
+                }
+                $.get('<?=SITEPATH?>/search/0?search='+search,function(data) {
+                    $('#main').html(data);
+                });
+            })
+        })
+    </script>
 
 </head>
 <body>
@@ -38,7 +51,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?=SITEPATH?>">
+            <a class="navbar-brand" href="<?= SITEPATH ?>">
                 <img src="<?= THEMEPATH ?>/images/index.png" width="20px"/>
             </a>
         </div>
@@ -47,11 +60,23 @@
                 <li><a href="<?= SITEPATH ?>">首页</a></li>
                 <li><a href="<?= SITEPATH ?>/admin">后台</a></li>
                 <?php foreach ($categories as $c): ?>
-                    <li class='<?= isset($id) && ($id == $c['id']) ? 'active' : '' ?>'>
+                    <li class='<?= isset($category_id) && ($category_id == $c['id']) ? 'active' : '' ?>'>
                         <a href="<?= SITEPATH ?>/category/<?= $c['id'] ?>"><?= $c['title'] ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
+            <form class="navbar-form navbar-right" role="search" method="get" action="<?=SITEPATH?>/search/0">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="search" id='search' placeholder="搜索书名、作者" value="<?= isset($search) ? $search : '' ?>"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" id="searchStory" type="submit">
+                                <i class="icon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </nav>
@@ -60,4 +85,4 @@
 
 
 <!-- Main -->
-<div class="main">
+<div class="main" id="main">

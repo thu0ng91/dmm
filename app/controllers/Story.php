@@ -23,11 +23,12 @@ class Story extends CI_Controller {
 
         $this->load->model('category_model', 'category');
 
-        $data['categorys'] = $this->category->get();
-        $data['user']      = '';
-        $data['story']     = $this->story->get($id);
-        $data['title']     = $data['story']['title'];
-        $data['chapters']  = $this->chapter->get(null, $id);
+        $data['categories'] = $this->category->get();
+
+        $data['story']       = $this->story->get($id);
+        $data['title']       = $data['story']['title'];
+        $data['chapters']    = $this->chapter->get(null, $id);
+        $data['category_id'] = $data['story']['category'];
 
         $this->load->view('story', $data);
     }

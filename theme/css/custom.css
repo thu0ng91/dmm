@@ -1,12 +1,4 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 2015-1-19, 8:30:39
-    Author     : joe
-*/
+
 body {
     position: absolute;
     top: 0px;
@@ -14,7 +6,11 @@ body {
     right: 0px;
     bottom: 0px;
     margin-right: 1px;
+    background-color: #EEEEEE;
+}
 
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    background-color: #EEEEEE;
 }
 
 .navbar-inverse {
@@ -87,6 +83,7 @@ body {
     width: 195px;
     margin: 5px;
     text-align: center;
+    float: left;
 }
 /*------------气泡----------------------*/
 .tag {
@@ -157,7 +154,7 @@ body {
 .ui_tpicker_millisec_label, .ui_tpicker_time_label {
     padding-left: 20px
 }
-//头像
+
 .kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
     margin: 0;
     padding: 0;
@@ -168,3 +165,19 @@ body {
 .kv-avatar .file-input {
     display: table-cell;
 }
+
+.fleft{float:left}
+.slideshow ul {list-style: none;}
+.slideshow{width:296px; height:441px; position:relative}
+.slideshow .slide-con{height:441px; overflow:hidden}
+.slideshow .slide-con li{height:441px; display:none}
+.slideshow .slide-con .pic{display:block; width:240px; height:340px}
+.slideshow .slide-con .pic img{width:240px; height:340px}
+.slideshow .slide-con h3{height:30px; line-height:30px; margin-top:5px; text-align:center; font-size:14px; overflow:hidden}
+.slideshow .slide-con p{height:66px; line-height:22px; text-indent:2em; overflow:hidden}
+.slideshow .slide-con p a{color:#666}
+.slideshow .slide-tab{position:absolute; right:0; top:-5px}
+.slideshow .slide-tab li{width:45px; height:64px; margin-top:5px; position:relative}
+.slideshow .slide-tab li img{width:45px; height:64px}
+.slideshow .slide-tab li span{width:41px; height:60px; border:2px solid #E7C08B; position:absolute; left:0; top:0; display:none}
+.slideshow .slide-tab li.on span{display:inline-block}

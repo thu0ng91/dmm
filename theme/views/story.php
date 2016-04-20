@@ -6,7 +6,7 @@
             <h2 class="text-center"><?= $story['title'] ?></h2>
         </div>
         <div class="panel-body">
-            <img src="<?= SITEPATH ?>/<?= ($story['image']) ? $story['image'] : 'books/default.jpg' ?>" align="left" class="img-thumbnail"/>
+            <img src="<?= SITEPATH ?>/<?= ($story['image']) ? $story['image'] : 'books/default.jpg' ?>" width="160px" align="left" class="img-thumbnail"/>
 
             <h4 class="text-right">作者：<?= $story['author'] ?></h4>
 
