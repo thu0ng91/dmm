@@ -168,7 +168,7 @@ body {
 
 .fleft{float:left}
 .slideshow ul {list-style: none;}
-.slideshow{width:296px; height:441px; position:relative}
+.slideshow{width:296px; height:400px; position:relative}
 .slideshow .slide-con{height:441px; overflow:hidden}
 .slideshow .slide-con li{height:441px; display:none}
 .slideshow .slide-con .pic{display:block; width:240px; height:340px}
@@ -176,8 +176,8 @@ body {
 .slideshow .slide-con h3{height:30px; line-height:30px; margin-top:5px; text-align:center; font-size:14px; overflow:hidden}
 .slideshow .slide-con p{height:66px; line-height:22px; text-indent:2em; overflow:hidden}
 .slideshow .slide-con p a{color:#666}
-.slideshow .slide-tab{position:absolute; right:0; top:-5px}
+.slideshow .slide-tab{position:absolute; right:-40px; top:-5px}
 .slideshow .slide-tab li{width:45px; height:64px; margin-top:5px; position:relative}
 .slideshow .slide-tab li img{width:45px; height:64px}
-.slideshow .slide-tab li span{width:41px; height:60px; border:2px solid #E7C08B; position:absolute; left:0; top:0; display:none}
+.slideshow .slide-tab li span{width:45px; height:65px; border:2px solid #E7C08B; position:absolute; left:0; top:0; display:none}
 .slideshow .slide-tab li.on span{display:inline-block}

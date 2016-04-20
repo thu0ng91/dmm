@@ -50,3 +50,28 @@ $(function () {
     });
 
 });
+
+//图片焦点滚动
+function focusSwitch(focusBox, focusList, focusTab, speed) {
+        if (!focusBox && !focusList && !focusTab)
+            return;
+        var i = 1, t = null, len = $(focusList + ' li').length;
+        $(focusTab + ' li').mouseover(function () {
+            i = $(focusTab + ' li').index($(this));
+            addCurrent(i);
+        });
+        t = setInterval(init, speed);
+        $(focusBox).hover(function () {
+            clearInterval(t);
+        }, function () {
+            t = setInterval(init, speed);
+        });
+        function init() {
+            addCurrent(i);
+            i = (i + 1) % len;
+        }
+        function addCurrent(i) {
+            $(focusTab + ' li').removeClass('on').eq(i).addClass('on');
+            $(focusList + ' li').hide().eq(i).show();
+        }
+    }

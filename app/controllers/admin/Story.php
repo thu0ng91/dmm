@@ -67,7 +67,7 @@ class Story extends CI_Controller {
     }
 
     function image() {
-        $config['upload_path']   = './books/' . date('Y', time());
+        $config['upload_path']   = 'books/' . date('Y', time());
         $config['allowed_types'] = 'jpg|png|bmp|gif|jpeg';
         $config['max_size']      = 500;
         $config['encrypt_name']  = true;

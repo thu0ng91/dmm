@@ -12,9 +12,13 @@ class Story_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($id = null, $num = null, $offset = null, $where = null) {
+    public function get($id = null, $num = null, $offset = null, $where = null, $sort = null, $asc = 'ASC') {
         if ($where != null) {
             $this->db->where($where);
+        }
+
+        if ($sort != NULL) {
+            $this->db->order_by($sort, $asc);
         }
 
         if ($id) {
@@ -29,7 +33,7 @@ class Story_model extends CI_Model {
         return $this->db->get('story')->result_array();
     }
 
-    public function all($where=null) {
+    public function all($where = null) {
         if ($where) {
             $this->db->where($where);
         }
@@ -38,7 +42,8 @@ class Story_model extends CI_Model {
 
     //解析TXT文本文件名，获取小说名、作者
     public function parse_file($data) {
-        if (!$data) return;
+        if (!$data)
+            return;
 
         preg_match('/(?:<|《)(.*)(?:>|》)(?:作者:|：){0,}([A-Za-z0-9_\x80-\xff\s]{0,})\.txt/', get_encoding($data['orig_name']), $match);
 
@@ -47,7 +52,7 @@ class Story_model extends CI_Model {
             show_error('文件名无法解析，请按照示范更改文件名！');
         }
 
-        $story['title']  = $match[1];
+        $story['title'] = $match[1];
         $story['author'] = $match[2];
 
         return $story;
@@ -64,17 +69,17 @@ class Story_model extends CI_Model {
         preg_match_all('/(第[0-9零一二三四五六七八九十百千万]+章\s+?.*\s+)/', $content, $match);
 
         if ($match[0]) {
-            $c               = preg_split('/(第[0-9零一二三四五六七八九十百千万]+章\s+?.*\s+)/', $content);
+            $c = preg_split('/(第[0-9零一二三四五六七八九十百千万]+章\s+?.*\s+)/', $content);
             $chapter['desc'] = $c[0]; //第一章前内容为简介
             for ($i = 0; $i < count($match[0]); $i++) {
                 $chapter[] = array(
-                    'title'   => $match[0][$i],
+                    'title' => $match[0][$i],
                     'content' => preg_replace('/(\r\n)/', '<br/>', $c[$i + 1])
                 );
             }
         } else {//如果没有分章，全部放到正文内
             $chapter['desc'] = substr($content, 0, 500);
-            $chapter[]       = array(
+            $chapter[] = array(
                 'title' => '正文',
                 'content' => preg_replace('/(\r\n)/', '<br/>', $content)
             );
@@ -82,4 +87,5 @@ class Story_model extends CI_Model {
 
         return $chapter;
     }
+
 }

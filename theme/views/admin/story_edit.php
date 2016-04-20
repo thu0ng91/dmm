@@ -48,13 +48,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10 btn-group" role="group">
-                    <button type="submit" class="btn btn-success"><?= isset($story) ? '编辑' : '增加' ?></button>
-                    <button type="reset" class="btn btn-info" onclick="BootstrapDialog.closeAll();">取消</button>
-                </div>
-            </div>
-
         </div>
         <div role="tabpanel" class="tab-pane" id="profile">
             <p></p>
@@ -71,7 +64,12 @@
             </div>
         </div>
     </div>
-
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10 btn-group" role="group">
+            <button type="submit" class="btn btn-success"><?= isset($story) ? '编辑' : '增加' ?></button>
+            <button type="reset" class="btn btn-info" onclick="BootstrapDialog.closeAll();">取消</button>
+        </div>
+    </div>
 
 </form>
 
@@ -83,24 +81,24 @@
 <script src="<?= THEMEPATH ?>/js/fileinput_locale_zh.js"></script>
 
 <script type="text/javascript">
-    $(function () {
-        $('#desc').redactor();
-        //上传封面图片
-        $('#imageUpload').fileinput({
-            'language': 'zh', //设置语言
-            'uploadUrl': "<?=SITEPATH?>/admin/story/image",
-            maxFileSize: 500,
-            showCaption: false,
-            uploadClass: 'btn btn-success',
-            elErrorContainer: '#kv-avatar-errors',
-            defaultPreviewContent: '<img src="<?=SITEPATH?>/<?=isset($story)?$story['image']:'books/default.jpg'?>" alt="Your Avatar" style="width:150px">',
-            allowedFileExtensions: ["jpg", "png", "gif", 'bmp']
-        });
-        $('#imageUpload').on('fileuploaded', function (event, data) {
-            console.log(data.response);
-            var file= data.response.message;
-            var image_url=file['path']+'/'+file.profile['raw_name']+file.profile['file_ext'];
-            $('#image').val(image_url);
-        });
-    })
+                $(function () {
+                    $('#desc').redactor();
+                    //上传封面图片
+                    $('#imageUpload').fileinput({
+                        'language': 'zh', //设置语言
+                        'uploadUrl': "<?= SITEPATH ?>/admin/story/image",
+                        maxFileSize: 500,
+                        showCaption: false,
+                        uploadClass: 'btn btn-success',
+                        elErrorContainer: '#kv-avatar-errors',
+                        defaultPreviewContent: '<img src="<?= SITEPATH ?>/<?= isset($story) ? $story['image'] : 'books/default.jpg' ?>" alt="Your Avatar" style="width:150px">',
+                        allowedFileExtensions: ["jpg", "png", "gif", 'bmp']
+                    });
+                    $('#imageUpload').on('fileuploaded', function (event, data) {
+                        console.log(data.response);
+                        var file = data.response.message;
+                        var image_url = file['path'] + '/' + file.profile['raw_name'] + file.profile['file_ext'];
+                        $('#image').val(image_url);
+                    });
+                })
 </script>
