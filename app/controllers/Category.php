@@ -27,8 +27,8 @@ class Category extends CI_Controller {
         $data['user']      = '';
         $data['title']     = $category['title'];
         $data['update']    = $this->update->get(10);
-        $data['categorys'] = $this->category->get();
-        $data['story']     = $this->story->get(null, 20,0,array('category'=>$id));
+        $data['categories'] = $this->category->get();
+        $data['stories']     = $this->story->get(null, 20,0,array('category'=>$id));
         $data['id']        = $id;
 
         $this->load->view('main', $data);

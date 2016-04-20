@@ -46,7 +46,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?= SITEPATH ?>">首页</a></li>
                 <li><a href="<?= SITEPATH ?>/admin">后台</a></li>
-                <?php foreach ($categorys as $c): ?>
+                <?php foreach ($categories as $c): ?>
                     <li class='<?= isset($id) && ($id == $c['id']) ? 'active' : '' ?>'>
                         <a href="<?= SITEPATH ?>/category/<?= $c['id'] ?>"><?= $c['title'] ?></a>
                     </li>

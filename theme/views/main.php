@@ -22,7 +22,7 @@
 
 <div class="col-md-10">
     <div id="story_list">
-        <?php foreach ($storys as $s): ?>
+        <?php foreach ($stories as $s): ?>
             <div class="story-list pull-left">
                 <div class="panel panel-default">
                     <div class="panel-body">
