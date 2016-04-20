@@ -18,7 +18,7 @@ function getStep(step) {
     $('#step-list').children().removeClass('active').addClass('disabled');
     $('#step' + step).removeClass('disabled').addClass('active');
 
-    width = step * 20;
+    width = step * 25;
     progress = $('#progress');
     progress.attr('aria-valuemin', width);
     progress.width(width + '%');
@@ -46,7 +46,7 @@ function check_config() {
     var error=1;
     warning = $('#warning');
     if (!base_url) {
-        warning.text("网站地址必须填写！！").show().fadeOut(500);
+        warning.text("网站地址必须填写！！").show().fadeOut(3000);
         return false;
     }
     $.ajaxSetup({async: false});
@@ -70,7 +70,7 @@ function check_databese_set() {
 
     warning = $('#warning');
     if (!db_host || !db_name || !db_user) {
-        warning.text("数据库地址、名称、管理员必须填写！！").show().fadeOut(500);
+        warning.text("数据库地址、名称、管理员必须填写！！").show().fadeOut(3000);
         return false;
     }
     var error = 1;
