@@ -34,4 +34,10 @@ class Category extends CI_Controller {
         redirect('admin/category');
     }
 
+    function delete($id=null) {
+        if (!$id) show_error('没有选择要删除的分类。');
+
+        $this->db->delete('category',array('id'=>$id));
+    }
+
 }
