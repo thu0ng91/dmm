@@ -76,8 +76,8 @@ class Chapter extends CI_Controller {
         $config['base_url']           = site_url('admin/chapter/list/' . $story_id);
         $config['total_rows']         = $this->chapter->all($story_id, $where);
         $config['reuse_query_string'] = true;
-        //$config['suffix']     = '?type=' . $type . '&search=' . urlencode($search);
-        $config['per_page'] = $per_page;
+        $config['uri_segment']        = 5;
+        $config['per_page']           = $per_page;
         //调用分页
         $this->pagination->initialize($config);
 
