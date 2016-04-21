@@ -45,8 +45,8 @@ class Story_model extends CI_Model {
         if (!$data)
             return;
 
-        preg_match('/(?:<|《)(.*)(?:>|》)(?:作者:|：){0,}([A-Za-z0-9_\x80-\xff\s]{0,})\.txt/', get_encoding($data['orig_name']), $match);
-
+        preg_match('/(?:<|《)(.*)(?:>|》)(?:作者:|作者：){0,}([A-Za-z0-9_\x80-\xff\s]{0,})\.txt/', get_encoding($data['orig_name']), $match);
+        
         if (!$match || !isset($match[1])) {
             unlink($data['full_path']);
             show_error('文件名无法解析，请按照示范更改文件名！');
@@ -66,10 +66,10 @@ class Story_model extends CI_Model {
 
         $content = get_encoding(file_get_contents($path));
 
-        preg_match_all('/(第[0-9零一二三四五六七八九十百千万]+章\s+?.*\s+)/', $content, $match);
+        preg_match_all('/((楔子\s?)|(第[0-9零一二三四五六七八九十百千万]+(章|节|回)\s?.*\s+))/', $content, $match);
 
         if ($match[0]) {
-            $c = preg_split('/(第[0-9零一二三四五六七八九十百千万]+章\s+?.*\s+)/', $content);
+            $c = preg_split('/((楔子\s?)|(第[0-9零一二三四五六七八九十百千万]+(章|节|回)\s?.*\s+))/', $content);
             $chapter['desc'] = $c[0]; //第一章前内容为简介
             for ($i = 0; $i < count($match[0]); $i++) {
                 $chapter[] = array(
