@@ -50,7 +50,26 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="adminHome">...</div>
+                <div role="tabpanel" class="tab-pane active" id="adminHome">
+                    <p></p>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <label>硬盘使用情况：</label><br />
+                            总共：<?=$dirSize['t']?>GB <br/>
+                            已用：<?=$dirSize['u']?>GB <br/>
+                            空闲：<?=$dirSize['f']?>GB <br/>
+                            DMNovel项目占用：<?=$dirSize['dir']?>GB<br/>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?=$dirSize['PCT']?>%;">
+                                    <span class="sr-only"><?=$dirSize['PCT']?>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?=$sqlSize?>MB
+
+                </div>
             </div>
 
         </div>
