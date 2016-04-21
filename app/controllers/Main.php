@@ -14,10 +14,19 @@ class Main extends CI_Controller {
         $this->load->model('Category_model', 'category');
         $this->load->model('story_model', 'story');
 
-        $data['title']     = $this->title;
-        $data['update']    = $this->story->get(null,5,0,null,'last_update','DESC');
+        $data['title']      = $this->title;
+        $data['update']     = $this->story->get(null, 5, 0, null, 'last_update', 'DESC');
         $data['categories'] = $this->category->get();
-        $data['stories']    = $this->story->get(null,20);
+        $data['stories']    = $this->story->get(null, 20);
+        //获取每个分类的最新更新5条记录
+        foreach ($data['categories'] as $category) {
+            $category_update[] = array(
+                'category' => $category,
+                'stories'  => $this->story->get(null, 5, 0, array('category' => $category['id']), 'last_update', 'DESC')
+            );
+        }
+
+        $data['category_update'] = $category_update;
 
         $this->load->view('main', $data);
     }

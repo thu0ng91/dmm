@@ -26,15 +26,12 @@
     <![endif]-->
     <script type="text/javascript">
         $(function () {
-            $('#searchStory').click(function(){
+            $('form').click(function(){
                 var search=$('#search').val();
                 if (!search) {
                     alert('请输入搜索内容');
                     return;
                 }
-                $.get('<?=SITEPATH?>/search/0?search='+search,function(data) {
-                    $('#main').html(data);
-                });
             })
         })
     </script>
