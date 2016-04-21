@@ -106,7 +106,7 @@ CREATE TABLE `story` (
   `click` int(10) NOT NULL,
   `category` int(10) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `last_update` timestamp NULL ,
   `image` varchar(255) NOT NULL,
   `user_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
