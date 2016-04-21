@@ -26,11 +26,11 @@
     <![endif]-->
     <script type="text/javascript">
         $(function () {
-            $('form').click(function(){
+            $('form').submit(function(){
                 var search=$('#search').val();
                 if (!search) {
                     alert('请输入搜索内容');
-                    return;
+                    return false;
                 }
             })
         })
