@@ -222,5 +222,3 @@ function finish_install() {
     </div>
 <?php
 }
-?>
-
