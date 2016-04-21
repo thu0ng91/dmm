@@ -1,6 +1,6 @@
 <?php include VIEWPATH . "header.php" ?>
 
-<div class="chapter">
+<div class="col-md-offset-2 col-md-8">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="text-center"><?= $story['title'] ?></h2>
