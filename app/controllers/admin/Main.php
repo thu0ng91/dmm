@@ -24,11 +24,28 @@ class Main extends CI_Controller {
         foreach (new RecursiveIteratorIterator($dir) as $file) {
             $totalSize += $file->getSize();
         }
-        $d['t']   = round(@disk_total_space(".") / (1024 * 1024 * 1024), 3);
-        $d['f']   = round(@disk_free_space(".") / (1024 * 1024 * 1024), 3);
-        $d['u']   = $d['t'] - $d['f'];
-        $d['PCT'] = (floatval($d['t']) != 0) ? round($d['u'] / $d['t'] * 100, 2) : 0;
-        $d['dir'] = round($totalSize / (1024 * 1024), 3);
+        $t = round(@disk_total_space(".") / (1024 * 1024 * 1024), 3);
+        $f = round(@disk_free_space(".") / (1024 * 1024 * 1024), 3);
+
+        $d['total'] = $t;
+
+        $d['data'] = array(
+            array(
+                'text' => '空闲',
+                'data' => $f
+            ),
+            array(
+                'text' => '已用',
+                'data' => $t - $f
+            ),
+            array(
+                'text' => 'DMNovel占用',
+                'data' => round($totalSize / (1024 * 1024 * 1024), 3)
+            )
+        );
+
+        $d['PCT'] = (floatval($t) != 0) ? round(($t - $f) / $t * 100, 2) : 0;
+
         return $d;
     }
 

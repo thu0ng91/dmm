@@ -1,15 +1,8 @@
 /**
-
  * Website: http://git.oschina.net/hbbcs/bootStrap-addTabs
-
+ * Version : 1.0
  *
-
- * Version : 0.6
-
- *
-
  * Created by joe on 2016-2-4.
-
  */
 
 $.fn.addtabs = function (options) {
