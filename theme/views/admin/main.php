@@ -58,7 +58,8 @@
                             总共：<?=$dirSize['t']?>GB <br/>
                             已用：<?=$dirSize['u']?>GB <br/>
                             空闲：<?=$dirSize['f']?>GB <br/>
-                            DMNovel项目占用：<?=$dirSize['dir']?>GB<br/>
+                            DMNovel项目占用：<?=$dirSize['dir']?>MB<br/>
+                            数据库占用：<?=$sqlSize?>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?=$dirSize['PCT']?>%;">
                                     <span class="sr-only"><?=$dirSize['PCT']?>%</span>
@@ -67,7 +68,7 @@
                         </div>
                     </div>
 
-                    <?=$sqlSize?>MB
+
 
                 </div>
             </div>

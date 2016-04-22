@@ -159,6 +159,8 @@
         $('.addChapter').click(function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
+            $(window.parent.document).find('#tab_tab_chapter').remove();
+            $(window.parent.document).find('#tab_chapter').remove();
             chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/' + id);
             chapter_btn.trigger("click");
         });
@@ -166,6 +168,8 @@
         $('.listChapter').click(function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter_list']");//触发父窗口按钮
+            $(window.parent.document).find('#tab_tab_chapter_list').remove();
+            $(window.parent.document).find('#tab_chapter_list').remove();
             chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/list/' + id);
             chapter_btn.trigger("click");
         });

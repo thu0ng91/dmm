@@ -92,6 +92,8 @@
             $('#addChapter').click(function () {
                 var id = $(this).attr('data-story-id');
                 var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
+                $(window.parent.document).find('#tab_tab_chapter').remove();
+                $(window.parent.document).find('#tab_chapter').remove();
                 chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/' + id);
                 chapter_btn.trigger("click");
             });
