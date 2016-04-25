@@ -55,24 +55,21 @@
 
                     <div class="panel">
                         <div class="panel-body">
-                            <label>硬盘使用情况：</label>
+                            <label>硬盘使用情况：</label><br/>
 
-                            <div class="col-md-3">
+                            <canvas id="HD_chart" width="550" height="300">
                                 总共：<?= $dirSize['total'] ?>GB <br/>
                                 已用：<?= $dirSize['data'][1]['data'] ?>GB <br/>
                                 空闲：<?= $dirSize['data'][0]['data'] ?>GB <br/>
                                 DMNovel项目占用：<?= $dirSize['data'][2]['data'] ?>GB<br/>
-                                数据库占用：<?= $sqlSize ?>
-                            </div>
-                            <div class="col-md-9">
-                                <canvas id="HD_chart" width="550" height="300" >
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="<?= $dirSize['PCT'] ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $dirSize['PCT'] ?>%;">
-                                            <?= $dirSize['PCT'] ?>%
-                                        </div>
+
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="<?= $dirSize['PCT'] ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $dirSize['PCT'] ?>%;">
+                                        <?= $dirSize['PCT'] ?>%
                                     </div>
-                                </canvas>
-                            </div>
+                                </div>
+                            </canvas>
+                            数据库占用：<?= $sqlSize ?>
                         </div>
                     </div>
 
@@ -111,8 +108,7 @@
             $('.tab-content').find('div.active').removeClass('active');
             $('#adminHome').addClass('active');
             $('#adminHomeTab').addClass('active');
-        })
-
+        });
     });
 
 </script>
