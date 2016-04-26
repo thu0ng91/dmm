@@ -166,6 +166,13 @@ body {
     display: table-cell;
 }
 
+.capture {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: normal;
+}
+
 .fleft{float:left}
 .slideshow ul {list-style: none;}
 .slideshow{height:340px; position:relative}

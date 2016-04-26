@@ -42,6 +42,7 @@ class Chapter_model extends CI_Model {
         if ($story_id) {
             $this->db->select('id,title');
             $this->db->where('story_id', $story_id);
+            $this->db->order_by('order','asc');
         }
 
         if ($num || $offset) {

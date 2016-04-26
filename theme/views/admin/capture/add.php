@@ -22,6 +22,7 @@
                     <li>:cr 换行符</li>
                     <li>:page /1/2.html或.php.htm</li>
                     <li>+ 在与:s和:cr联合时代表多个空格或换行</li>
+                    <li>支持直接写入正则表达式，正则中/前不要加\，正则表达式前后不要加/</li>
                 </ul>      
             </div>
         </div>
@@ -58,6 +59,16 @@
                         <div class="form-group">
                             <label for="titleLabel">小说地址</label>
                             <input type="text" class="form-control" id="book_url" name="book_url" placeholder="Book URL" value="<?= isset($capture) ? $capture['book_url'] : '' ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titleLabel">搜索地址</label>
+                            <input type="text" class="form-control" id="search_url" name="search_url" placeholder="Book URL" value="<?= isset($capture) ? $capture['search_url'] : '' ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titleLabel">搜索小说地址规则</label>
+                            <textarea class="form-control" name="search_book_url"><?= isset($capture) ? htmlspecialchars($capture['search_book_url']) : '' ?></textarea>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile">

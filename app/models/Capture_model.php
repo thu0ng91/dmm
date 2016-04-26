@@ -15,12 +15,13 @@ class Capture_model extends CI_Model {
 
     private $capture_url = 'http://www.23wx.com/';
     public $capture_id = 0;
-    public $capture = array();
+    public $capture;
     public $book_info;
     public $chapter_list;
 
     public function __construct() {
         $this->load->database();
+        $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
     }
 
     /**
@@ -52,7 +53,7 @@ class Capture_model extends CI_Model {
         $this->capture_id = $id;
         $capture          = $this->get($id);
 
-        $book_id = $book_id ? $$book_id : $capture['test_id'];
+        $book_id = $book_id ? $book_id : $capture['test_id'];
 
         $book_home_url     = preg_replace('/(\(:book_id\))/', $book_id, $capture['book_url']);
         $book_home_content = get_encoding($this->_getPage($book_home_url));
@@ -73,10 +74,15 @@ class Capture_model extends CI_Model {
         }
 
         $this->capture = $capture;
+        $this->cache->save('capture',$capture,3000);
 
         return $this->book_info;
     }
 
+    /**
+     * 抓取章节列表
+     * @return bool
+     */
     function getChapterList() {
         $chapter_list_url = $this->book_info['chapter_list_url'];
 
@@ -97,11 +103,40 @@ class Capture_model extends CI_Model {
         return $this->chapter_list;
     }
 
+    /**
+     * 抓取章节
+     *
+     * @param $url
+     *
+     * @return bool|string
+     */
     function getChapter($url) {
+        $this->capture=$this->capture?$this->capture:$this->cache->get('capture');
         $chapter_content = $this->_getPage($url);
         preg_match('/' . $this->capture['chapter_content'] . '/is', $chapter_content, $match);
         if (!$match) return FALSE;
         return get_encoding($match[1]);
+    }
+
+    /**
+     * 比较数据库已存章节和采集到的章节，得出差集
+     *
+     * @param array $sql
+     * @param array $capture
+     *
+     * @return array
+     */
+    function checkChapterList($sql, $capture) {
+        for ($i = 0; $i < count($capture); $i++) {
+            foreach ($sql as $s) {
+                if ($capture[$i]['title'] == $s['title']) {
+                    unset($capture[$i]);
+                    continue;
+                }
+            }
+            $capture[$i]['order']=$i;
+        }
+        return $capture;
     }
 
     private function _getPage($url) {

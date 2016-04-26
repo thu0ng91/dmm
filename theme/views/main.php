@@ -15,10 +15,10 @@
                         <?php foreach ($update as $s): ?>
 
                             <li>
-                                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" title="<?= $s['title'] ?>" target="_blank">
+                                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" title="<?= $s['title'] ?>">
                                     <img src="<?= SITEPATH ?>/<?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" class="pic"/>
                                 </a>
-                                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" title="<?= $s['title'] ?>" target="_blank">
+                                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" title="<?= $s['title'] ?>">
                                     <h3><?= $s['title'] ?></h3>
                                 </a>
 
@@ -73,7 +73,6 @@
             $(".slideshow .slide-tab li:eq(0)").addClass("on");
             focusSwitch('.slideshow', '.slide-con', '.slide-tab', 5000);
             $('[data-toggle="tooltip"]').tooltip({html: true, container: 'body'});
-            //$("img.lazy").lazyload();
         });
     </script>
 
