@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.28, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.11, for Linux (x86_64)
 --
 -- Host: localhost    Database: novel
 -- ------------------------------------------------------
--- Server version	5.6.28-0ubuntu0.15.10.1
+-- Server version	5.7.11-0ubuntu6
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `capture`
+--
+
+DROP TABLE IF EXISTS `capture`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `capture` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `site_title` varchar(255) NOT NULL,
+  `site_url` varchar(255) NOT NULL,
+  `book_url` varchar(255) NOT NULL,
+  `book_title` varchar(255) NOT NULL,
+  `book_author` varchar(255) NOT NULL,
+  `book_desc` varchar(255) NOT NULL,
+  `book_img` varchar(255) NOT NULL,
+  `chapter_list_url` varchar(255) NOT NULL,
+  `chapter_url_title` varchar(255) NOT NULL,
+  `chapter_url` varchar(255) NOT NULL,
+  `chapter_content` varchar(255) NOT NULL,
+  `test_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `capture`
+--
+
+LOCK TABLES `capture` WRITE;
+/*!40000 ALTER TABLE `capture` DISABLE KEYS */;
+INSERT INTO `capture` VALUES (1,'顶点小说','http://www.23wx.com/','http://www.23wx.com/book/(:book_id)','<dd><h1>(:cn) 全文阅读</h1>','文章作者</th><td>&nbsp;(:cn)</td>','</table>:s+<p>(:char)</p><p style=\"display:none\"','<img style=\":char\" alt=\":char\" src=\"(:char)\"/></a>','class=\"read\":shref=\"(:char)\":stitle=\":char\">最新章节','<td class=\"L\"><a href=\"(:page)\">(:cn)</a>','list_url+chapter_url','<dd id=\"contents\">(:char)</dd>',55519),(2,'笔趣阁','http://www.biquge.la/','http://www.biquge.la/book/(:book_id)','<div id=\"info\">:s+<h1>(:cn)</h1>','作&nbsp;&nbsp;&nbsp;&nbsp;者：(:cn)','<div id=\"intro\">(:char)</p>:s+<p>各位书友要','\"fmimg\"><img alt=\":cn\" src=\"(:char)\" width=\"120\" height=\"150\" /><span class=\"b\"','og:novel:read_url\" content=\"(:char)\"/>\r\n<meta property=\"og:url\"','<dd><a href=\"(:page)\">(:cn)</a></dd>','list_url+chapter_url','</script>&nbsp;(:char)</div>\r\n				<script>read3',14);
+/*!40000 ALTER TABLE `capture` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `category`
 --
 
@@ -27,7 +62,7 @@ CREATE TABLE `category` (
   `title` varchar(255) NOT NULL,
   `parent_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +71,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'玄幻',0),(2,'仙侠',0),(3,'武侠',0),(4,'都市',0),(5,'校园',0),(6,'历史',0),(7,'农村',0),(8,'军事',0),(9,'恐怖',0),(10,'其他',0);
+INSERT INTO `category` VALUES (1,'玄幻',0),(2,'仙侠',0),(3,'武侠',0),(4,'都市',0),(5,'言情',0),(6,'历史',0),(7,'侦探',0),(8,'恐怖',0);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,9 +140,9 @@ CREATE TABLE `story` (
   `desc` mediumtext NOT NULL,
   `click` int(10) NOT NULL,
   `category` int(10) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `last_update` timestamp NULL ,
-  `image` varchar(255) NOT NULL,
+  `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `image` varchar(255) DEFAULT NULL,
   `user_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -185,4 +220,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-20 20:15:23
+-- Dump completed on 2016-04-26  8:46:22
