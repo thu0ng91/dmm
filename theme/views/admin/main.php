@@ -29,6 +29,10 @@
                 发布章节
             </a>
             <a href="#" class="list-group-item" data-addtab="capture" url="<?= SITEPATH ?>/admin/capture">
+                <i class="icon-cog"></i>
+                采集设置
+            </a>
+            <a href="#" class="list-group-item" data-addtab="capture" url="<?= SITEPATH ?>/admin/capture/get">
                 <i class="icon-cloud-download"></i>
                 采集小说
             </a>

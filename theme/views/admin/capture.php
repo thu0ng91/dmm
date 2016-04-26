@@ -1,44 +1,84 @@
 <?php include VIEWPATH . "admin/iframe_header.php" ?>
 
-<div class="panel panel-default" id="accordion" role="tablist" aria-multiselectable="true">
-
+<div class="panel panel-default">
+    <!-- Default panel contents -->
     <div class="panel-heading">
-        <i class="icon-warning-sign icon-large"></i>
-        默认采集网站为<a href="http://www.23wx.com/">顶点小说</a>
+        <div class="row">
+            <div class="col-md-6">
+          
+                    <i class="icon-cog"></i>
+                    采集设置
+                
+            </div>
+            <div class="col-md-6 text-right">
+                <button class="btn btn-xs btn-info" id="addCapture">
+                    <i class="icon-plus"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
-
-    <div class="panel-body">
-        <form class="form-horizontal" action="<?= SITEPATH ?>/admin/capture/add" method="post">
-
-            <div class="form-group">
-                <label for="book_id" class="col-sm-2 control-label">采集书号</label>
-
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="book_id" id="title" placeholder="Book ID">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="category" class="col-sm-2 control-label">所在分类</label>
-                <div class="col-sm-10">
-                    <select class="form-control" name='category_id'>
-                        <?php foreach ($categorys as $c):?>
-                        <option value="<?=$c['id']?>"><?=$c['title']?></option>
-                        <?php endforeach;?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-success">增加</button>
-                </div>
-            </div>
-
-        </form>
-    </div>
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th width="70%">采集站点</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($captures as $c): ?>
+                <tr id="<?= $c['id'] ?>">
+                    <td><?= $c['id'] ?></td>
+                    <td><?= $c['site_title'] ?></td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <button type="button" class="btn btn-primary editCapture" title="编辑">
+                                <i class="icon-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-success testCapture" title="测试">
+                                <i class="icon-info-sign"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger deleteCapture" title="删除">
+                                <i class="icon-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.testCapture').click(function () {
+            var id = $(this).parents('tr').attr('id');
+            var title = $(this).parents('td').prev('td').text();
+            BootstrapDialog.show({
+                title: '测试采集 - ' + title,
+                message: $('<div></div>').load('<?= SITEPATH ?>/admin/capture/test/' + id)
+            });
+        });
+        
+         $('#addCapture').click(function () {           
+            BootstrapDialog.show({
+                title: '测试采集配置',
+                message: $('<div></div>').load('<?= SITEPATH ?>/admin/capture/edit/')
+            });
+        });
+        
+        $('.editCapture').click(function () {
+            var id = $(this).parents('tr').attr('id');
+            var title = $(this).parents('td').prev('td').text();
+            BootstrapDialog.show({
+                title: '编辑采集配置 - ' + title,
+                message: $('<div></div>').load('<?= SITEPATH ?>/admin/capture/edit/' + id)
+            });
+        });
+    });
+</script>
 
 
 <?php include VIEWPATH . "admin/iframe_footer.php" ?>

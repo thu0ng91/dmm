@@ -14,87 +14,53 @@ class Capture extends CI_Controller {
     }
 
     function index() {
-        $this->load->model('category_model', 'category');
-        $data['categorys'] = $this->category->get();
+        $data['captures'] = $this->capture->get(null, 'id,site_title');
         $this->load->view('admin/capture', $data);
     }
 
+    function get() {
+        
+    }
+
+    function test($id) {
+        $book = $this->capture->getBookInfo($id);
+        $chapter_list = $this->capture->getChapterList();
+        $chapter = substr($this->capture->getChapter($book['chapter_list_url'] . $chapter_list[0]['url']), 0, 250);
+
+        $data['book'] = $book;
+        $data['chapter_list'] = $chapter_list;
+        $data['chapter'] = $chapter;
+
+        $this->load->view('admin/capture/test', $data);
+    }
+
+    function edit($id = null) {
+        $data = array();
+        if ($id) {
+            $data['capture'] = $this->capture->get($id);
+        }
+        $this->load->view('admin/capture/add', $data);
+    }
+
     function add() {
-        $book_id     = $this->input->post('book_id');
-        $category_id = $this->input->post('category_id');
-
-        if ($book = $this->capture->check_book($book_id)) {
-
-        } else {
-            $this->get_book($book_id, $category_id);
-        }
-
-    }
-
-    function get_book($book_id, $category_id) {
-        $item = $this->capture->getBook($book_id);
-
-        $book = array(
-            'book_id'     => $book_id,
-            'category_id' => $category_id,
-            'item'        => $item
+        $capture = array(
+            'id' => $this->input->post('id'),
+            'site_title' => $this->input->post('site_title'),
+            'site_url' => $this->input->post('site_url'),
+            'book_url' => $this->input->post('book_url'),
+            'book_title' => $this->input->post('book_title'),
+            'book_author' => $this->input->post('book_author'),
+            'book_desc' => $this->input->post('book_desc'),
+            'book_img' => $this->input->post('book_img'),
+            'chapter_list_url' => $this->input->post('chapter_list_url'),
+            'chapter_url_title' => $this->input->post('chapter_url_title'),
+            'chapter_url' => $this->input->post('chapter_url'),
+            'chapter_content' => $this->input->post('chapter_content'),
+            'test_id' => $this->input->post('test_id')
         );
-
-        $this->cache->save($book_id, $book, 3000);
-
-        $data['item'] = $item;
-        $data['id']   = $book_id;
-
-        $this->load->view('admin/capture_book', $data);
+        
+        $this->db->replace('capture',$capture);
+        redirect('admin/capture');
     }
-
-    function get_chapter($id) {
-        $book = $this->cache->get($id);
-
-        if (!$book) {
-            show_error('缓存中不存在书号，请重新抓取');
-            return;
-        }
-
-        if ($book['item']['img']) $img = grab_image($book['item']['img'], null, 'books/' . $book['category_id'] . '/');
-
-        $story = array(
-            'title'    => $book['item']['title'],
-            'author'   => $book['item']['author'],
-            'desc'     => $book['item']['desc'],
-            'category' => $book['category_id'],
-            'image'    => $img
-        );
-
-        $this->db->replace('story', $story);
-
-        $story_id = $this->db->insert_id();
-
-        $chapter_list = $this->capture->getChapterList($book['item']['chapter_list_url']);
-
-        foreach ($chapter_list as $chapter) {
-            $ch             = $this->capture->getChapter($book['item']['chapter_list_url'] . $chapter['url']);
-            $ch['story_id'] = $story_id;
-            unset($ch['next']);
-            $this->db->replace('chapter', $ch);
-            echo $ch['title'] . '=====> OK <br />';
-            ob_flush();
-            flush();
-        }
-
-        $story_update = array(
-            'story_id'      => $story_id,
-            'story_title'   => $book['item']['title'],
-            'book_id'       => $id,
-            'chapter_url'   => $book['item']['chapter_list_url'],
-            'last_chapter'  => $chapter_list[count($chapter_list) - 1]['url'],
-            'chapter_id'    => $this->db->insert_id(),
-            'chapter_title' => $chapter_list[count($chapter_list) - 1]['title'],
-            'time'          => date('Y-m-d H:i', time())
-        );
-
-        $this->db->replace('update', $story_update);
-    }
-
 
 }

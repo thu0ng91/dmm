@@ -57,6 +57,7 @@
     </div>
 </div>
 
+
 <table class="table table-hover">
     <thead>
     <tr>
@@ -73,7 +74,7 @@
         <tr id="<?= $s['id'] ?>">
             <td><?= $s['id'] ?></td>
             <td>
-                [<?= $categorys[$s['category'] - 1]['title'] ?>]
+                [<?= $s['category_title'] ?>]
                 <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" target="_blank">
                     <?= $s['title'] ?>
                 </a>

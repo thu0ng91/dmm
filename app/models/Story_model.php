@@ -12,7 +12,7 @@ class Story_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get($id = null, $num = null, $offset = null, $where = null, $sort = null, $asc = 'ASC') {
+    public function get($id = null, $num = null, $offset = null, $where = null, $sort = null, $asc = 'ASC',$join=null) {
         if ($where != null) {
             $this->db->where($where);
         }
@@ -28,8 +28,13 @@ class Story_model extends CI_Model {
         if ($num || $offset) {
             $this->db->limit($num, $offset);
         }
+        
+        if ($join) {
+            $this->db->select('story.*,'.$join['select']);
+            $this->db->join($join['database'],$join['where']);
+        }
 
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('story.id', 'DESC');
         return $this->db->get('story')->result_array();
     }
 
