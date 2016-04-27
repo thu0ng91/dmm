@@ -140,6 +140,7 @@ class Capture_model extends CI_Model {
                 $j++;
             }
         }
+
         return $capture;
     }
 
