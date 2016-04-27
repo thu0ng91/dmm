@@ -17,6 +17,7 @@
 #安装
 
 - 打开地址http:// you ip /dmnovel/install/
+- 正式运行环境请将/index.php中的define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development'); 改为define('ENVIRONMENT', 'production');
 
 #截图
 
