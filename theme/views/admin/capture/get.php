@@ -4,7 +4,7 @@
 
         <div class="panel-heading">
             <i class="icon-warning-sign icon-large"></i>
-            采集小说 - <span id="site"></span>
+            采集小说 - <span id="site"><a href="<?=$captures[0]['site_url']?>"><?=$captures[0]['site_title']?></a></span>
         </div>
 
 

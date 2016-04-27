@@ -6,10 +6,17 @@
         <h3 class="panel-title">
             <?= $book['title'] ?>
         </h3>
-        <a class="btn btn-primary btn-xs" href="<?= SITEPATH ?>/admin/capture/get">
-            <i class="icon-cloud-download"></i>
-            继续采集
-        </a>
+
+        <div class="btn-group-xs btn-group">
+            <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/capture/get">
+                <i class="icon-cloud-download"></i>
+                继续采集
+            </a>
+            <a class="btn btn-success" href="#" onclick="location.reload();">
+                <i class="icon-refresh"></i>
+                刷新失败
+            </a>
+        </div>
     </div>
     <div class="panel-body">
         <div class="capture">

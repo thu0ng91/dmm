@@ -71,8 +71,9 @@ class Capture extends CI_Controller {
         //检查小说是否存在
         $order = 0;
 
-        $book_data = $this->story->get(null, 1, null, array('title' => $book_title))[0];
+        $book_data = $this->story->get(null, 1, null, array('title' => $book_title));
         if ($book_data) {
+            $book_data=$book_data[0];
             $this->load->model('chapter_model', 'chapter');
             $chapter_list = $this->chapter->get(null, $book_data['id']);
             $chapter_list = $this->capture->checkChapterList($chapter_list, $book['chapter_list']);
