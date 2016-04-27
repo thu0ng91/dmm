@@ -13,7 +13,6 @@
  */
 class Capture_model extends CI_Model {
 
-    private $capture_url = 'http://www.23wx.com/';
     public $capture_id = 0;
     public $capture;
     public $book_info;
@@ -74,7 +73,7 @@ class Capture_model extends CI_Model {
         }
 
         $this->capture = $capture;
-        $this->cache->save('capture',$capture,3000);
+        $this->cache->save('capture', $capture, 3000);
 
         return $this->book_info;
     }
@@ -111,7 +110,7 @@ class Capture_model extends CI_Model {
      * @return bool|string
      */
     function getChapter($url) {
-        $this->capture=$this->capture?$this->capture:$this->cache->get('capture');
+        $this->capture   = $this->capture ? $this->capture : $this->cache->get('capture');
         $chapter_content = $this->_getPage($url);
         preg_match('/' . $this->capture['chapter_content'] . '/is', $chapter_content, $match);
         if (!$match) return FALSE;
@@ -127,9 +126,9 @@ class Capture_model extends CI_Model {
      * @return array
      */
     function checkChapterList($sql, $capture) {
-        foreach ($capture as $key=>$c) {
-            $capture[$key]['order']=$key;
-            $j=0;
+        foreach ($capture as $key => $c) {
+            $capture[$key]['order'] = $key;
+            $j                      = 0;
             foreach ($sql as $s) {
                 if ($c['title'] == $s['title']) {
                     unset($capture[$key]);
@@ -143,16 +142,11 @@ class Capture_model extends CI_Model {
     }
 
     private function _getPage($url) {
-        if (function_exists('file_get_contents')) {
+        if (!function_exists('curl_init')) {
             $file_contents = file_get_contents($url);
         } else {
-            $ch      = curl_init();
-            $timeout = 5;
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-            $file_contents = curl_exec($ch);
-            curl_close($ch);
+            $this->load->library('curl');
+            $file_contents = $this->curl->simple_get($url);
         }
         return $file_contents;
     }
