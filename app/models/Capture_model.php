@@ -127,13 +127,17 @@ class Capture_model extends CI_Model {
      * @return array
      */
     function checkChapterList($sql, $capture) {
-        for ($i = 0; $i < count($capture); $i++) {
-            $capture[$i]['order']=$i;
+        echo count($sql).'----'.count($capture);
+        foreach ($capture as $key=>$c) {
+            $capture[$key]['order']=$key;
+            $j=0;
             foreach ($sql as $s) {
-                if ($capture[$i]['title'] == $s['title']) {
-                    unset($capture[$i]);
+                if ($c['title'] == $s['title']) {
+                    unset($capture[$key]);
+                    unset($sql[$j]);
                     break;
                 }
+                $j++;
             }
         }
         return $capture;

@@ -77,17 +77,18 @@ class Chapter_model extends CI_Model {
      */
     public function get_pn($id) {
         if (!$prev_next = $this->cache->get('chapter_prev_next_' . $id)) {//检查缓存
-            $this->db->select('id,story_id');
+            $this->db->select('id,story_id,order');//获取当前章节
             $c = $this->db->get_where('chapter', array('id' => $id))->row_array();
-
+            //获取下一章节
             $this->db->select('id');
-            $this->db->where(array('id >' => $id, 'story_id' => $c['story_id']));
+            $this->db->where(array('order >' => $c['order'], 'story_id' => $c['story_id']));
+            $this->db->order_by('order','ASC');
             $this->db->limit(1);
             $next = $this->db->get('chapter')->row_array();
 
             $this->db->select('id');
-            $this->db->where(array('id <' => $id, 'story_id' => $c['story_id']));
-            $this->db->order_by('id', 'DESC');
+            $this->db->where(array('order <' => $c['order'], 'story_id' => $c['story_id']));
+            $this->db->order_by('order', 'DESC');
             $this->db->limit(1);
             $prev = $this->db->get('chapter')->row_array();
 

@@ -6,6 +6,10 @@
         <h3 class="panel-title">
             <?= $book['title'] ?>
         </h3>
+        <a class="btn btn-primary btn-xs" href="<?= SITEPATH ?>/admin/capture/get">
+            <i class="icon-cloud-download"></i>
+            继续采集
+        </a>
     </div>
     <div class="panel-body">
         <div class="capture">
@@ -32,6 +36,8 @@
                 }
             }).responseText;
             $('.capture').append(ch.title + ' ====> ' + html);
+            $('.capture').scrollTop($('.capture').scrollHeight);
+
             i++;
         })
     });
