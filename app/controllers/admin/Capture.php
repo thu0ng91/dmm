@@ -97,7 +97,7 @@ class Capture extends CI_Controller {
                 'capture_id' => $book['capture_id'],
                 'book_id'    => $book['book_id']
             );
-            $this->db->replace('capture', $capture_book);
+            $this->db->replace('capture_book', $capture_book);
             $chapter_list = $book['chapter_list'];
         }
         $data['chapter_list'] = json_encode($chapter_list);
