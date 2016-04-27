@@ -43,7 +43,7 @@
                 }
             }).responseText;
             if (html=='失败') {
-                $('.capture').append($('<s>').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
+                $('.capture').append($('<s>',{style:'color:red;'}).append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
             } else {
                 $('.capture').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
             }

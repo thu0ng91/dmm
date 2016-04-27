@@ -33,11 +33,13 @@ class Chapter extends CI_Controller {
 
     function add() {
         $type    = $this->input->post('type');
+        $order   = $this->chapter->all($this->input->post('story_id'));
         $chapter = array(
             'id'       => $this->input->post('id'),
             'title'    => $this->input->post('title'),
             'content'  => $this->input->post('content'),
-            'story_id' => $this->input->post('story_id')
+            'story_id' => $this->input->post('story_id'),
+            'order'    => $order
         );
 
         if (!$chapter['title']) show_error('章节标题未填写，请检查后重新提交。');
