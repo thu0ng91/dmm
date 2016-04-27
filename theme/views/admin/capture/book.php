@@ -42,7 +42,11 @@
                     order: ch.order ? ch.order : parseInt(<?=$order?>) + i
                 }
             }).responseText;
-            $('.capture').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
+            if (html=='失败') {
+                $('.capture').append($('<s>').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
+            } else {
+                $('.capture').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
+            }
             $('.capture').scrollTop($('.capture')[0].scrollHeight);
             i++;
         })
