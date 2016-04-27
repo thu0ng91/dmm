@@ -174,6 +174,15 @@
             chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/list/' + id);
             chapter_btn.trigger("click");
         });
+        //更新小说
+        $('.updateStory').click(function(){
+            var id = $(this).parents('tr').attr('id');
+            var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='capture_book']");//触发父窗口按钮
+            $(window.parent.document).find('#tab_tab_capture_book').remove();
+            $(window.parent.document).find('#tab_capture_book').remove();
+            chapter_btn.attr("url", '<?=SITEPATH?>/admin/capture/get/' + id);
+            chapter_btn.trigger("click");
+        })
     });
 </script>
 

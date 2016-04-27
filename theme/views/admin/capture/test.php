@@ -23,7 +23,9 @@
         <div role="tabpanel" class="tab-pane" id="profile">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <?php for ($i = 0; $i < 4; $i++): ?>
+                    <?php
+                    $num=count($chapter_list);
+                    for ($i = $num-1; $i > ($num-5); $i--): ?>
                         <div class="col-md-3">
                             <a href="<?= $book['chapter_list_url'] ?><?= $chapter_list[$i]['url'] ?>"><?= $chapter_list[$i]['title'] ?></a>
                         </div>

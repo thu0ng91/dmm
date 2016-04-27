@@ -20,7 +20,10 @@ class Capture extends CI_Controller {
         $this->load->view('admin/capture', $data);
     }
 
-    function get() {
+    function get($story_id = null) {
+        if ($story_id) {
+            $data['capture_book'] = $this->db->get_where('capture_book', array('story_id'=>$story_id))->row_array();
+        }
         $data['categories'] = $this->category->get();
         $data['captures']   = $this->capture->get(null, 'id,site_title,site_url');
         $this->load->view('admin/capture/get', $data);

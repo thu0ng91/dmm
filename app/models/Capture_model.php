@@ -113,7 +113,7 @@ class Capture_model extends CI_Model {
         $this->capture   = $this->capture ? $this->capture : $this->cache->get('capture');
         $chapter_content = $this->_getPage($url);
         preg_match('/' . $this->capture['chapter_content'] . '/is', $chapter_content, $match);
-        if (!$match) return FALSE;
+        if (!isset($match[1])) return FALSE;
         return get_encoding($match[1]);
     }
 

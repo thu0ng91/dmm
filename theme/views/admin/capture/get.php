@@ -15,7 +15,7 @@
                     <label for="book_id" class="col-sm-2 control-label">采集书号</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="book_id" id="title" placeholder="Book ID">
+                        <input type="text" class="form-control" name="book_id" id="title" placeholder="Book ID" value="<?=isset($capture_book)?$capture_book['book_id']:''?>" />
                     </div>
                 </div>
 
@@ -25,7 +25,7 @@
                     <div class="col-sm-10">
                         <select class="form-control" name='category_id'>
                             <?php foreach ($categories as $c): ?>
-                                <option value="<?= $c['id'] ?>"><?= $c['title'] ?></option>
+                                <option value="<?= $c['id'] ?>" ><?= $c['title'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="col-sm-10">
                         <select class="form-control" name='capture_id' id="capture_id">
                             <?php foreach ($captures as $c): ?>
-                                <option value="<?= $c['id'] ?>" url='<?= $c['site_url'] ?>'><?= $c['site_title'] ?></a></option>
+                                <option value="<?= $c['id'] ?>" url='<?= $c['site_url'] ?>' <?=isset($capture_book)?($capture_book['capture_id']==$c['id']?'selected':''):''?>><?= $c['site_title'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
