@@ -42,9 +42,8 @@
                     order: ch.order ? ch.order : parseInt(<?=$order?>) + i
                 }
             }).responseText;
-            $('.capture').append(ch.title + ' ====> ' + html);
-            $('.capture').scrollTop($('.capture').scrollHeight);
-
+            $('.capture').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
+            $('.capture').scrollTop($('.capture')[0].scrollHeight);
             i++;
         })
     });
