@@ -42,6 +42,8 @@ class Capture extends CI_Controller {
         $chapter      = $this->capture->getChapter($book['chapter_list_url'] . $chapter_list[0]['url']);
         //写入缓存
         $cache = array(
+            'capture_id'   => $id,
+            'book_id'      => $book_id,
             'book'         => $book,
             'chapter_list' => $chapter_list,
             'category'     => $category_id
@@ -73,7 +75,7 @@ class Capture extends CI_Controller {
 
         $book_data = $this->story->get(null, 1, null, array('title' => $book_title));
         if ($book_data) {
-            $book_data=$book_data[0];
+            $book_data = $book_data[0];
             $this->load->model('chapter_model', 'chapter');
             $chapter_list = $this->chapter->get(null, $book_data['id']);
             $chapter_list = $this->capture->checkChapterList($chapter_list, $book['chapter_list']);
@@ -87,9 +89,16 @@ class Capture extends CI_Controller {
                 'time'     => date('Y-m-d H:i', time()),
                 'image'    => $book_image
             );
+            //写入数据库
             $this->db->replace('story', $book_data);
             $book_data['id'] = $this->db->insert_id();
-            $chapter_list    = $book['chapter_list'];
+            $capture_book    = array(
+                'story_id'   => $book_data['id'],
+                'capture_id' => $book['capture_id'],
+                'book_id'    => $book['book_id']
+            );
+            $this->db->replace('capture', $capture_book);
+            $chapter_list = $book['chapter_list'];
         }
         $data['chapter_list'] = json_encode($chapter_list);
         $data['book']         = $book_data;
@@ -101,10 +110,10 @@ class Capture extends CI_Controller {
     function get_chapter() {
         $chapter_url = $this->input->post('url');
         $chapter     = array(
-            'content' => $this->capture->getChapter($chapter_url),
-            'order'   => $this->input->post('order'),
+            'content'  => $this->capture->getChapter($chapter_url),
+            'order'    => $this->input->post('order'),
             'story_id' => $this->input->post('story_id'),
-            'title'   => $this->input->post('title')
+            'title'    => $this->input->post('title')
         );
         if ($chapter['content']) {
             $this->db->replace('chapter', $chapter);

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.11, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Linux (x86_64)
 --
 -- Host: localhost    Database: novel
 -- ------------------------------------------------------
--- Server version	5.7.11-0ubuntu6
+-- Server version	5.7.12-0ubuntu1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,6 +26,8 @@ CREATE TABLE `capture` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `site_title` varchar(255) NOT NULL,
   `site_url` varchar(255) NOT NULL,
+  `search_url` varchar(255) NOT NULL,
+  `search_book_url` varchar(255) NOT NULL,
   `book_url` varchar(255) NOT NULL,
   `book_title` varchar(255) NOT NULL,
   `book_author` varchar(255) NOT NULL,
@@ -37,7 +39,7 @@ CREATE TABLE `capture` (
   `chapter_content` varchar(255) NOT NULL,
   `test_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,8 +48,33 @@ CREATE TABLE `capture` (
 
 LOCK TABLES `capture` WRITE;
 /*!40000 ALTER TABLE `capture` DISABLE KEYS */;
-INSERT INTO `capture` VALUES (1,'顶点小说','http://www.23wx.com/','http://www.23wx.com/book/(:book_id)','<dd><h1>(:cn) 全文阅读</h1>','文章作者</th><td>&nbsp;(:cn)</td>','</table>:s+<p>(:char)</p><p style=\"display:none\"','<img style=\":char\" alt=\":char\" src=\"(:char)\"/></a>','class=\"read\":shref=\"(:char)\":stitle=\":char\">最新章节','<td class=\"L\"><a href=\"(:page)\">(:cn)</a>','list_url+chapter_url','<dd id=\"contents\">(:char)</dd>',55519),(2,'笔趣阁','http://www.biquge.la/','http://www.biquge.la/book/(:book_id)','<div id=\"info\">:s+<h1>(:cn)</h1>','作&nbsp;&nbsp;&nbsp;&nbsp;者：(:cn)','<div id=\"intro\">(:char)</p>:s+<p>各位书友要','\"fmimg\"><img alt=\":cn\" src=\"(:char)\" width=\"120\" height=\"150\" /><span class=\"b\"','og:novel:read_url\" content=\"(:char)\"/>\r\n<meta property=\"og:url\"','<dd><a href=\"(:page)\">(:cn)</a></dd>','list_url+chapter_url','</script>&nbsp;(:char)</div>\r\n				<script>read3',14);
+INSERT INTO `capture` VALUES (1,'顶点小说','http://www.23wx.com/','','','http://www.23wx.com/book/(:book_id)','<dd><h1>(:cn) 全文阅读</h1>','文章作者</th><td>&nbsp;(:cn)</td>','</table>:s+<p>(:char)</p><p style=\"display:none\"','<img style=\":char\" alt=\":char\" src=\"(:char)\"/></a>','class=\"read\":shref=\"(:char)\":stitle=\":char\">最新章节','<td class=\"L\"><a href=\"(:page)\">(:cn)</a>','list_url+chapter_url','<dd id=\"contents\">(:char)</dd>',55519),(2,'笔趣阁','http://www.biquge.la/','','','http://www.biquge.la/book/(:book_id)','<div id=\"info\">:s+<h1>(:cn)</h1>','作&nbsp;&nbsp;&nbsp;&nbsp;者：(:cn)','<div id=\"intro\">(:char)</p>:s+<p>各位书友要','\"fmimg\"><img alt=\":cn\" src=\"(:char)\" width=\"120\" height=\"150\" /><span class=\"b\"','og:novel:read_url\" content=\"(:char)\"/>\r\n<meta property=\"og:url\"','<dd><a href=\"(:page)\">(:cn)</a></dd>','list_url+chapter_url','</script>&nbsp;(:char)</div>\r\n				<script>read3',14);
 /*!40000 ALTER TABLE `capture` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `capture_book`
+--
+
+DROP TABLE IF EXISTS `capture_book`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `capture_book` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `story_id` int(10) NOT NULL,
+  `capture_id` int(10) NOT NULL,
+  `book_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `capture_book`
+--
+
+LOCK TABLES `capture_book` WRITE;
+/*!40000 ALTER TABLE `capture_book` DISABLE KEYS */;
+/*!40000 ALTER TABLE `capture_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -62,7 +89,7 @@ CREATE TABLE `category` (
   `title` varchar(255) NOT NULL,
   `parent_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,6 +114,7 @@ CREATE TABLE `chapter` (
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `story_id` int(10) NOT NULL,
+  `order` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -140,7 +168,7 @@ CREATE TABLE `story` (
   `desc` mediumtext NOT NULL,
   `click` int(10) NOT NULL,
   `category` int(10) NOT NULL,
-  `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `time` timestamp NULL DEFAULT NULL,
   `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `image` varchar(255) DEFAULT NULL,
   `user_id` int(10) NOT NULL,
@@ -220,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-26  8:46:22
+-- Dump completed on 2016-04-27 11:06:16
