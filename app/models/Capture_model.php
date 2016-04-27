@@ -127,7 +127,6 @@ class Capture_model extends CI_Model {
      * @return array
      */
     function checkChapterList($sql, $capture) {
-        echo count($sql).'----'.count($capture);
         foreach ($capture as $key=>$c) {
             $capture[$key]['order']=$key;
             $j=0;
@@ -140,7 +139,6 @@ class Capture_model extends CI_Model {
                 $j++;
             }
         }
-
         return $capture;
     }
 
