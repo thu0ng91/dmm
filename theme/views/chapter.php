@@ -73,7 +73,7 @@
                 <dd id="next"></dd>
             </div>
         </div>
-        <span id="cPage" class="text-center"></span>
+        <div id="cPage" class="text-right"></div>
 
     </div>
 </div>
@@ -83,7 +83,7 @@
 
 <script type="text/javascript">
     $(function () {
-        var height = parseInt($(window).height()) - 90;
+        var height = parseInt($(window).height()) - 86;
         var width = parseInt($(window).width()) > 980 ? 980 : parseInt($(window).width());
         $('.chapter-list').height(height - 52);
         $('.chapter').width(width);
