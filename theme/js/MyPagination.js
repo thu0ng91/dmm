@@ -5,7 +5,7 @@
             var options = $.extend({
                 width:  900,
                 height: '400px',
-                fadeSpeed: 400,
+                fadeSpeed: 200,
                 fontSize: '20px',
                 lineHeight: '25px'
             }, options || {});

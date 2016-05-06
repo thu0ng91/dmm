@@ -15,6 +15,7 @@ class Chapter extends CI_Controller {
     }
 
     function index($story_id = null, $chapter_id = null) {
+        $data['order']=0;
         if ($story_id) {
             $data['story'] = $this->story->get($story_id);
             if ($chapter_id) {
@@ -22,6 +23,7 @@ class Chapter extends CI_Controller {
                 $this->load->view('admin/chapter', $data);
                 return;
             }
+            $data['order']=$this->chapter->all($story_id);
         } else {
             $data['storys'] = $this->story->get();
         }
@@ -33,13 +35,12 @@ class Chapter extends CI_Controller {
 
     function add() {
         $type    = $this->input->post('type');
-        $order   = $this->chapter->all($this->input->post('story_id'));
         $chapter = array(
             'id'       => $this->input->post('id'),
             'title'    => $this->input->post('title'),
             'content'  => $this->input->post('content'),
             'story_id' => $this->input->post('story_id'),
-            'order'    => $order
+            'order'    => $this->input->post('order')
         );
 
         if (!$chapter['title']) show_error('章节标题未填写，请检查后重新提交。');

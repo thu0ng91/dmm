@@ -32,6 +32,14 @@
             </div>
 
             <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">章节排序</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="order" name="order" placeholder="Title" value="<?=isset($chapter['order'])?$chapter['order']:$order?>">
+                </div>
+            </div>
+
+            <div class="form-group">
                 <textarea class="form-control" id="content" name="content"><?=isset($chapter['id'])?$chapter['content']:''?></textarea>
             </div>
             <?php if (isset($chapter['id'])):?>
