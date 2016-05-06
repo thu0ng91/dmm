@@ -148,9 +148,8 @@
             var id = $(this).parents('tr').attr('id');
 
             $.get('<?=SITEPATH?>/admin/story/delete/' + id, function (data) {
-                var message = $.parseJSON(data).message;
-                if (message) {
-                    show_error(message);
+                if (data) {
+                    show_error(data);
                 } else {
                     window.location.href = '<?=SITEPATH?>/admin/story';
                 }

@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             <i class="icon-plus"></i>
-            <?=isset($chapter['id'])?'编辑':'增加新'?>章节<?= isset($story['title']) ? ' - 《' . $story['title'] . '》' : '' ?>
+            <?= isset($chapter['id']) ? '编辑' : '增加新' ?>章节<?= isset($story['title']) ? ' - 《' . $story['title'] . '》' : '' ?>
         </h3>
     </div>
     <div class="panel-body">
@@ -27,7 +27,7 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">章节标题</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<?=isset($chapter['id'])?$chapter['title']:''?>">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<?= isset($chapter['id']) ? $chapter['title'] : '' ?>">
                 </div>
             </div>
 
@@ -35,20 +35,20 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">章节排序</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="order" name="order" placeholder="Title" value="<?=isset($chapter['order'])?$chapter['order']:$order?>">
+                    <input type="text" class="form-control" id="order" name="order" placeholder="Title" value="<?= isset($chapter['order']) ? $chapter['order'] : $order ?>">
                 </div>
             </div>
 
             <div class="form-group">
-                <textarea class="form-control" id="content" name="content"><?=isset($chapter['id'])?$chapter['content']:''?></textarea>
+                <textarea class="form-control" id="content" name="content"><?= isset($chapter['id']) ? $chapter['content'] : '' ?></textarea>
             </div>
-            <?php if (isset($chapter['id'])):?>
-                <input type="hidden" name="id" value="<?=$chapter['id']?>" />
-                <input type="hidden" name="type" value="list" />
-            <?php endif;?>
+            <?php if (isset($chapter['id'])): ?>
+                <input type="hidden" name="id" value="<?= $chapter['id'] ?>"/>
+                <input type="hidden" name="type" value="list"/>
+            <?php endif; ?>
             <div class="form-group">
                 <div class="col-sm-12 text-center btn-group">
-                    <button type="submit" class="btn btn-primary"><?=isset($chapter)?'编辑':'增加'?></button>
+                    <button type="submit" class="btn btn-primary"><?= isset($chapter) ? '编辑' : '增加' ?></button>
                     <button type="reset" class="btn btn-success" onclick="BootstrapDialog.closeAll();">取消</button>
                 </div>
             </div>
@@ -63,7 +63,9 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#content').redactor({minHeight:350});
+        $('#content').redactor({
+            minHeight: 350
+        });
     });
 </script>
 

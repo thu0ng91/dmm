@@ -177,7 +177,7 @@ var RLANG = {
             buttonsCustom: {},
             buttonsAdd: [],
             buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', 'underline', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-                //'image', 'video', 'file', 'table', 'link', '|',
+                //'image', 'file', 'video',  'table', 'link', '|',
                 'fontcolor', 'backcolor', '|', 'alignleft', 'aligncenter', 'alignright', 'justify', '|', 'horizontalrule'], // 'alignment',
 
             airButtons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'fontcolor', 'backcolor'],

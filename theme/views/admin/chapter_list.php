@@ -7,37 +7,37 @@
                     <h4>
                         <i class="icon-book"></i>
                         <?= $story['title'] ?>
-                    <button type="submit" class="bg-info btn" id="addChapter" title="增加新章节" data-story-id="<?=$story['id']?>">
-                        <i class="icon-plus-sign-alt"></i>
-                        增加新章节
-                    </button>
+                        <button type="submit" class="bg-info btn" id="addChapter" title="增加新章节" data-story-id="<?= $story['id'] ?>">
+                            <i class="icon-plus-sign-alt"></i>
+                            增加新章节
+                        </button>
                     </h4>
                 </div>
 
                 <div class="col-md-5 pull-right">
                     <h4>
-                    <form action="<?= SITEPATH ?>/admin/chapter/list/<?= $story['id'] ?>/0" method="get">
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="selectSearchType">
-                                    ID
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" id="selectSearch">
-                                    <li id="id"><a href="#">ID</a></li>
-                                    <li id="title"><a href="#">标题</a></li>
-                                </ul>
-                            </div>
-                            <!-- /btn-group -->
-                            <input type="hidden" name="type" value="id" id="type"/>
-                            <input type="text" class="form-control" name="search" placeholder="搜索章节 ID">
+                        <form action="<?= SITEPATH ?>/admin/chapter/list/<?= $story['id'] ?>/0" method="get">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="selectSearchType">
+                                        ID
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="selectSearch">
+                                        <li id="id"><a href="#">ID</a></li>
+                                        <li id="title"><a href="#">标题</a></li>
+                                    </ul>
+                                </div>
+                                <!-- /btn-group -->
+                                <input type="hidden" name="type" value="id" id="type"/>
+                                <input type="text" class="form-control" name="search" placeholder="搜索章节 ID">
                             <span class="input-group-btn">
                                 <button type="submit" class="bg-primary btn" id="selectFile">
                                     <i class="icon-search"></i>
                                 </button>
                             </span>
-                        </div>
-                    </form>
+                            </div>
+                        </form>
                     </h4>
                     <!-- /input-group -->
                 </div>
@@ -100,12 +100,31 @@
 
             //编辑章节
             $('.editChapter').click(function () {
-                var chapter_id=$(this).parents('tr').attr('id');
-                var chapter_title=$(this).parents('td').prev('td').text();
-                var url='<?=SITEPATH?>/admin/chapter/<?=$story['id']?>/'+chapter_id;
+                var chapter_id = $(this).parents('tr').attr('id');
+                var chapter_title = $(this).parents('td').prev('td').text();
+                var url = '<?=SITEPATH?>/admin/chapter/<?=$story['id']?>/' + chapter_id;
                 BootstrapDialog.show({
                     title: chapter_title,
                     message: $('<div></div>').load(url)
+                });
+            });
+
+            //删除章节
+            $('.deleteChapter').click(function () {
+                if (!confirm('确认删除此章节？')) return false;
+                var chapter = $(this).parents('tr');
+                var chapter_id = chapter.attr('id');
+
+                var url = '<?=SITEPATH?>/admin/chapter/delete/' + chapter_id;
+                $.get(url, function (data) {
+                    if (!data) {
+                        chapter.remove();
+                    } else {
+                        BootstrapDialog.show({
+                            title: '发生错误',
+                            message: data
+                        });
+                    }
                 });
             })
         })
