@@ -49,7 +49,7 @@ class Capture extends CI_Controller {
             'book_id'      => $book_id,
             'book'         => $book,
             'chapter_list' => $chapter_list,
-            'category'     => $category_id
+            'category'     => $id?1:$category_id
         );
 
         $this->cache->save($book['book_title'], $cache, 30000);

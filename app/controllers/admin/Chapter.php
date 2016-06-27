@@ -38,7 +38,7 @@ class Chapter extends CI_Controller {
         $chapter = array(
             'id'       => $this->input->post('id'),
             'title'    => $this->input->post('title'),
-            'content'  => $this->input->post('content'),
+            'content'  => $this->chapter->filter($this->input->post('content')),
             'story_id' => $this->input->post('story_id'),
             'order'    => $this->input->post('order')
         );
@@ -50,6 +50,10 @@ class Chapter extends CI_Controller {
         if (!$story) show_error('您所提交的小说不存在，请检查后重新提交。');
 
         $this->db->replace('chapter', $chapter);
+
+        $this->db->cache_delete('admin', 'chapter');
+        $this->db->cache_delete('chapter', $chapter['id']);
+
         $chapter_id = $chapter['id']?$chapter['id']:$this->db->insert_id();
         $update     = array(
             'story_id'      => $chapter['story_id'],
@@ -59,7 +63,7 @@ class Chapter extends CI_Controller {
             'time'          => date('Y-m-d H:i:s', time())
         );
         $this->db->replace('update', $update);
-        //redirect('/admin/chapter/' . $type . '/' . $story['id']);
+        redirect('/admin/chapter/' . $type . '/' . $story['id']);
     }
 
     function delete($id=null) {

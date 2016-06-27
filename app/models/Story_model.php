@@ -71,22 +71,24 @@ class Story_model extends CI_Model {
 
         $content = get_encoding(file_get_contents($path));
 
-        preg_match_all('/((楔子\s?)|(第[0-9零一二三四五六七八九十百千万]+(章|节|回)\s?.*\s+))/', $content, $match);
+        $preg='/((楔子\s?)|(第[0-9０１２３４５６７８９零一二三四五六七八九十百千万]+(章|节|回)\s+.*\s+))/';
+
+        preg_match_all($preg, $content, $match);
 
         if ($match[0]) {
-            $c = preg_split('/((楔子\s?)|(第[0-9零一二三四五六七八九十百千万]+(章|节|回)\s?.*\s+))/', $content);
+            $c = preg_split($preg, $content);
             $chapter['desc'] = $c[0]; //第一章前内容为简介
             for ($i = 0; $i < count($match[0]); $i++) {
                 $chapter[] = array(
                     'title' => $match[0][$i],
-                    'content' => preg_replace('/(\r\n)/', '<br/>', $c[$i + 1])
+                    'content' => preg_replace('/(\r\s+)/', '<br/><br/>', $c[$i + 1])
                 );
             }
         } else {//如果没有分章，全部放到正文内
             $chapter['desc'] = substr($content, 0, 500);
             $chapter[] = array(
                 'title' => '正文',
-                'content' => preg_replace('/(\r\n)/', '<br/>', $content)
+                'content' => preg_replace('/(\r\s+)/', '<br/><br/>', $content)
             );
         }
 

@@ -43,6 +43,49 @@ minus = function (a, b) {
 };
 
 
+
+var ajax_dialog = function (title, url) {
+    var mymodal = $('body').find('#modal_ajax').remove();
+    $('body').find('.modal-backdrop').remove();
+    $('body').attr('style','');
+    if (mymodal.length == 0) {
+        mymodal = $('<div>', {
+            'class': 'modal fade',
+            'tabindex': '-1',
+            'role': 'dialog',
+            'id': 'modal_ajax',
+            'aria-labelledby': 'myModalLabel'
+        }).append(
+            $('<div>', {'class': 'modal-dialog modal-lg', 'role': 'document'}).append(
+                $('<div>', {'class': 'modal-content'}).append(
+                    $('<div>', {'class': 'modal-header'}).append(
+                        $('<button>', {
+                            'type': 'button',
+                            'class': 'close',
+                            'data-dismiss': 'modal',
+                            'aria-label': 'Close'
+                        }).append(
+                            $('<span>', {'aria-hidden': 'true'}).html('&times;')
+                        )
+                    ).append(
+                        $('<h4>', {'class': 'modal-title', 'id': 'myModalLabel'}).text(title)
+                    )
+                ).append(
+                    $('<div>', {'class': 'modal-body'}).load(url)
+                )
+            )
+        );
+        $('body').append(mymodal);
+    }
+
+    mymodal.modal('show');
+    mymodal.on('hidden.bs.modal', function () {
+        mymodal.remove();
+        $('body').find('.modal-backdrop').remove();
+    });
+}
+
+
 $(function () {
 
     $(window).resize(function () {

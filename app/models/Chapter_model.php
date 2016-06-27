@@ -32,17 +32,16 @@ class Chapter_model extends CI_Model {
         }
 
         if ($id) {
-            if (!$chapter = $this->cache->get('chapter_' . $id)) {//检查缓存
-                $chapter = $this->db->get_where('chapter', array('id' => $id))->row_array();
-                $this->cache->save('chapter_' . $id, $chapter, $this->chapter_cache_time);//存入缓存
-            }
+            $this->db->cache_on();
+            $chapter = $this->db->get_where('chapter', array('id' => $id))->row_array();
+            $this->db->cache_off();
             return $chapter;
         }
 
         if ($story_id) {
             $this->db->select('id,title');
             $this->db->where('story_id', $story_id);
-            $this->db->order_by('order','asc');
+            $this->db->order_by('order', 'asc');
         }
 
         if ($num || $offset) {
@@ -58,7 +57,7 @@ class Chapter_model extends CI_Model {
      *
      * @return mixed
      */
-    public function all($story_id=null,$where=null) {
+    public function all($story_id = null, $where = null) {
         if ($where) {
             $this->db->where($where);
         }
@@ -82,7 +81,7 @@ class Chapter_model extends CI_Model {
             //获取下一章节
             $this->db->select('id');
             $this->db->where(array('order >' => $c['order'], 'story_id' => $c['story_id']));
-            $this->db->order_by('order','ASC');
+            $this->db->order_by('order', 'ASC');
             $this->db->limit(1);
             $next = $this->db->get('chapter')->row_array();
 
@@ -98,5 +97,18 @@ class Chapter_model extends CI_Model {
         }
 
         return $prev_next;
+    }
+
+    public function filter($content) {
+        $this->load->model('setting_model', 'setting');
+        $filter = $this->setting->get('content_filter');
+        $filter = json_decode($filter, true);
+
+        foreach ($filter as $key => $val) {
+            $patterns[] = '#' . str_replace('%%', '(.+)', $key) . '#U';
+            $replace[]  = $val;
+        }
+
+        return preg_replace($patterns, $replace, $content);
     }
 }
