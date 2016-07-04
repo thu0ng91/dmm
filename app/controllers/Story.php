@@ -30,6 +30,8 @@ class Story extends CI_Controller {
         $data['chapters']    = $this->chapter->get(null, $id);
         $data['category_id'] = $data['story']['category'];
 
+        $data['last_read'] = $this->input->cookie($id)?json_decode($this->input->cookie($id),true):'';
+
         $this->load->view('story', $data);
     }
 
@@ -46,6 +48,10 @@ class Story extends CI_Controller {
         $data['chapters']  = $this->chapter->get(null, $data['chapter']['story_id']);
         $this->load->model('category_model', 'category');
         $data['category'] = $this->category->get($data['story']['category']);
+
+        $chapter = json_encode(array('id'=>$id,'title'=>$data['chapter']['title']));
+
+        $this->input->set_cookie($data['story']['id'],$chapter,360000,'',SITEPATH);
 
         $this->load->view('chapter', $data);
     }

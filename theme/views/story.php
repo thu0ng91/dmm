@@ -13,6 +13,10 @@
             <p style="margin-left: 50px;">
                 <?= $story['desc'] ?>
             </p>
+
+            <?php if(isset($last_read['id'])):?>
+                <div class="pull-right">您最后阅读章节： <span id="last_read"><a href="<?SITEPATH?>/chapter/<?=$last_read['id']?>"><?=$last_read['title']?></a> </span></div>
+            <?php endif;?>
         </div>
 
         <!-- Table -->
@@ -38,4 +42,5 @@
         </table>
     </div>
 </div>
+
 <?php include VIEWPATH . "footer.php" ?>

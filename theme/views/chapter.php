@@ -80,6 +80,7 @@
 
 <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/MyPagination.css"/>
 <script src="<?= THEMEPATH ?>/js/MyPagination.js"></script>
+<script src="<?= THEMEPATH ?>/js/jquery.cookie.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -105,7 +106,13 @@
             } else {
                 chapter_list.animate({left: '-250px'});
             }
-        })
+        });
+
+        //写入cookie
+        $.cookie('story_id','<?=$prev_next['story_id'] ?>',{ path: "<?=SITEPATH?>/"});
+        $.cookie('story_title','<?= $story['title'] ?>',{ path: "<?=SITEPATH?>/"});
+        $.cookie('<?=$prev_next['story_id'] ?>',{"id":"<?=$chapter['id']?>","title":"<?=$chapter['title']?>"},{ path: "<?=SITEPATH?>/"});
+        console.log($.cookie());
     });
 </script>
 <?php include VIEWPATH . "footer.php" ?>
