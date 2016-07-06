@@ -1,6 +1,5 @@
 //错误提醒窗口
 var show_error = function (option) {
-console.log(option)
     var options = $.extend({
         'message': '',
         'color': 'info' // success | info | warning | danger
