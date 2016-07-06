@@ -19,6 +19,9 @@
                 var all = $('input[name=all_page]').val();
                 if (start < all) {
                     ajax_load_story(start);
+                } else {
+                    console.log(start);
+                    show_error({'message':'到底了！不能再下去了...'});
                 }
             }
         });

@@ -1,13 +1,18 @@
 //错误提醒窗口
-var show_error = function (message) {
-    var color = arguments[1] ? arguments[1] : 'warning';
-    if (check_json(message)) {
-        m = JSON.parse(message);
-        message = m.message;
-    }
+var show_error = function (option) {
+console.log(option)
+    var options = $.extend({
+        'message': '',
+        'color': 'info' // success | info | warning | danger
+    }, option || {});
 
-    str = $('<div class="alert alert-' + color + ' alert-dismissible boxmsg" role="alert"></div>');
-    str.html(message);
+    var height=$(document).height();
+
+    console.log(height);
+
+    var str = $('<div>', {'class': 'boxmsg alert alert-' + options.color, 'role': "alert"})
+        .html(options.message);
+    str.css('top',parseInt(height)-80);
     $('body').append(str);
     str.fadeIn().fadeOut(6000);
     setTimeout(function () {
@@ -43,11 +48,10 @@ minus = function (a, b) {
 };
 
 
-
 var ajax_dialog = function (title, url) {
     var mymodal = $('body').find('#modal_ajax').remove();
     $('body').find('.modal-backdrop').remove();
-    $('body').attr('style','');
+    $('body').attr('style', '');
     if (mymodal.length == 0) {
         mymodal = $('<div>', {
             'class': 'modal fade',
@@ -96,25 +100,26 @@ $(function () {
 
 //图片焦点滚动
 function focusSwitch(focusBox, focusList, focusTab, speed) {
-        if (!focusBox && !focusList && !focusTab)
-            return;
-        var i = 1, t = null, len = $(focusList + ' li').length;
-        $(focusTab + ' li').mouseover(function () {
-            i = $(focusTab + ' li').index($(this));
-            addCurrent(i);
-        });
+    if (!focusBox && !focusList && !focusTab)
+        return;
+    var i = 1, t = null, len = $(focusList + ' li').length;
+    $(focusTab + ' li').mouseover(function () {
+        i = $(focusTab + ' li').index($(this));
+        addCurrent(i);
+    });
+    t = setInterval(init, speed);
+    $(focusBox).hover(function () {
+        clearInterval(t);
+    }, function () {
         t = setInterval(init, speed);
-        $(focusBox).hover(function () {
-            clearInterval(t);
-        }, function () {
-            t = setInterval(init, speed);
-        });
-        function init() {
-            addCurrent(i);
-            i = (i + 1) % len;
-        }
-        function addCurrent(i) {
-            $(focusTab + ' li').removeClass('on').eq(i).addClass('on');
-            $(focusList + ' li').hide().eq(i).show();
-        }
+    });
+    function init() {
+        addCurrent(i);
+        i = (i + 1) % len;
     }
+
+    function addCurrent(i) {
+        $(focusTab + ' li').removeClass('on').eq(i).addClass('on');
+        $(focusList + ' li').hide().eq(i).show();
+    }
+}
