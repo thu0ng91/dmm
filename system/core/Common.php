@@ -819,10 +819,12 @@ if (!function_exists('show_json')) {
      * @param null $stat
      */
     function show_json($message, $stat = null) {
-
-        $show_message['message'] = $message;
-        if ($stat) $show_message['stat'] = $stat;
-
+        if (!is_array($message)) {
+            $show_message['message'] = $message;
+            if ($stat) $show_message['stat'] = $stat;
+        } else {
+            $show_message = $message;
+        }
         echo json_encode($show_message, JSON_UNESCAPED_UNICODE);
     }
 }
@@ -845,7 +847,7 @@ if (!function_exists('get_encoding')) {
      *
      * @return string
      */
-    function get_encoding($data, $to='UTF-8') {
+    function get_encoding($data, $to = 'UTF-8') {
         $encode_arr = array('UTF-8', 'ASCII', 'GBK', 'GB2312', 'BIG5', 'JIS', 'eucjp-win', 'sjis-win', 'EUC-JP');
         $encoded    = mb_detect_encoding($data, $encode_arr);
         $data       = mb_convert_encoding($data, $to, $encoded);

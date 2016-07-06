@@ -150,7 +150,11 @@ CREATE TABLE `setting` (
 
 LOCK TABLES `setting` WRITE;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
-INSERT INTO `setting` VALUES (1,'title','主页标题','東木书屋'),(2,'chapter_cache_time','章节缓存时间','30000'),(3, 'content_filter', '过滤内容敏感字', '{"<a href=\\"http:\\/\\/www.01bz.in\\/.+\\"><u>%%<\\/u><\\/a>":"\\\\1"}');;
+INSERT INTO `setting` VALUES
+(1,'title','主页标题','東木书屋'),
+(2,'chapter_cache_time','章节缓存时间','30000'),
+(3, 'content_filter', '过滤内容敏感字', '{"<a href=\\"http:\\/\\/www.01bz.in\\/.+\\"><u>%%<\\/u><\\/a>":"\\\\1"}'),
+(4, 'per_page', '分类中文章列表数量', '20');
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 UNLOCK TABLES;
 

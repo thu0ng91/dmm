@@ -36,17 +36,14 @@
     <li class="active"><b><?= $chapter['title'] ?></b></li>
 
     <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
-        <a class="btn btn-default" href="<?= $prev_next['prev'] ? SITEPATH . '/chapter/' . $prev_next['prev'] : SITEPATH . '/story/' . $prev_next['story_id'] ?>" id="prev_url">
+        <a class="btn btn-default" href="<?= $prev_next['prev'] ? SITEPATH . '/chapter/' . $prev_next['prev'] : SITEPATH . '/story/' . $prev_next['story_id'] ?>" id="prev_url" title="上一章">
             <i class="icon-hand-left"></i>
-            上一章
         </a>
-        <button type="button" class="btn btn-default" id="chapter_list">
+        <button type="button" class="btn btn-default" id="chapter_list" title="目录">
             <i class="icon-list-ul"></i>
-            目录
         </button>
-        <a class="btn btn-default" href="<?= $prev_next['next'] ? SITEPATH . '/chapter/' . $prev_next['next'] : SITEPATH . '/story/' . $prev_next['story_id'] ?>" id="next_url">
+        <a class="btn btn-default" href="<?= $prev_next['next'] ? SITEPATH . '/chapter/' . $prev_next['next'] : SITEPATH . '/story/' . $prev_next['story_id'] ?>" id="next_url" title="下一章">
             <i class="icon-hand-right"></i>
-            下一章
         </a>
     </div>
 </ol>
