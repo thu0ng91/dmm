@@ -28,11 +28,11 @@
                 <i class="icon-file-text-alt"></i>
                 发布章节
             </a>
-            <a href="#" class="list-group-item" data-addtab="capture" url="<?= SITEPATH ?>/admin/capture">
+            <a href="#" class="list-group-item" data-addtab="capture" url="<?= SITEPATH ?>/admin/collect">
                 <i class="icon-cog"></i>
                 采集设置
             </a>
-            <a href="#" class="list-group-item" data-addtab="capture_book" url="<?= SITEPATH ?>/admin/capture/get">
+            <a href="#" class="list-group-item" data-addtab="capture_book" url="<?= SITEPATH ?>/admin/collect/get">
                 <i class="icon-cloud-download"></i>
                 采集小说
             </a>

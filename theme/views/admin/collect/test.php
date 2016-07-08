@@ -27,7 +27,7 @@
                     $num=count($chapter_list);
                     for ($i = $num-1; $i > ($num-5); $i--): ?>
                         <div class="col-md-3">
-                            <a href="<?= $book['chapter_list_url'] ?><?= $chapter_list[$i]['url'] ?>"><?= $chapter_list[$i]['title'] ?></a>
+                            <a href="<?= $book['book_list'] ?><?= $chapter_list[$i]['url'] ?>"><?= $chapter_list[$i]['title'] ?></a>
                         </div>
                     <?php endfor; ?>
                     ...
@@ -48,7 +48,7 @@
     <?php if ($ajax == 0): ?>
         <div class="text-center">
             <div class="btn-group">
-                <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/capture/get_book?title=<?= rawurlencode($book['book_title']) ?>">
+                <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/collect/get_book?title=<?= rawurlencode($book['book_title']) ?>">
                     <i class="icon-cloud-download"></i>
                     开始采集
                 </a>

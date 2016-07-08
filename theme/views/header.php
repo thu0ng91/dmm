@@ -16,14 +16,16 @@
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/custom.css"/>
 
     <script src="<?= THEMEPATH ?>/js/jquery.min.js"></script>
-    <script src="<?= THEMEPATH ?>/js/bootstrap.min.js"></script>
-    <script src="<?= THEMEPATH ?>/js/custom.js"></script>
 
     <!--[if lt IE 9]>
     <script src="<?=THEMEPATH?>/js/html5shiv.min.js"></script>
     <script src="<?=THEMEPATH?>/js/respond.min.js"></script>
     <script src="<?=THEMEPATH?>/css/font-awesome-ie7.min.js"></script>
     <![endif]-->
+
+    <script src="<?= THEMEPATH ?>/js/bootstrap.min.js"></script>
+    <script src="<?= THEMEPATH ?>/js/custom.js"></script>
+
     <script type="text/javascript">
         $(function () {
             $('form').submit(function(){

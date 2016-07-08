@@ -90,7 +90,6 @@ var ajax_dialog = function (title, url) {
 
 
 $(function () {
-
     $(window).resize(function () {
         $('body').find('iframe').attr('height', $('body').height() - 70);
     });

@@ -4,18 +4,18 @@
 
         <div class="panel-heading">
             <i class="icon-warning-sign icon-large"></i>
-            采集小说 - <span id="site"><a href="<?=$captures[0]['site_url']?>"><?=$captures[0]['site_title']?></a></span>
+            采集小说 - <span id="site"><a href="<?=$collects[0]['site_url']?>"><?=$collects[0]['site_title']?></a></span>
         </div>
 
 
         <div class="panel-body">
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/capture/test" method="post">
+            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/collect/test" method="post">
 
                 <div class="form-group">
                     <label for="book_id" class="col-sm-2 control-label">采集书号</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="book_id" id="title" placeholder="Book ID" value="<?=isset($capture_book)?$capture_book['book_id']:''?>" />
+                        <input type="text" class="form-control" name="book_id" id="title" placeholder="Book ID" value="<?=isset($collect_book)?$collect_book['book_id']:''?>" />
                     </div>
                 </div>
 
@@ -35,9 +35,9 @@
                     <label for="category" class="col-sm-2 control-label">采集站点</label>
 
                     <div class="col-sm-10">
-                        <select class="form-control" name='capture_id' id="capture_id">
-                            <?php foreach ($captures as $c): ?>
-                                <option value="<?= $c['id'] ?>" url='<?= $c['site_url'] ?>' <?=isset($capture_book)?($capture_book['capture_id']==$c['id']?'selected':''):''?>><?= $c['site_title'] ?></option>
+                        <select class="form-control" name='collect_id' id="collect_id">
+                            <?php foreach ($collects as $c): ?>
+                                <option value="<?= $c['id'] ?>" url='<?= $c['site_url'] ?>' <?=isset($collect_book)?($collect_book['collect_id']==$c['id']?'selected':''):''?>><?= $c['site_title'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -55,7 +55,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#capture_id').change(function () {
+            $('#collect_id').change(function () {
                 var title = $(this).find('option:selected').text();
                 var url = $(this).find('option:selected').attr('url');
                 $('#site').html($('<a>',{href:url,text:title,target:"_Blank"}))

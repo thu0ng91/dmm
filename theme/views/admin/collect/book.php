@@ -8,7 +8,7 @@
         </h3>
 
         <div class="btn-group-xs btn-group">
-            <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/capture/get">
+            <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/collect/get">
                 <i class="icon-cloud-download"></i>
                 继续采集
             </a>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="panel-body">
-        <div class="capture">
+        <div class="collect">
 
         </div>
     </div>
@@ -31,23 +31,23 @@
         var i = 0;
         $.each(data, function (key, ch) {
             html = $.ajax({
-                url: '<?=SITEPATH?>/admin/capture/get_chapter',
+                url: '<?=SITEPATH?>/admin/collect/get_chapter',
                 async: false,
                 dataType: 'text',
                 type: 'POST',
                 data: {
-                    url: '<?=$capture_url?>/' + ch.url,
+                    url: '<?=$collect_url?>/' + ch.url,
                     title: ch.title,
                     story_id: '<?=$book['id']?>',
                     order: ch.order ? ch.order : parseInt(<?=$order?>) + i
                 }
             }).responseText;
             if (html=='失败') {
-                $('.capture').append($('<s>',{style:'color:red;'}).append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
+                $('.collect').append($('<s>',{style:'color:red;'}).append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
             } else {
-                $('.capture').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
+                $('.collect').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
             }
-            $('.capture').scrollTop($('.capture')[0].scrollHeight);
+            $('.collect').scrollTop($('.collect')[0].scrollHeight);
             i++;
         })
     });
