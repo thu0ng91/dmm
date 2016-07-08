@@ -42,7 +42,7 @@ class Collect extends CI_Controller {
 
         $book         = $this->collect->getBookInfo($id, $book_id);
         $chapter_list = $this->collect->getChapterList();
-        $chapter      = $this->collect->getChapter($book['book_list'] .'/'. $chapter_list[0]['url']);
+        $chapter      = $this->collect->getChapter($book['chapter_url'] . $chapter_list[0]['url']);
         //写入缓存
         $cache = array(
             'collect_id'   => $id,
@@ -56,7 +56,7 @@ class Collect extends CI_Controller {
 
         $data['book']         = $book;
         $data['chapter_list'] = $chapter_list;
-        $data['chapter']      = substr($chapter, 0, 250);
+        $data['chapter']      = $chapter?substr($chapter, 0, 500):"没有抓取到内容......";
         $data['ajax']         = $ajax;
 
         if ($ajax == 0) {
@@ -77,7 +77,7 @@ class Collect extends CI_Controller {
         $order = 0;
 
         $book_data = $this->story->get(null, 1, null, array('title' => $book_title));
-        if ($book_data) {
+        if ($book_data) {//如果存在，只更新
             $book_data = $book_data[0];
             $this->load->model('chapter_model', 'chapter');
             $chapter_list = $this->chapter->get(null, $book_data['id']);

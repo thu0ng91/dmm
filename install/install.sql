@@ -87,8 +87,10 @@ CREATE TABLE IF NOT EXISTS `collect` (
 --
 
 INSERT INTO `collect` (`id`, `site_title`, `site_url`, `book_url`, `book_title`, `book_author`, `book_desc`, `book_img`, `book_list`, `chapter_list`, `chapter_url`, `chapter_content`, `test_id`) VALUES
-(1, '顶点小说', 'http://www.23wx.com/', 'http://www.23wx.com/book/(:book_id)', '#content dd:eq(0) h1', '#content dd:eq(1) table td:eq(1)', '#content dd:eq(3) p:eq(1)', '#content dd:eq(1) div:eq(0) img', '#content dd:eq(1) .btnlinks a:eq(0)', '.bdsub table td a', '', '#contents ', 55519),
-(2, '笔趣阁', 'http://www.biquge.la/', 'http://www.biquge.la/book/(:book_id)', '#info h1', '#info p:eq(0)', '#intro p:eq(0)', '#fmimg img', 'http://www.biquge.la/book/(:book_id)', '#list dd a', '', '#content', 14);
+(1, '顶点小说', 'http://www.23wx.com/', 'http://www.23wx.com/book/:book_id', '#content dd:eq(0) h1', '#content dd:eq(1) table td:eq(1)', '#content dd:eq(3) p:eq(1)', '#content dd:eq(1) div:eq(0) img', '#content dd:eq(1) .btnlinks a:eq(0)', '.bdsub table td a', ':book_url/', '#contents ', 55519),
+(2, '笔趣阁', 'http://www.biquge.la/', 'http://www.biquge.la/book/:book_id', '#info h1', '#info p:eq(0)', '#intro p:eq(0)', '#fmimg img', 'http://www.biquge.la/book/:book_id', '#list dd a', ':book_url/', '#content', 14),
+(3, '三五文学网', 'http://www.555zw.com', 'http://www.555zw.com/bookinfo/:book_id[2]/:book_id.htm', 'span#title a', 'div#title span:eq(1) a', '.rightDiv div:eq(5)', '.picborder', 'span#title a', '.acss td a', ':book_url/', '#content', 31281),
+(4, '看书网', 'http://www.kanshu.com/', 'http://www.kanshu.com/artinfo/:book_id.html', '.title_h1 .div1 h1', '.title_h1 .div2 span:eq(1) a', '#articledesc', '.xx_left1 img', 'http://www.kanshu.com/files/article/html/:book_id', '.mulu_list li a', ':site_url', 'div.yd_text2', 28942);
 
 -- --------------------------------------------------------
 

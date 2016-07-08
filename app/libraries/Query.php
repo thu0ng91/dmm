@@ -24,12 +24,25 @@ class Query {
         $this->html = phpQuery::newDocumentFile($site['book_url']);
     }
 
-    function bookInfo() {
-        $this->book['book_title']  = pq($this->html)->find($this->site['book_title'])->text();
+    function bookInfo($book_id=0) {
+        $this->book['book_title']  = $this->filter(get_encoding(pq($this->html)->find($this->site['book_title'])->text()));
         $this->book['book_img']    = pq($this->html)->find($this->site['book_img'])->attr('src');
-        $this->book['book_author'] = pq($this->html)->find($this->site['book_author'])->text();
-        $this->book['book_desc']   = pq($this->html)->find($this->site['book_desc'])->text();
-        $this->book['book_list']   = pq($this->html)->find($this->site['book_list'])->attr('href');
+        $this->book['book_author'] = $this->filter(get_encoding(pq($this->html)->find($this->site['book_author'])->text()));
+        $this->book['book_desc']   = get_encoding(pq($this->html)->find($this->site['book_desc'])->text());
+        //解析图书列表地址
+        if (preg_match('/^((http|ftp|https):\/\/)?[\w-_\.]+(\/[\w-_:\.]+)*\/?$/', $this->site['book_list'])) {
+            if (preg_match('/\[(\d+)\]/',$this->site['book_list'],$match)) {
+                $this->book['book_list'] = preg_replace('/(:book_id\[(\d+)\])/', substr($book_id,0,(int)$match[1]), $this->site['book_list']);
+            }
+            $this->book['book_list'] = preg_replace('/(:book_id)/', $book_id, $this->site['book_list']);
+        } else {
+            $this->book['book_list'] = pq($this->html)->find($this->site['book_list'])->attr('href');
+        }
+
+        //解析章节地址
+        $this->book['chapter_url']=str_ireplace(':site_url',$this->site['site_url'],$this->site['chapter_url']);
+        $this->book['chapter_url']=str_ireplace(':book_url',$this->book['book_list'],$this->book['chapter_url']);
+        echo $this->book['chapter_url'];
         phpQuery::$documents = array();
         return $this->book;
     }
@@ -46,16 +59,21 @@ class Query {
                 );
             }
         }
+
         phpQuery::$documents = array();
         return $list;
     }
 
     function chapter($url) {
         $chapter_html = phpQuery::newDocumentFile($url);
-
-        $chapter = iconv('GBK', 'UTF-8', pq($chapter_html)->find($this->site['chapter_content'])->html());
+        $chapter = get_encoding(pq($chapter_html)->find($this->site['chapter_content'])->html());
         phpQuery::$documents = array();
         return $chapter;
+    }
+
+    private function filter($content) {
+        $pattern = "/(全集|下载|作者|作    者|：|:)/i";
+        return preg_replace($pattern,'',$content);
     }
 
 }

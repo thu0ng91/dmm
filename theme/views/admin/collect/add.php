@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="titleLabel">章节内容地址</label>
+                            <label for="titleLabel">章节内容地址前缀</label>
                             <textarea class="form-control" name="chapter_url"><?= isset($collect) ? htmlspecialchars($collect['chapter_url']) : '' ?></textarea>
                         </div>
 

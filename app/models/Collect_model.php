@@ -38,19 +38,18 @@ class Collect_model extends CI_Model {
         $this->id   = $id;
         $this->site = $this->get($id);
 
-        $book_id = $book_id ? $book_id : $this->site['test_id'];
+        $book_id = $book_id ? $book_id : $this->site['test_id']; //如果没有ID，使用测试ID
 
-        $this->site['book_url'] = preg_replace('/(\(:book_id\))/', $book_id, $this->site['book_url']);
+        //是否截取ID
+        if (preg_match('/\[(\d+)\]/', $this->site['book_url'], $match)) {
+            $this->site['book_url'] = preg_replace('/(:book_id\[(\d+)\])/', substr($book_id, 0, (int) $match[1]), $this->site['book_url']);
+        }
+        $this->site['book_url'] = preg_replace('/(:book_id)/', $book_id, $this->site['book_url']);
 
         $this->query->site($this->site);
-        $book_info = $this->query->bookInfo();
+        $book_info = $this->query->bookInfo($book_id);
 
-        if (preg_match('/^((http|ftp|https):\/\/)?[\w-_.]+(\/[\w-_\(\):]+)*\/?$/', $this->site['book_list'])) {
-            $this->book_list = preg_replace('/(\(:book_id\))/', $book_id, $this->site['book_list']);
-            $book_info['book_list']=$this->book_list;
-        } else {
-            $this->book_list = $book_info['book_list'];
-        }
+        $this->book_list = $book_info['book_list'];
 
         return $book_info;
     }
