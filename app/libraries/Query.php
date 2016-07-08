@@ -42,7 +42,7 @@ class Query {
         //解析章节地址
         $this->book['chapter_url']=str_ireplace(':site_url',$this->site['site_url'],$this->site['chapter_url']);
         $this->book['chapter_url']=str_ireplace(':book_url',$this->book['book_list'],$this->book['chapter_url']);
-        echo $this->book['chapter_url'];
+
         phpQuery::$documents = array();
         return $this->book;
     }
