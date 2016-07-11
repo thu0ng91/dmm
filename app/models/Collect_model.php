@@ -55,6 +55,7 @@ class Collect_model extends CI_Model {
     }
 
     public function getChapterList() {
+        echo $this->book_list;
         return $this->query->chapterList($this->book_list);
     }
 

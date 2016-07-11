@@ -136,6 +136,12 @@ class Collect extends CI_Controller {
         $this->load->view('admin/collect/add', $data);
     }
 
+    function delete($id) {
+        if (!$id) show_error('没有要删除的ID');
+
+        $this->db->delete('collect',array('id'=>$id));
+    }
+
     function add() {
         $collect = array(
             'id'              => $this->input->post('id'),

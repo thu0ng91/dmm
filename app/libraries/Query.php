@@ -30,11 +30,13 @@ class Query {
         $this->book['book_author'] = $this->filter(get_encoding(pq($this->html)->find($this->site['book_author'])->text()));
         $this->book['book_desc']   = get_encoding(pq($this->html)->find($this->site['book_desc'])->text());
         //解析图书列表地址
-        if (preg_match('/^((http|ftp|https):\/\/)?[\w-_\.]+(\/[\w-_:\.]+)*\/?$/', $this->site['book_list'])) {
+        if (preg_match('/^((http|ftp|https):\/\/)?[\w-_\.]+(\/[\w-_:\.\[\]]+)*\/?$/', $this->site['book_list'])) {
             if (preg_match('/\[(\d+)\]/',$this->site['book_list'],$match)) {
                 $this->book['book_list'] = preg_replace('/(:book_id\[(\d+)\])/', substr($book_id,0,(int)$match[1]), $this->site['book_list']);
+                $this->book['book_list'] = preg_replace('/(:book_id)/', $book_id, $this->book['book_list']);
+            } else {
+                $this->book['book_list'] = preg_replace('/(:book_id)/', $book_id, $this->site['book_list']);
             }
-            $this->book['book_list'] = preg_replace('/(:book_id)/', $book_id, $this->site['book_list']);
         } else {
             $this->book['book_list'] = pq($this->html)->find($this->site['book_list'])->attr('href');
         }
