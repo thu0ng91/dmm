@@ -49,6 +49,7 @@ class Collect extends CI_Controller {
             'book_id'      => $book_id,
             'book'         => $book,
             'chapter_list' => $chapter_list,
+            'chapter_url'  => $book['chapter_url'],
             'category'     => $id ? 1 : $category_id
         );
 
@@ -105,7 +106,8 @@ class Collect extends CI_Controller {
         }
         $data['chapter_list'] = json_encode($chapter_list);
         $data['book']         = $book_data;
-        $data['collect_url']  = $book['book']['book_list'];
+        $data['collect_url']  = $book['chapter_url'];
+        $data['collect_id']   = $book['collect_id'];
         $data['order']        = $order;
         $this->load->view('admin/collect/book', $data);
     }
@@ -113,7 +115,7 @@ class Collect extends CI_Controller {
     function get_chapter() {
         $chapter_url = $this->input->post('url');
         $chapter     = array(
-            'content'  => $this->collect->getChapter($chapter_url),
+            'content'  => $this->collect->getChapter($chapter_url,$this->input->post('collect_id')),
             'order'    => $this->input->post('order'),
             'story_id' => $this->input->post('story_id'),
             'title'    => $this->input->post('title')

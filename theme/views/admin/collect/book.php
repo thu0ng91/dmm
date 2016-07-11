@@ -38,6 +38,7 @@
                 data: {
                     url: '<?=$collect_url?>/' + ch.url,
                     title: ch.title,
+                    collect_id: <?=$collect_id?>,
                     story_id: '<?=$book['id']?>',
                     order: ch.order ? ch.order : parseInt(<?=$order?>) + i
                 }

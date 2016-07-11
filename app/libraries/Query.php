@@ -21,10 +21,10 @@ class Query {
 
     function site($site) {
         $this->site = $site;
-        $this->html = phpQuery::newDocumentFile($site['book_url']);
     }
 
     function bookInfo($book_id=0) {
+        $this->html = phpQuery::newDocumentFile($this->site['book_url']);
         $this->book['book_title']  = $this->filter(get_encoding(pq($this->html)->find($this->site['book_title'])->text()));
         $this->book['book_img']    = pq($this->html)->find($this->site['book_img'])->attr('src');
         $this->book['book_author'] = $this->filter(get_encoding(pq($this->html)->find($this->site['book_author'])->text()));
