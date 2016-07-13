@@ -45,6 +45,7 @@ class Story extends CI_Controller {
         if ($id) {
             $data['story'] = $this->story->get($id);
         }
+
         $this->load->view('admin/story_edit', $data);
     }
 
@@ -57,6 +58,7 @@ class Story extends CI_Controller {
             'image'    => $this->input->post('image'),
             'desc'     => $this->input->post('desc')
         );
+
         if (!$story['title']) show_error('小说标题没有输入，请返回重新填写。');
         $this->db->replace('story', $story);
         redirect('/admin/story');
@@ -95,7 +97,7 @@ class Story extends CI_Controller {
     }
 
     function upload() {
-        $config['upload_path']   = './uploads/';
+        $config['upload_path']   = './books/uploads/';
         $config['allowed_types'] = 'txt';
         $config['max_size']      = 10240;
 
@@ -110,7 +112,7 @@ class Story extends CI_Controller {
 
             if ($this->story->get(null, 1, null, array('title' => $story['title']))) {
                 unlink($data["upload_data"]['full_path']);
-                show_error('小说已经存在《' . $story['title'] . '》，请不要重复上传。<br />如果是同名小说，请改名后重新上传。');
+                show_error('《' . $story['title'] . '》小说已经存在，请不要重复上传。<br />如果是同名小说，请改名后重新上传。');
             }
 
             $chapters = $this->story->parse_chapter($data["upload_data"]['full_path']);

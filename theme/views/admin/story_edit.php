@@ -96,7 +96,7 @@
                     });
                     $('#imageUpload').on('fileuploaded', function (event, data) {
                         console.log(data.response);
-                        var file = data.response.message;
+                        var file = data.response;
                         var image_url = file['path'] + '/' + file.profile['raw_name'] + file.profile['file_ext'];
                         $('#image').val(image_url);
                     });
