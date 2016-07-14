@@ -790,7 +790,7 @@ if (!function_exists('grab_image')) {
 
         if ($url == "") return false;
         if ($filename == "") {
-            $ext     = strrchr($url, "."); //获取扩展名
+            $ext     = strtolower(strrchr($url, ".")); //获取扩展名
             $ext_arr = array(".gif", ".png", ".jpg", ".bmp");
             //判断扩展名是否为图片
             if (!in_array($ext, $ext_arr)) return false;
