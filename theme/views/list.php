@@ -4,7 +4,7 @@
             <div class="panel-body">
                 <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>">
                     <img src="<?= SITEPATH ?>/<?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" width="160px" title="<?= $s['desc'] ?>"/>
-                </a>
+                </a><br/>
                         <span>
                             <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>">
                                 <b><?= $s['title'] ?></b> - <?= $s['author'] ?>

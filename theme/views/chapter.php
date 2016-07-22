@@ -35,7 +35,7 @@
     <li><a href=" <?= SITEPATH . '/story/' . $prev_next['story_id'] ?>"><?= $story['title'] ?></a></li>
     <li class="active"><b><?= $chapter['title'] ?></b></li>
 
-    <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+    <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
         <a class="btn btn-default" href="<?= $prev_next['prev'] ? SITEPATH . '/chapter/' . $prev_next['prev'] : SITEPATH . '/story/' . $prev_next['story_id'] ?>" id="prev_url" title="上一章">
             <i class="icon-hand-left"></i>
         </a>
@@ -95,7 +95,7 @@
             scrollTo.offset().top - container.offset().top + container.scrollTop()
         );
 
-        $('#chapter_list').click(function () {
+        $('#chapter_list,#cent').click(function () {
             var chapter_list = $('.chapter-list');
             if (chapter_list.offset().left < 0) {
                 chapter_list.animate({left: '10px'});

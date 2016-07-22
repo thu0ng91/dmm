@@ -77,6 +77,13 @@
                 showPage(cPage + 1);
             });
 
+            $('.pagination').on("swipeleft",'dd',function(){
+                alert(1);
+                showPage(cPage + 1);
+            });
+            $('.pagination').on("swiperight",'dd',function(){
+                showPage(cPage - 1);
+            });
         }
     });
 })(jQuery);

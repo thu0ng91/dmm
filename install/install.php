@@ -39,7 +39,7 @@ function check_system() {
         'app/config/config.php',
         'app/config/database.php',
         'books',
-        'uploads'
+        'books/uploads'
     );
 
     $premit = TRUE;

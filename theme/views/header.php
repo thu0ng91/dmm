@@ -17,6 +17,7 @@
 
     <script src="<?= THEMEPATH ?>/js/jquery.min.js"></script>
 
+
     <!--[if lt IE 9]>
     <script src="<?=THEMEPATH?>/js/html5shiv.min.js"></script>
     <script src="<?=THEMEPATH?>/js/respond.min.js"></script>
