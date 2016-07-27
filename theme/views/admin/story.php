@@ -62,24 +62,21 @@
 
 <div class="container-fluid">
 
-    <table class="table table-hover" id="story_list_table">
+    <table class="table table-striped table-hover" id="story_list_table">
         <thead>
         <tr>
-            <th width="5px">ID</th>
+            <th width="40%">书名</th>
             <th>类别</th>
-            <th>书名</th>
             <th>作者</th>
             <th>创建时间</th>
             <th>最后更新</th>
             <th width="82px">操作</th>
         </tr>
         </thead>
-
     </table>
 </div>
 
 
-<link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/jquery.dataTables.min.css"/>
 <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/dataTables.bootstrap.min.css"/>
 
 <script src="<?= THEMEPATH ?>/js/jquery.dataTables.min.js"></script>
@@ -117,9 +114,8 @@
             "serverSide": true,
             "ajax": "<?=SITEPATH?>/admin/story/datatable",
             "columns": [
-                { "data": "id" },
-                { "data": "category_title" },
                 { "data": "title" },
+                { "data": "category_title" },
                 { "data": "author" },
                 { "data": "time" },
                 { "data": "last_update" },

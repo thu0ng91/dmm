@@ -72,32 +72,49 @@ class Chapter extends CI_Controller {
         $this->db->delete('chapter',array('id'=>$id));
     }
 
-    function list_chapter($story_id = null, $page = 0) {
+    function list_chapter($story_id) {
         if (!$story_id) show_error('没有选择小说，请从发布小说中查看章节列表');
-        $where  = null;
-        $search = $this->input->get('search');
-        $type   = $this->input->get('type');
 
-        if ($search) {
-            if ($type == 'id') $where = array('id' => $search); else $where = "`title` like '%{$search}%'";
-        }
-        $this->load->library('pagination');
-        //每页分几项
-        $per_page = 10;
-        //分页配置
-        $this->config->load('pagination');
-        $config['base_url']           = site_url('admin/chapter/list/' . $story_id);
-        $config['total_rows']         = $this->chapter->all($story_id, $where);
-        $config['reuse_query_string'] = true;
-        $config['uri_segment']        = 5;
-        $config['per_page']           = $per_page;
-        //调用分页
-        $this->pagination->initialize($config);
 
         $data['story']    = $this->story->get($story_id);
-        $data['chapters'] = $this->chapter->get(null, $story_id, $per_page, $page, $where);
-        $data['pages']    = $this->pagination->create_links(); //创建分页
+
         $this->load->view('admin/chapter_list', $data);
+    }
+
+    function datatable() {
+        $search = $this->input->get_post('search');
+        $this->load->library('Datatables');
+        $this->datatables->select("id,`title`,`order`", false)
+            ->from('chapter')
+            ->where('id', $search['value'])
+            ->or_like('title', $search['value'])
+            ->add_column('DT_RowId', '$1', 'id')
+            ->add_column('action', <<<ETO
+<div class="dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            操作
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li class="editChapter">
+                                <a href="#">
+                                    <i class="icon-edit"></i>
+                                    编辑列表
+                                </a>
+                            </li>
+                            <li class="deleteChapter">
+                                <a href="#">
+                                    <i class="icon-trash"></i>
+                                    删除章节
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+ETO
+            );
+
+        echo $this->datatables->generate();
     }
 
 }

@@ -119,6 +119,11 @@ class Datatables {
         return $this;
     }
 
+    public function order_by($order, $asc='ASC') {
+        $this->ci->db->order_by($order,$asc);
+        return $this;
+    }
+
     /**
      * Generates the WHERE portion of the query
      *
@@ -254,7 +259,7 @@ class Datatables {
     public function generate($output = 'json', $charset = 'UTF-8') {
         if (strtolower($output) == 'json') $this->get_paging();
         $this->get_ordering();
-        $this->get_filtering();
+        //$this->get_filtering();
         return $this->produce_output(strtolower($output), strtolower($charset));
     }
 
@@ -264,8 +269,8 @@ class Datatables {
      * @return mixed
      */
     private function get_paging() {
-        $iStart = $this->ci->input->post('start');
-        $iLength = $this->ci->input->post('length');
+        $iStart = $this->ci->input->post_get('start');
+        $iLength = $this->ci->input->post_get('length');
         if ($iLength != '' && $iLength != '-1') $this->ci->db->limit($iLength, ($iStart) ? $iStart : 0);
     }
 
@@ -275,8 +280,8 @@ class Datatables {
      * @return mixed
      */
     private function get_ordering() {
-        $Data = $this->ci->input->post('columns');
-        if ($this->ci->input->post('order')) foreach ($this->ci->input->post('order') as $key) if ($this->check_cType()) $this->ci->db->order_by($Data[$key['column']]['data'], $key['dir']); else
+        $Data = $this->ci->input->post_get('columns');
+        if ($this->ci->input->post_get('order')) foreach ($this->ci->input->post_get('order') as $key) if ($this->check_cType()) $this->ci->db->order_by($Data[$key['column']]['data'], $key['dir']); else
             $this->ci->db->order_by($this->columns[$key['column']], $key['dir']);
     }
 
@@ -286,9 +291,9 @@ class Datatables {
      * @return mixed
      */
     private function get_filtering() {
-        $mColArray = $this->ci->input->post('columns');
+        $mColArray = $this->ci->input->post_get('columns');
         $sWhere = '';
-        $search = $this->ci->input->post('search');
+        $search = $this->ci->input->post_get('search');
         $sSearch = $this->ci->db->escape_like_str(trim($search['value']));
         $columns = array_values(array_diff($this->columns, $this->unset_columns));
         if ($sSearch != '') for ($i = 0; $i < count($mColArray); $i++) if ($mColArray[$i]['searchable'] == 'true' && !array_key_exists($mColArray[$i]['data'], $this->add_columns)) if ($this->check_cType()) $sWhere .= $this->select[$mColArray[$i]['data']] . " LIKE '%" . $sSearch . "%' OR "; else
@@ -320,7 +325,7 @@ class Datatables {
         $rResult = $this->get_display_result();
         if ($output == 'json') {
             $iTotal = $this->get_total_results();
-            $iFilteredTotal = $this->get_total_results(TRUE);
+            $iFilteredTotal = $this->get_total_results(false);
         }
         foreach ($rResult->result_array() as $row_key => $row_val) {
             $aaData[$row_key] = ($this->check_cType()) ? $row_val : array_values($row_val);
@@ -332,7 +337,7 @@ class Datatables {
         }
         if ($output == 'json') {
             $sOutput = array(
-                'draw' => intval($this->ci->input->post('draw')), 'recordsTotal' => $iTotal,
+                'draw' => intval($this->ci->input->post_get('draw')), 'recordsTotal' => $iTotal,
                 'recordsFiltered' => $iFilteredTotal, 'data' => $aaData
             );
             if ($charset == 'utf-8') return json_encode($sOutput); else
@@ -404,7 +409,7 @@ class Datatables {
      * @return bool
      */
     private function check_cType() {
-        $column = $this->ci->input->post('columns');
+        $column = $this->ci->input->post_get('columns');
         if (is_numeric($column[0]['data'])) return FALSE; else
             return TRUE;
     }
