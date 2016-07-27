@@ -14,29 +14,65 @@ class Story extends CI_Controller {
     }
 
     function index($page = 0) {
-        $this->load->library('pagination');
         $this->load->model('category_model', 'category');
-        //每页分几项
-        $per_page = 10;
-        //分页配置
-        $this->config->load('pagination');
-        $config['base_url']   = site_url('admin/story');
-        $config['total_rows'] = $this->story->all();
-        $config['per_page']   = $per_page;
-        //调用分页
-        $this->pagination->initialize($config);
-        //联合查询分类
-        $join = array(
-            'database' => 'category',
-            'where'    => 'category.id=story.category',
-            'select'   => 'category.title as category_title'
-        );
 
         $data['categorys'] = $this->category->get();
-        $data['storys']    = $this->story->get(null, $per_page, $page, null, null, 'ASC', $join);
-        $data['pages']     = $this->pagination->create_links(); //创建分页
 
         $this->load->view('admin/story', $data);
+    }
+
+    function datatable() {
+        $search = $this->input->get_post('search');
+        $this->load->library('Datatables');
+        $this->datatables->select("story.id,category.title as category_title,story.title,author,time,last_update", false)
+            ->from('story')
+            ->join('category', 'story.category=category.id', 'left')
+            ->like('story.title', $search['value'])
+            ->or_like('story.author', $search['value'])
+            ->add_column('DT_RowId', '$1', 'id')
+            ->add_column('action', <<<ETO
+<div class="dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            操作
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            <li class="listChapter">
+                                <a href="#">
+                                    <i class="icon-list-alt"></i>
+                                    章节列表
+                                </a>
+                            </li>
+                            <li class="addChapter">
+                                <a href="#">
+                                    <i class="icon-plus"></i>
+                                    增加章节
+                                </a>
+                            </li>
+                            <li class="editStory">
+                                <a href="#">
+                                    <i class="icon-edit"></i>
+                                    编辑小说
+                                </a>
+                            </li>
+                            <li class="deleteStory">
+                                <a href="#">
+                                    <i class="icon-trash"></i>
+                                    删除小说
+                                </a>
+                            </li>
+                            <li class="updateStory">
+                                <a href="#">
+                                    <i class="icon-cloud-download"></i>
+                                    更新小说
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+ETO
+            );
+        echo $this->datatables->generate();
     }
 
     function edit($id = null) {
@@ -51,12 +87,9 @@ class Story extends CI_Controller {
 
     function add() {
         $story = array(
-            'id'       => $this->input->post('id'),
-            'title'    => $this->input->post('title'),
-            'author'   => $this->input->post('author'),
-            'category' => $this->input->post('category'),
-            'image'    => $this->input->post('image'),
-            'desc'     => $this->input->post('desc')
+            'id' => $this->input->post('id'), 'title' => $this->input->post('title'),
+            'author' => $this->input->post('author'), 'category' => $this->input->post('category'),
+            'image' => $this->input->post('image'), 'desc' => $this->input->post('desc')
         );
 
         if (!$story['title']) show_error('小说标题没有输入，请返回重新填写。');
@@ -74,10 +107,10 @@ class Story extends CI_Controller {
     }
 
     function image() {
-        $config['upload_path']   = 'books/' . date('Y', time());
+        $config['upload_path'] = 'books/' . date('Y', time());
         $config['allowed_types'] = 'jpg|png|bmp|gif|jpeg';
-        $config['max_size']      = 500;
-        $config['encrypt_name']  = true;
+        $config['max_size'] = 500;
+        $config['encrypt_name'] = true;
         //创建目录
         mkdirs($config['upload_path']);
 
@@ -89,25 +122,24 @@ class Story extends CI_Controller {
             $data = array('upload_data' => $this->upload->data());
 
             $message = array(
-                'path'    => $config['upload_path'],
-                'profile' => $data['upload_data']
+                'path' => $config['upload_path'], 'profile' => $data['upload_data']
             );
             show_json($message);
         }
     }
 
     function upload() {
-        $config['upload_path']   = './books/uploads/';
+        $config['upload_path'] = './books/uploads/';
         $config['allowed_types'] = 'txt';
-        $config['max_size']      = 10240;
+        $config['max_size'] = 10240;
 
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('story')) {
             show_error($this->upload->display_errors());
         } else {
-            $data              = array('upload_data' => $this->upload->data());
-            $story             = $this->story->parse_file($data["upload_data"]);
+            $data = array('upload_data' => $this->upload->data());
+            $story = $this->story->parse_file($data["upload_data"]);
             $story['category'] = $this->input->post('category') ? $this->input->post('category') : 1;
 
             if ($this->story->get(null, 1, null, array('title' => $story['title']))) {
@@ -125,18 +157,15 @@ class Story extends CI_Controller {
             unset($chapters['desc']);
             $i = 0;
             foreach ($chapters as $chapter) {
-                $chapter['order']    = $i;
+                $chapter['order'] = $i;
                 $chapter['story_id'] = $story_id;
                 $this->db->replace('chapter', $chapter);
                 $i++;
             }
 
             $update = array(
-                'story_id'      => $story_id,
-                'story_title'   => $story['title'],
-                'chapter_id'    => $this->db->insert_id(),
-                'chapter_title' => $chapters[count($chapters) - 1]['title'],
-                'time'          => date('Y-m-d', time())
+                'story_id' => $story_id, 'story_title' => $story['title'], 'chapter_id' => $this->db->insert_id(),
+                'chapter_title' => $chapters[count($chapters) - 1]['title'], 'time' => date('Y-m-d', time())
             );
             $this->db->replace('update', $update);
             unlink($data["upload_data"]['full_path']);
