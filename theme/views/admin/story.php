@@ -196,7 +196,12 @@
             $(window.parent.document).find('#tab_capture_book').remove();
             chapter_btn.attr("url", '<?=SITEPATH?>/admin/collect/get/' + id);
             chapter_btn.trigger("click");
-        })
+        });
+        //双击打开小说
+        $('body').on('dblclick','tr', function () {
+            var id = $(this).attr('id');
+            window.open('<?=SITEPATH?>/story/'+id);
+        });
     });
 </script>
 
