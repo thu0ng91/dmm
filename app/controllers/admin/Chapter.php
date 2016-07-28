@@ -72,7 +72,7 @@ class Chapter extends CI_Controller {
         $this->db->delete('chapter',array('id'=>$id));
     }
 
-    function list_chapter($story_id) {
+    function list_chapter($story_id=null) {
         if (!$story_id) show_error('没有选择小说，请从发布小说中查看章节列表');
 
 
@@ -100,7 +100,7 @@ class Chapter extends CI_Controller {
                             <li class="editChapter">
                                 <a href="#">
                                     <i class="icon-edit"></i>
-                                    编辑列表
+                                    编辑章节
                                 </a>
                             </li>
                             <li class="deleteChapter">

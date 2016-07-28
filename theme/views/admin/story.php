@@ -109,9 +109,10 @@
                     "sSortDescending": ": 以降序排列此列"
                 }
             },
-            stateSave: true,
+            //stateSave: true,
             "processing": true,
             "serverSide": true,
+            "order": [[ 4, "desc" ]],
             "ajax": "<?=SITEPATH?>/admin/story/datatable",
             "columns": [
                 { "data": "title" },
