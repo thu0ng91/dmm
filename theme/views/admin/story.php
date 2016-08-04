@@ -9,7 +9,8 @@
                 <i class="icon-plus-sign-alt icon-large"></i>
                 发布新小说
             </button>
-            <a role="button" class="btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <a role="button" class="btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+               aria-expanded="false" aria-controls="collapseTwo">
                 <i class="icon-upload-alt icon-large"></i>
                 上传文本文件
             </a>
@@ -31,11 +32,13 @@
 
             <p>&nbsp;</p>
 
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/upload" method="post" enctype="multipart/form-data" id="addTxt">
+            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/upload" method="post"
+                  enctype="multipart/form-data" id="addTxt">
 
                 <div class="input-group">
                     <div class="input-group-btn">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="selectCategoryName">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" id="selectCategoryName">
                             选择分类 <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" id="selectCategory">
@@ -57,63 +60,72 @@
     </div>
 </div>
 
+<div class="container-fluid">
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>书名</th>
-        <th>作者</th>
-        <th>创建时间</th>
-        <th>最后更新</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($storys as $s): ?>
-        <tr id="<?= $s['id'] ?>">
-            <td><?= $s['id'] ?></td>
-            <td>
-                [<?= $s['category_title'] ?>]
-                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" target="_blank">
-                    <?= $s['title'] ?>
-                </a>
-            </td>
-            <td><?= $s['author'] ?></td>
-            <td><?= $s['time'] ?></td>
-            <td><?= $s['last_update'] ?></td>
-            <td>
-                <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning listChapter" title="章节列表">
-                        <i class="icon-list-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-default addChapter" title="增加章节">
-                        <i class="icon-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary editStory" title="编辑">
-                        <i class="icon-edit"></i>
-                    </button>
-                    <button type="button" class="btn btn-success deleteStory" title="删除">
-                        <i class="icon-trash"></i>
-                    </button>
-                    <button type="button" class="btn btn-info updateStory" title="更新">
-                        <i class="icon-cloud-download"></i>
-                    </button>
-                </div>
-            </td>
+    <table class="table table-striped table-hover" id="story_list_table">
+        <thead>
+        <tr>
+            <th width="40%">书名</th>
+            <th>类别</th>
+            <th>作者</th>
+            <th>创建时间</th>
+            <th>最后更新</th>
+            <th width="82px">操作</th>
         </tr>
-    <?php endforeach ?>
-    </tbody>
-</table>
-<div class="text-right">
-    <?= $pages ?>
+        </thead>
+    </table>
 </div>
 
 
+<link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/dataTables.bootstrap.min.css"/>
+
+<script src="<?= THEMEPATH ?>/js/jquery.dataTables.min.js"></script>
+<script src="<?= THEMEPATH ?>/js/dataTables.bootstrap.min.js"></script>
+
 <script type="text/javascript">
     $(function () {
+        $('#story_list_table').dataTable({
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            },
+            //stateSave: true,
+            "processing": true,
+            "serverSide": true,
+            "order": [[ 4, "desc" ]],
+            "ajax": "<?=SITEPATH?>/admin/story/datatable",
+            "columns": [
+                { "data": "title" },
+                { "data": "category_title" },
+                { "data": "author" },
+                { "data": "time" },
+                { "data": "last_update" },
+                { "data": "action" }
+            ]
+        });
+
         //打开新增小说窗口
-        $('#addStory').click(function() {
+        $('#addStory').click(function () {
             BootstrapDialog.show({
                 title: '发布新小说',
                 message: $('<div></div>').load('<?=SITEPATH?>/admin/story/edit/')
@@ -132,10 +144,10 @@
             var id = $(this).parent('li').attr('id');
             $('#category').val(id);
             $('#selectCategoryName').html($(this).text() + ' <span class="caret"></span>');
-        })
+        });
 
         //编辑小说
-        $('.editStory').click(function () {
+        $('body').on('click','.editStory',function () {
             var id = $(this).parents('tr').attr('id');
             BootstrapDialog.show({
                 title: '编辑小说',
@@ -143,7 +155,7 @@
             });
         });
         //删除小说
-        $('.deleteStory').click(function () {
+        $('body').on('click','.deleteStory',function () {
             if (!confirm('删除小说将同时删除所有章节！\r\n是否确认删除？')) return;
             var id = $(this).parents('tr').attr('id');
 
@@ -156,7 +168,7 @@
             })
         });
         //增加章节
-        $('.addChapter').click(function () {
+        $('body').on('click','.addChapter',function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_chapter').remove();
@@ -165,7 +177,7 @@
             chapter_btn.trigger("click");
         });
         //打开章节列表
-        $('.listChapter').click(function () {
+        $('body').on('click','.listChapter',function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter_list']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_chapter_list').remove();
@@ -174,14 +186,19 @@
             chapter_btn.trigger("click");
         });
         //更新小说
-        $('.updateStory').click(function(){
+        $('body').on('click','.updateStory',function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='capture_book']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_capture_book').remove();
             $(window.parent.document).find('#tab_capture_book').remove();
             chapter_btn.attr("url", '<?=SITEPATH?>/admin/collect/get/' + id);
             chapter_btn.trigger("click");
-        })
+        });
+        //双击打开小说
+        $('body').on('dblclick','tr', function () {
+            var id = $(this).attr('id');
+            window.open('<?=SITEPATH?>/story/'+id);
+        });
     });
 </script>
 
