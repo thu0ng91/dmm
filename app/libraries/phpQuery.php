@@ -406,7 +406,7 @@ abstract class phpQuery {
 	 */
 	public static function newDocumentFile($file, $contentType = null) {
 		$documentID = self::createDocumentWrapper(
-			file_get_contents($file), $contentType
+			@file_get_contents($file), $contentType
 		);
 		return new phpQueryObject($documentID);
 	}
