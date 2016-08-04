@@ -81,13 +81,19 @@ class Chapter extends CI_Controller {
         $this->load->view('admin/chapter_list', $data);
     }
 
-    function datatable() {
+    function datatable($story_id) {
         $search = $this->input->get_post('search');
+
+        $where='story_id='.$story_id;
+
+        if ($search['value']) {
+            $where.=' AND (id='.$search['value'].' OR title like "%'.$search['value'].'%")';
+        }
+
         $this->load->library('Datatables');
         $this->datatables->select("id,`title`,`order`", false)
             ->from('chapter')
-            ->where('id', $search['value'])
-            ->or_like('title', $search['value'])
+            ->where($where)
             ->add_column('DT_RowId', '$1', 'id')
             ->add_column('action', <<<ETO
 <div class="dropdown">
