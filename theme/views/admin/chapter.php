@@ -39,8 +39,8 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <textarea class="form-control" id="content" name="content"><?= isset($chapter['id']) ? $chapter['content'] : '' ?></textarea>
+            <div class="">
+                <textarea class="form-control" id="chapterContent" name="content"><?= isset($chapter['id']) ? $chapter['content'] : '' ?></textarea>
             </div>
             <?php if (isset($chapter['id'])): ?>
                 <input type="hidden" name="id" value="<?= $chapter['id'] ?>"/>
@@ -57,15 +57,36 @@
 </div>
 
 
-<link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/redactor.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/summernote.css"/>
 
-<script src="<?= THEMEPATH ?>/js/redactor.js"></script>
+<script src="<?= THEMEPATH ?>/js/summernote.min.js"></script>
+<script src="<?= THEMEPATH ?>/js/summernote-zh-CN.min.js"></script>
 
 <script type="text/javascript">
     $(function () {
-        $('#content').redactor({
-            minHeight: 350
+        $('#chapterContent').summernote({
+            'lang': 'zh-CN',
+            'height': 300,
+            'onImageUpload': function (files, editor, welEditable) {
+                sendFile(files[0], editor, welEditable);
+            }
         });
+
+        function sendFile(file, editor, welEditable) {
+            data = new FormData();
+            data.append("file", file);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "<?=SITEPATH?>/admin/upload",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (url) {
+                    editor.insertImage(welEditable, url);
+                }
+            });
+        }
     });
 </script>
 

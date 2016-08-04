@@ -1,11 +1,17 @@
-
 <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/add" method="post" id="addStory">
+    <div class="pull-right">
+        <div class="col-sm-offset-2 col-sm-10 btn-group" role="group">
+            <button type="submit" class="btn btn-success"><?= isset($story) ? '编辑' : '增加' ?></button>
+            <button type="reset" class="btn btn-info" onclick="ajax_dialog.close();">取消</button>
+        </div>
+    </div>
 
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">常规</a>
         </li>
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">封面</a></li>
     </ul>
+
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -51,6 +57,7 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="profile">
             <p></p>
+
             <div class="well">
                 上传封面时，要先在<b>封面</b>标签页中先上传图片，然后再提交表单，否则不会上传图片。
             </div>
@@ -64,41 +71,40 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10 btn-group" role="group">
-            <button type="submit" class="btn btn-success"><?= isset($story) ? '编辑' : '增加' ?></button>
-            <button type="reset" class="btn btn-info" onclick="BootstrapDialog.closeAll();">取消</button>
-        </div>
-    </div>
+
 
 </form>
 
-
-<link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/redactor.css"/>
 <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/fileinput.min.css"/>
-<script src="<?= THEMEPATH ?>/js/redactor.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/summernote.css"/>
+
+<script src="<?= THEMEPATH ?>/js/summernote.min.js"></script>
+<script src="<?= THEMEPATH ?>/js/summernote-zh-CN.min.js"></script>
 <script src="<?= THEMEPATH ?>/js/fileinput.min.js"></script>
 <script src="<?= THEMEPATH ?>/js/fileinput_locale_zh.js"></script>
 
 <script type="text/javascript">
-                $(function () {
-                    $('#desc').redactor();
-                    //上传封面图片
-                    $('#imageUpload').fileinput({
-                        'language': 'zh', //设置语言
-                        'uploadUrl': "<?= SITEPATH ?>/admin/story/image",
-                        maxFileSize: 500,
-                        showCaption: false,
-                        uploadClass: 'btn btn-success',
-                        elErrorContainer: '#kv-avatar-errors',
-                        defaultPreviewContent: '<img src="<?= SITEPATH ?>/<?= isset($story) ? $story['image'] : 'books/default.jpg' ?>" alt="Your Avatar" style="width:150px">',
-                        allowedFileExtensions: ["jpg", "png", "gif", 'bmp']
-                    });
-                    $('#imageUpload').on('fileuploaded', function (event, data) {
-                        console.log(data.response);
-                        var file = data.response;
-                        var image_url = file['path'] + '/' + file.profile['raw_name'] + file.profile['file_ext'];
-                        $('#image').val(image_url);
-                    });
-                })
+    $(function () {
+        $('#desc').summernote({
+            'lang': 'zh-CN',
+            'height': 200
+        });
+        //上传封面图片
+        $('#imageUpload').fileinput({
+            'language': 'zh', //设置语言
+            'uploadUrl': "<?= SITEPATH ?>/admin/story/image",
+            maxFileSize: 500,
+            showCaption: false,
+            uploadClass: 'btn btn-success',
+            elErrorContainer: '#kv-avatar-errors',
+            defaultPreviewContent: '<img src="<?= SITEPATH ?>/<?= isset($story) ? $story['image'] : 'books/default.jpg' ?>" alt="Your Avatar" style="width:150px">',
+            allowedFileExtensions: ["jpg", "png", "gif", 'bmp']
+        });
+        $('#imageUpload').on('fileuploaded', function (event, data) {
+            console.log(data.response);
+            var file = data.response;
+            var image_url = file['path'] + '/' + file.profile['raw_name'] + file.profile['file_ext'];
+            $('#image').val(image_url);
+        });
+    })
 </script>

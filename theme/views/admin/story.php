@@ -5,12 +5,12 @@
 
     <div class="panel-heading" id="headingTwo">
         <div class="btn-group">
-            <button class="btn btn-primary" id="addStory">
+            <button class="btn btn-primary" openDialog="<?=SITEPATH?>/admin/story/edit/" title="发布新小说">
                 <i class="icon-plus-sign-alt icon-large"></i>
                 发布新小说
             </button>
             <a role="button" class="btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-               aria-expanded="false" aria-controls="collapseTwo">
+                aria-expanded="false" aria-controls="collapseTwo">
                 <i class="icon-upload-alt icon-large"></i>
                 上传文本文件
             </a>
@@ -33,12 +33,12 @@
             <p>&nbsp;</p>
 
             <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/upload" method="post"
-                  enctype="multipart/form-data" id="addTxt">
+                enctype="multipart/form-data" id="addTxt">
 
                 <div class="input-group">
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" id="selectCategoryName">
+                            aria-haspopup="true" aria-expanded="false" id="selectCategoryName">
                             选择分类 <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" id="selectCategory">
@@ -62,7 +62,7 @@
 
 <div class="container-fluid">
 
-    <table class="table table-striped table-hover" id="story_list_table">
+    <table class="table table-striped table-hover" width="100%" id="story_list_table">
         <thead>
         <tr>
             <th width="40%">书名</th>
@@ -86,41 +86,20 @@
     $(function () {
         $('#story_list_table').dataTable({
             language: {
-                "sProcessing": "处理中...",
-                "sLengthMenu": "显示 _MENU_ 项结果",
-                "sZeroRecords": "没有匹配结果",
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                "sInfoPostFix": "",
-                "sSearch": "搜索:",
-                "sUrl": "",
-                "sEmptyTable": "表中数据为空",
-                "sLoadingRecords": "载入中...",
-                "sInfoThousands": ",",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "上页",
-                    "sNext": "下页",
-                    "sLast": "末页"
-                },
-                "oAria": {
-                    "sSortAscending": ": 以升序排列此列",
-                    "sSortDescending": ": 以降序排列此列"
-                }
+                'url': '<?=THEMEPATH?>/js/dataTables.zh-CN.json'
             },
-            //stateSave: true,
+            "stateSave": false,
             "processing": true,
             "serverSide": true,
-            "order": [[ 4, "desc" ]],
+            "order": [[4, "desc"]],
             "ajax": "<?=SITEPATH?>/admin/story/datatable",
             "columns": [
-                { "data": "title" },
-                { "data": "category_title" },
-                { "data": "author" },
-                { "data": "time" },
-                { "data": "last_update" },
-                { "data": "action" }
+                {"data": "title"},
+                {"data": "category_title"},
+                {"data": "author"},
+                {"data": "time"},
+                {"data": "last_update"},
+                {"data": "action"}
             ]
         });
 
@@ -147,15 +126,12 @@
         });
 
         //编辑小说
-        $('body').on('click','.editStory',function () {
+        $('body').on('click', '.editStory', function () {
             var id = $(this).parents('tr').attr('id');
-            BootstrapDialog.show({
-                title: '编辑小说',
-                message: $('<div></div>').load('<?=SITEPATH?>/admin/story/edit/' + id)
-            });
+            ajax_dialog('编辑小说', '<?=SITEPATH?>/admin/story/edit/' + id)
         });
         //删除小说
-        $('body').on('click','.deleteStory',function () {
+        $('body').on('click', '.deleteStory', function () {
             if (!confirm('删除小说将同时删除所有章节！\r\n是否确认删除？')) return;
             var id = $(this).parents('tr').attr('id');
 
@@ -168,7 +144,7 @@
             })
         });
         //增加章节
-        $('body').on('click','.addChapter',function () {
+        $('body').on('click', '.addChapter', function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_chapter').remove();
@@ -177,7 +153,7 @@
             chapter_btn.trigger("click");
         });
         //打开章节列表
-        $('body').on('click','.listChapter',function () {
+        $('body').on('click', '.listChapter', function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter_list']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_chapter_list').remove();
@@ -186,7 +162,7 @@
             chapter_btn.trigger("click");
         });
         //更新小说
-        $('body').on('click','.updateStory',function () {
+        $('body').on('click', '.updateStory', function () {
             var id = $(this).parents('tr').attr('id');
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='capture_book']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_capture_book').remove();
@@ -195,9 +171,9 @@
             chapter_btn.trigger("click");
         });
         //双击打开小说
-        $('body').on('dblclick','tr', function () {
+        $('body').on('dblclick', 'tr', function () {
             var id = $(this).attr('id');
-            window.open('<?=SITEPATH?>/story/'+id);
+            window.open('<?=SITEPATH?>/story/' + id);
         });
     });
 </script>

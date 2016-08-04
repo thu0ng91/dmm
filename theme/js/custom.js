@@ -80,7 +80,6 @@ var ajax_dialog = function (title, url) {
         );
         $('body').append(mymodal);
     }
-
     mymodal.modal('show');
     mymodal.on('hidden.bs.modal', function () {
         mymodal.remove();
@@ -88,6 +87,9 @@ var ajax_dialog = function (title, url) {
     });
 }
 
+ajax_dialog.close=function () {
+    $('#modal_ajax').modal('hide');
+}
 
 $(function () {
     $(window).resize(function () {
