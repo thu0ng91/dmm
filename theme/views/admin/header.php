@@ -10,12 +10,11 @@
 
     <title><?= $title ?></title>
 
-
-    <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/custom.css"/>
 
     <script src="<?= THEMEPATH ?>/js/jquery.min.js"></script>
+    <script src="<?= THEMEPATH ?>/js/jquery.cookie.js"></script>
     <script src="<?= THEMEPATH ?>/js/bootstrap.min.js"></script>
     <script src="<?= THEMEPATH ?>/js/custom.js"></script>
 
@@ -25,9 +24,28 @@
     <script src="<?=THEMEPATH?>/css/font-awesome-ie7.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+        $(function(){
+            var bootstrap = $.cookie('style') ? "bootstrap/" + $.cookie('style') : "bootstrap.min";
+
+            $("<link>").attr({
+                rel: "stylesheet",
+                type: "text/css",
+                id: "bootstrapStyle",
+                href: "<?= THEMEPATH ?>/css/" + bootstrap + ".css"
+            }).insertBefore("head link:first");
+
+            $('#bootstrapStyle').ready(function () {
+                $('.maskLayer').remove();
+            });
+        });
+    </script>
 
 </head>
 <body>
+<div class="maskLayer">
+    <img src="<?=THEMEPATH?>images/loading.gif">
+</div>
 <!-- Header -->
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container-fluid">

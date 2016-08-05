@@ -24,7 +24,7 @@
     </div>
     <div class="container-fluid">
 
-        <table class="table table-striped table-hover" id="chapter_list_table">
+        <table class="table table-striped table-hover" width="100%" id="chapter_list_table">
             <thead>
             <tr>
                 <th>排序</th>

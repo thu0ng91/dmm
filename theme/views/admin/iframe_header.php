@@ -7,12 +7,12 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/bootstrap-dialog.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/custom.css"/>
 
     <script src="<?= THEMEPATH ?>/js/jquery.min.js"></script>
+    <script src="<?= THEMEPATH ?>/js/jquery.cookie.js"></script>
     <script src="<?= THEMEPATH ?>/js/bootstrap.min.js"></script>
     <script src="<?= THEMEPATH ?>/js/bootstrap-dialog.js"></script>
     <script src="<?= THEMEPATH ?>/js/custom.js"></script>
@@ -22,6 +22,19 @@
     <script src="<?=THEMEPATH?>/js/respond.min.js"></script>
     <script src="<?=THEMEPATH?>/css/font-awesome-ie7.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript">
+        $(function(){
+            var bootstrap = $.cookie('style') ? "bootstrap/" + $.cookie('style') : "bootstrap.min";
+
+            $("<link>").attr({
+                rel: "stylesheet",
+                type: "text/css",
+                id: "bootstrapStyle",
+                href: "<?= THEMEPATH ?>/css/" + bootstrap + ".css"
+            }).insertBefore("head link:first");
+        });
+    </script>
 
 </head>
 <body>

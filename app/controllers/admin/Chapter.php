@@ -60,9 +60,10 @@ class Chapter extends CI_Controller {
             'story_title'   => $story['title'],
             'chapter_id'    => $chapter_id,
             'chapter_title' => $chapter['title'],
-            'time'          => date('Y-m-d H:i:s', time())
+            'time'          => date('Y-m-d H:i:s')
         );
         $this->db->replace('update', $update);
+        $this->db->set('last_update',date('Y-m-d H:i:s'))->where('id',$chapter['story_id'])->update('story');
         redirect('/admin/chapter/' . $type . '/' . $story['id']);
     }
 

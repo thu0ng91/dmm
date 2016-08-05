@@ -7,7 +7,7 @@
                 height: '400px',
                 fadeSpeed: 200,
                 fontSize: '20px',
-                lineHeight: '25px'
+                lineHeight: '30px'
             }, options || {});
 
             var $content = $(this);

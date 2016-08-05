@@ -10,12 +10,10 @@
 
     <title><?= $title ?></title>
 
-
-    <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="<?= THEMEPATH ?>/css/custom.css"/>
 
     <script src="<?= THEMEPATH ?>/js/jquery.min.js"></script>
+    <script src="<?= THEMEPATH ?>/js/jquery.cookie.js"></script>
     <script src="<?= THEMEPATH ?>/js/bootstrap.min.js"></script>
     <script src="<?= THEMEPATH ?>/js/custom.js"></script>
 
@@ -25,9 +23,29 @@
     <script src="<?=THEMEPATH?>/css/font-awesome-ie7.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+        $(function(){
+            var bootstrap = $.cookie('style') ? "bootstrap/" + $.cookie('style') : "bootstrap.min";
+
+            $("<link>").attr({
+                rel: "stylesheet",
+                type: "text/css",
+                id: "bootstrapStyle",
+                href: "<?= THEMEPATH ?>/css/" + bootstrap + ".css"
+            }).insertBefore("head link:first");
+
+            $('#bootstrapStyle').ready(function () {
+                $('.maskLayer').remove();
+            });
+        });
+    </script>
 
 </head>
 <body>
+
+<div class="maskLayer">
+    <img src="<?=THEMEPATH?>images/loading.gif">
+</div>
 
 <ol class="breadcrumb">
     <li><a href="<?= SITEPATH ?>">首页</a></li>
@@ -80,7 +98,7 @@
 
 <script type="text/javascript">
     $(function () {
-        var height = parseInt($(window).height()) - 86;
+        var height = parseInt($(window).height()) - 115;
         var width = parseInt($(window).width()) > 980 ? 980 : parseInt($(window).width());
         $('.chapter-list').height(height - 52);
         $('.chapter').width(width);

@@ -122,6 +122,7 @@ class Collect extends CI_Controller {
         );
         if ($chapter['content']) {
             $this->db->replace('chapter', $chapter);
+            $this->db->set('last_update',date('Y-m-d H:i:s'))->where('id',$chapter['story_id'])->update('story');
             echo '成功';
         } else {
             echo '失败';

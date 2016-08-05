@@ -1,15 +1,6 @@
-body {
-    background: url(../images/bg.png) transparent;
-}
 
 .panel {
     margin-bottom: 0;
-}
-
-.panel-body {
-    padding-top: 0;
-    padding-bottom: 0;
-    background: url('../images/bg.png');
 }
 
 .chapter-list {
@@ -29,6 +20,7 @@ body {
     position: relative;
     overflow: hidden;
     word-break: break-all;
+    font-family: "宋体";
     column-gap: 50px;
     -moz-column-gap: 50px;
     -webkit-column-gap: 50px;
