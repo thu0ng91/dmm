@@ -189,7 +189,7 @@ function import_database() {
                     echo '创建表：';
                     if ($db_cover == 1) {
                         $str = "DROP TABLE IF EXISTS {$match[2]} ;";
-                        $database->query($str) or die($database->error());
+                        $database->query($str) or die($database->error);
                     }
                     break;
                 case 'insert':
@@ -199,7 +199,7 @@ function import_database() {
             echo $match[2] . '<br />';
             ob_flush();
             flush();
-            $database->query($sql) or die($database->error());
+            $database->query($sql) or die($database->error);
         }
     }
     ob_end_clean();
