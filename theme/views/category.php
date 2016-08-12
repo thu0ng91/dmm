@@ -1,6 +1,6 @@
-<div class="col-md-8 col-md-offset-2" id="story_list">
-    <input type="hidden" name="start_page" value="<?= $per_page ?>" autocomplete="off" />
-    <input type="hidden" name="all_page" value="<?= $all ?>" autocomplete="off" />
+<div class="col-sm-8 col-sm-offset-2 " id="story_list">
+    <input type="hidden" name="start_page" value="<?= $per_page ?>" autocomplete="off"/>
+    <input type="hidden" name="all_page" value="<?= $all ?>" autocomplete="off"/>
     <?php include VIEWPATH . "list.php" ?>
 </div>
 
@@ -8,9 +8,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#story_list').masonry({
-            itemSelector: '.story-list',
-            columnWidth: 20
+
+        $('#bootstrapStyle').ready(function () {
+            $('#story_list').masonry({
+                itemSelector: '.box',
+                columnWidth: 20
+            });
         });
 
         $(window).scroll(function () {
@@ -20,7 +23,7 @@
                 if (start < all) {
                     ajax_load_story(start);
                 } else {
-                    show_error({'message':'到底了！不能再下去了...'});
+                    show_error({'message': '到底了！不能再下去了...'});
                 }
             }
         });

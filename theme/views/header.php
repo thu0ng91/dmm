@@ -37,6 +37,8 @@
                 }
             });
 
+            $('.maskLayer').height($(window).height());
+
             var bootstrap = $.cookie('style') ? "bootstrap/" + $.cookie('style') : "bootstrap.min";
 
             $("<link>").attr({
