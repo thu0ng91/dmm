@@ -1,9 +1,12 @@
-<div class="col-sm-8 col-sm-offset-2 " id="story_list">
-    <input type="hidden" name="start_page" value="<?= $per_page ?>" autocomplete="off"/>
-    <input type="hidden" name="all_page" value="<?= $all ?>" autocomplete="off"/>
-    <?php include VIEWPATH . "list.php" ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 " id="story_list">
+            <input type="hidden" name="start_page" value="<?= $per_page ?>" autocomplete="off"/>
+            <input type="hidden" name="all_page" value="<?= $all ?>" autocomplete="off"/>
+            <?php include VIEWPATH . "list.php" ?>
+        </div>
+    </div>
 </div>
-
 <script src="<?= THEMEPATH ?>/js/masonry.min.js"></script>
 
 <script type="text/javascript">
