@@ -8,7 +8,7 @@
         </h3>
 
         <div class="btn-group-xs btn-group">
-            <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/collect">
+            <a class="btn btn-primary" href="<?= site_url('/admin/collect') ?>">
                 <i class="icon-cloud-download"></i>
                 继续采集
             </a>
@@ -47,13 +47,11 @@
                 $('#collect').append($('<s>', {style: 'color:red;'}).append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
             } else {
                 $('#collect').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
-
-                console.log(key);
             }
             $('#collect').scrollTop($('#collect').scrollHeight);
             i++;
         });
-        $('.collect').append('采集完成.');
+        $('#collect').append('采集完成.');
     });
 </script>
 <?php include VIEWPATH . "admin/iframe_footer.php" ?>

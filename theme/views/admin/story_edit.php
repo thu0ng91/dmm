@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/add" method="post" id="addStory">
+<form class="form-horizontal" action="<?= site_url('/admin/story/add') ?>" method="post" id="addStory">
     <div class="pull-right">
         <div class="col-sm-offset-2 col-sm-10 btn-group" role="group">
             <button type="submit" class="btn btn-success"><?= isset($story) ? '编辑' : '增加' ?></button>
@@ -92,12 +92,12 @@
         //上传封面图片
         $('#imageUpload').fileinput({
             'language': 'zh', //设置语言
-            'uploadUrl': "<?= SITEPATH ?>/admin/story/image",
+            'uploadUrl': "<?= site_url('/admin/story/image') ?>",
             maxFileSize: 500,
             showCaption: false,
             uploadClass: 'btn btn-success',
             elErrorContainer: '#kv-avatar-errors',
-            defaultPreviewContent: '<img src="<?= SITEPATH ?>/<?= isset($story) ? $story['image'] : 'books/default.jpg' ?>" alt="Your Avatar" style="width:150px">',
+            defaultPreviewContent: '<img src="<?= site_url('/') ?><?= isset($story) ? $story['image'] : 'books/default.jpg' ?>" alt="Your Avatar" style="width:150px">',
             allowedFileExtensions: ["jpg", "png", "gif", 'bmp']
         });
         $('#imageUpload').on('fileuploaded', function (event, data) {

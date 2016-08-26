@@ -52,7 +52,7 @@
                 "stateSave": true,
                 "processing": true,
                 "serverSide": true,
-                "ajax": "<?= site_url('/admin/chapter/datatable/') ?><?=$story['id']?>",
+                "ajax": "<?= site_url('/admin/chapter/datatable/'.$story['id']) ?>",
                 "columns": [
                     {"data": "order"},
                     {"data": "title"},

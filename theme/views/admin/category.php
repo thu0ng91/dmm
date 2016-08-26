@@ -11,7 +11,7 @@
 
     <div id="createCategory" class="panel-collapse collapse" role="tabpanel" aria-labelledby="createCategory">
         <div class="panel-body">
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/category/add" method="post">
+            <form class="form-horizontal" action="<?= site_url('/admin/category/add') ?>" method="post">
 
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">标题</label>
@@ -63,7 +63,7 @@
             var $title = $title_td.text(); //需要编辑的分类title
 
 
-            var $form = '<form class="form-inline" action="<?= SITEPATH ?>/admin/category/add" method="post">' +
+            var $form = '<form class="form-inline" action="<?= site_url('/admin/category/add') ?>" method="post">' +
                 '<div class="form-group">' +
                 '<div class="input-group">' +
                 '<input type = "text" class = "form-control" name="title" value="' + $title + '" />' +

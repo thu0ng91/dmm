@@ -49,7 +49,7 @@
         <div class="text-center">
             <div class="btn-group">
                 <a class="btn btn-primary"
-                   href="<?= SITEPATH ?>/admin/collect/get?collect_id=<?= $collect_id ?>&book_id=<?= $book_id ?>&category_id=<?= $category_id ?>">
+                   href="<?= site_url('/admin/collect/get') ?>?collect_id=<?= $collect_id ?>&book_id=<?= $book_id ?>&category_id=<?= $category_id ?>">
                     <i class="icon-cloud-download"></i>
                     开始采集
                 </a>

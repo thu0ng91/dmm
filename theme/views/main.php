@@ -7,7 +7,7 @@
                         <?php foreach ($update as $s): ?>
                             <li>
                                 <span></span>
-                                <img src="<?= SITEPATH ?>/<?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" alt="<?= $s['title'] ?>"/>
+                                <img src="<?= site_url('/') ?><?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" alt="<?= $s['title'] ?>"/>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -15,10 +15,10 @@
                         <?php foreach ($update as $s): ?>
 
                             <li>
-                                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" title="<?= $s['title'] ?>">
-                                    <img src="<?= SITEPATH ?>/<?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" class="pic"/>
+                                <a href="<?= site_url('/story/'.$s['id']) ?>" title="<?= $s['title'] ?>">
+                                    <img src="<?= site_url('/') ?><?= $s['image'] ? $s['image'] : 'books/default.jpg' ?>" class="pic"/>
                                 </a>
-                                <a href="<?= SITEPATH ?>/story/<?= $s['id'] ?>" title="<?= $s['title'] ?>">
+                                <a href="<?= site_url('/story/'.$s['id']) ?>" title="<?= $s['title'] ?>">
                                     <h3><?= $s['title'] ?></h3>
                                 </a>
 
@@ -46,7 +46,7 @@
                             <div class="panel-heading">
                                 <b><?= $cu['category']['title'] ?></b>
                                 <span class="pull-right">
-                                    <a href="<?= SITEPATH ?>/category/<?= $cu['category']['id'] ?>">
+                                    <a href="<?= site_url('/category/'.$cu['category']['id']) ?>">
                                         更多...
                                     </a>
                                 </span>

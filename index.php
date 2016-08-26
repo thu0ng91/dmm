@@ -258,7 +258,7 @@ if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) 
 // 站点相对路径
 define('SITEPATH', dirname($_SERVER["SCRIPT_NAME"]));
 
-define('THEMEPATH', SITEPATH . 'theme/');
+define('THEMEPATH', SITEPATH . '/theme/');
 define('VIEWPATH', $view_folder . '/views/');
 
 /*

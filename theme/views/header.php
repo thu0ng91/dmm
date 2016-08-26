@@ -93,7 +93,7 @@
                     </li>
                 <?php endforeach; ?>
             </ul>
-            <form class="navbar-form navbar-right" role="search" method="get" action="<?= SITEPATH ?>/search/0">
+            <form class="navbar-form navbar-right" role="search" method="get" action="<?= site_url('/search/') ?>0">
                 <div class="form-group">
                     <div class="input-group">
                         <input class="form-control" type="text" name="search" id='search' placeholder="搜索书名、作者" value="<?= isset($search) ? $search : '' ?>"/>

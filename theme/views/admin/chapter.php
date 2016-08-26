@@ -6,7 +6,7 @@
         </h3>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" action="<?= SITEPATH ?>/admin/chapter/add" method="post">
+        <form class="form-horizontal" action="<?= site_url('/admin/chapter/add') ?>" method="post">
             <?php if (!isset($story)) { ?>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">小说</label>

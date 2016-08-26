@@ -32,7 +32,7 @@
 
             <p>&nbsp;</p>
 
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/story/upload" method="post"
+            <form class="form-horizontal" action="<?= site_url('/admin/story/upload') ?>" method="post"
                 enctype="multipart/form-data" id="addTxt">
 
                 <div class="input-group">
@@ -92,7 +92,7 @@
             "processing": true,
             "serverSide": true,
             "order": [[4, "desc"]],
-            "ajax": "<?= site_url('/admin/story/datatable') ?>",
+            "ajax": "<?= site_url('/admin/story/datatable/') ?>",
             "columns": [
                 {"data": "title"},
                 {"data": "category_title"},
@@ -128,7 +128,7 @@
         //编辑小说
         $('body').on('click', '.editStory', function () {
             var id = $(this).parents('tr').attr('id');
-            ajax_dialog('编辑小说', '<?= site_url('/admin/story/edit/') ?>' + id)
+            ajax_dialog('编辑小说', '<?= site_url('/admin/story/edit/') ?>/' + id)
         });
         //删除小说
         $('body').on('click', '.deleteStory', function () {
@@ -149,7 +149,7 @@
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_chapter').remove();
             $(window.parent.document).find('#tab_chapter').remove();
-            chapter_btn.attr("url", '<?= site_url('/admin/chapter/') ?>' + id);
+            chapter_btn.attr("url", '<?= site_url('/admin/chapter/') ?>/' + id);
             chapter_btn.trigger("click");
         });
         //打开章节列表
@@ -158,7 +158,7 @@
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter_list']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_chapter_list').remove();
             $(window.parent.document).find('#tab_chapter_list').remove();
-            chapter_btn.attr("url", '<?= site_url('/admin/chapter/list/') ?>' + id);
+            chapter_btn.attr("url", '<?= site_url('/admin/chapter/list/') ?>/' + id);
             chapter_btn.trigger("click");
         });
         //更新小说
@@ -167,13 +167,13 @@
             var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='capture_book']");//触发父窗口按钮
             $(window.parent.document).find('#tab_tab_capture_book').remove();
             $(window.parent.document).find('#tab_capture_book').remove();
-            chapter_btn.attr("url", '<?= site_url('/admin/collect/get/') ?>' + id);
+            chapter_btn.attr("url", '<?= site_url('/admin/collect/get/') ?>/' + id);
             chapter_btn.trigger("click");
         });
         //双击打开小说
         $('body').on('dblclick', 'tr', function () {
             var id = $(this).attr('id');
-            window.open('<?= site_url('/story/') ?>' + id);
+            window.open('<?= site_url('/story/') ?>/' + id);
         });
     });
 </script>

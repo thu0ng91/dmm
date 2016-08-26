@@ -20,11 +20,11 @@
                 <i class="icon-book"></i>
                 小说列表
             </a>
-            <a href="#" class="list-group-item" data-addtab="chapter_list" url="<?= site_url('/admin/chapter/list')?>">
+            <a href="#" class="list-group-item" data-addtab="chapter_list" url="<?= site_url('/admin/chapter/list/')?>">
                 <i class="icon-list-alt"></i>
                 章节列表
             </a>
-            <a href="#" class="list-group-item" data-addtab="chapter" url="<?= site_url('/admin/chapter')?>">
+            <a href="#" class="list-group-item" data-addtab="chapter" url="<?= site_url('/admin/chapter/')?>">
                 <i class="icon-file-text-alt"></i>
                 发布章节
             </a>

@@ -16,7 +16,7 @@
         <p>
         <span class="pull-right">
             <a href="history.go(-1);">返回</a>
-            <a href="<?= SITEPATH ?>/admin/capture/get_chapter/<?= $id ?>">开始采集</a>
+            <a href="<?= site_url('/admin/capture/get_chapter/') ?><?= $id ?>">开始采集</a>
         </span>
         </p>
     </div>

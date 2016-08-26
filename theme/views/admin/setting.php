@@ -14,7 +14,7 @@
                         class="glyphicon glyphicon-floppy-disk"></i>
                     全部保存
                 </button>
-                <button type="button" class="btn btn-default btn-primary" openDialog="<?= SITEPATH ?>/admin/setting/create" title="新建配置项"
+                <button type="button" class="btn btn-default btn-primary" openDialog="<?= site_url('/admin/setting/create') ?>" title="新建配置项"
                     id="create_menu"><i
                         class="glyphicon glyphicon-plus"></i>
                     新建配置项

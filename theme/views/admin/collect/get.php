@@ -9,7 +9,7 @@
 
 
         <div class="panel-body">
-            <form class="form-horizontal" action="<?= SITEPATH ?>/admin/collect_setting/test" method="post">
+            <form class="form-horizontal" action="<?= site_url('/admin/collect_setting/test') ?>" method="post">
 
                 <div class="form-group">
                     <label for="book_id" class="col-sm-2 control-label">采集书号</label>
