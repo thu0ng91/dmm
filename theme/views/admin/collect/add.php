@@ -15,7 +15,7 @@
 <div class="panel panel-default" id="accordion" role="tablist" aria-multiselectable="true">
 
     <div class="panel-body">
-        <form action="<?=SITEPATH?>/admin/collect/add" method="post">
+        <form action="<?= site_url('/admin/collect_setting/add') ?>" method="post">
 
             <div class="btn-group pull-right" role="group">
                 <button type="submit" class="btn btn-success">提交</button>

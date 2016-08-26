@@ -78,7 +78,7 @@
             $.ajax({
                 data: data,
                 type: "POST",
-                url: "<?=SITEPATH?>/admin/upload",
+                url: "<?= site_url('/admin/upload') ?>",
                 cache: false,
                 contentType: false,
                 processData: false,

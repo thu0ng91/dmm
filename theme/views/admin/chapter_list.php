@@ -52,7 +52,7 @@
                 "stateSave": true,
                 "processing": true,
                 "serverSide": true,
-                "ajax": "<?=SITEPATH?>/admin/chapter/datatable/<?=$story['id']?>",
+                "ajax": "<?= site_url('/admin/chapter/datatable/') ?><?=$story['id']?>",
                 "columns": [
                     {"data": "order"},
                     {"data": "title"},
@@ -74,7 +74,7 @@
                 var chapter_btn = parent.$(window.parent.document).find("a[data-addtab='chapter']");//触发父窗口按钮
                 $(window.parent.document).find('#tab_tab_chapter').remove();
                 $(window.parent.document).find('#tab_chapter').remove();
-                chapter_btn.attr("url", '<?=SITEPATH?>/admin/chapter/' + id);
+                chapter_btn.attr("url", '<?= site_url('/admin/chapter/') ?>' + id);
                 chapter_btn.trigger("click");
             });
 
@@ -82,7 +82,7 @@
             $('body').on('click','.editChapter',function () {
                 var chapter_id = $(this).parents('tr').attr('id');
                 var chapter_title = $(this).parents('td').prev('td').text();
-                var url = '<?=SITEPATH?>/admin/chapter/<?=$story['id']?>/' + chapter_id;
+                var url = '<?= site_url('/admin/chapter/') ?><?=$story['id']?>/' + chapter_id;
                 BootstrapDialog.show({
                     title: chapter_title,
                     message: $('<div></div>').load(url)
@@ -95,7 +95,7 @@
                 var chapter = $(this).parents('tr');
                 var chapter_id = chapter.attr('id');
 
-                var url = '<?=SITEPATH?>/admin/chapter/delete/' + chapter_id;
+                var url = '<?= site_url('/admin/chapter/delete/') ?>' + chapter_id;
                 $.get(url, function (data) {
                     if (!data) {
                         chapter.remove();
@@ -110,7 +110,7 @@
             //双击打开章节
             $('body').on('dblclick','tr', function () {
                 var id = $(this).attr('id');
-                window.open('<?=SITEPATH?>/chapter/'+id);
+                window.open('<?= site_url('/chapter/') ?>'+id);
             });
         })
     </script>

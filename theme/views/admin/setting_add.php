@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="settingForm" action="<?=SITEPATH?>/admin/setting/edit" method="post">
+<form class="form-horizontal" id="settingForm" action="<?= site_url('/admin/setting/edit') ?>" method="post">
     <div class="btn-group pull-right" role="group" aria-label="...">
         <button type="submit" class="btn btn-primary" id="submit"><i class="glyphicon glyphicon-floppy-disk"></i> 保存
         </button>

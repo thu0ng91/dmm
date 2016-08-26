@@ -33,7 +33,7 @@
 
         var ajax_load_story = function (start) {
             $('input[name=start_page]').val(parseInt(start) + <?=$per_page?>);
-            $.get('<?=SITEPATH?>/category/page/<?=$category_id?>/' + start, function (data) {
+            $.get('<?= site_url('/category/page/') ?><?=$category_id?>/' + start, function (data) {
                 var str = $(data);
                 $('#story_list').append(str).masonry('appended', str).masonry();
             });

@@ -24,8 +24,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <?php
-                    $num=count($chapter_list);
-                    for ($i = $num-1; $i > ($num-5); $i--): ?>
+                    $num = count($chapter_list);
+                    for ($i = $num - 1; $i > ($num - 5); $i--): ?>
                         <div class="col-md-3">
                             <a href="<?= $book['book_list'] ?><?= $chapter_list[$i]['url'] ?>"><?= $chapter_list[$i]['title'] ?></a>
                         </div>
@@ -48,7 +48,8 @@
     <?php if ($ajax == 0): ?>
         <div class="text-center">
             <div class="btn-group">
-                <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/collect/get_book?title=<?= rawurlencode($book['book_title']) ?>">
+                <a class="btn btn-primary"
+                   href="<?= SITEPATH ?>/admin/collect/get?collect_id=<?= $collect_id ?>&book_id=<?= $book_id ?>&category_id=<?= $category_id ?>">
                     <i class="icon-cloud-download"></i>
                     开始采集
                 </a>

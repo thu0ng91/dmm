@@ -3,7 +3,7 @@
         MyPagination: function (options) {
 
             var options = $.extend({
-                width:  900,
+                width:  400,
                 height: '400px',
                 fadeSpeed: 200,
                 fontSize: '20px',
@@ -12,10 +12,6 @@
 
             var $content = $(this);
 
-            console.log(options.width);
-
-
-            //set content height
 
             var lastPage;
             var cPage = 1;
@@ -25,14 +21,13 @@
                 $content.css("font-size", options.fontSize);
                 $content.css("line-height", options.lineHeight);
 
-                lastPage = Math.ceil($content.outerHeight() / options.height);
+                lastPage = Math.ceil($content.outerHeight() / (options.height-30));
                 $content.height(options.height);
                 $content.css("column-width", options.width + 'px');
                 $content.css("-moz-column-width", options.width + 'px');
                 $content.css("-webkit-column-width", options.width + 'px');
-                $content.css("column-count", lastPage);
-                $content.css("-moz-column-count", lastPage);
-                $content.css("-webkit-column-count", lastPage);
+                //lastPage=Math.ceil($('#offset').position().left / (options.width+14));
+
             };
 
 

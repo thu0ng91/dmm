@@ -54,7 +54,7 @@
                             <!-- List group -->
                             <ul class="list-group">
                                 <?php foreach ($cu['stories'] as $cs):?>
-                                <a class="list-group-item" href="<?=SITEPATH?>/story/<?=$cs['id']?>">
+                                <a class="list-group-item" href="<?=site_url(SITEPATH.'/story/'.$cs['id'])?>">
                                     <?=$cs['title']?>
                                 </a>
                                 <?php endforeach;?>

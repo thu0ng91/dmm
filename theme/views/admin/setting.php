@@ -98,7 +98,7 @@
                     value = $(this).children('input').val();
                     $.ajax({
                         type: "post",
-                        url: "<?=SITEPATH?>/admin/setting/edit",
+                        url: "<?= site_url('/admin/setting/edit') ?>",
                         data: {
                             id: id,//修改项的ID
                             field: field,//修改列的名称

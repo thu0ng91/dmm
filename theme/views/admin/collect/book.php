@@ -8,7 +8,7 @@
         </h3>
 
         <div class="btn-group-xs btn-group">
-            <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/collect/get">
+            <a class="btn btn-primary" href="<?= SITEPATH ?>/admin/collect">
                 <i class="icon-cloud-download"></i>
                 继续采集
             </a>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="panel-body">
-        <div class="collect">
+        <div class="collect" id="collect">
 
         </div>
     </div>
@@ -31,26 +31,29 @@
         var i = 0;
         $.each(data, function (key, ch) {
             html = $.ajax({
-                url: '<?=SITEPATH?>/admin/collect/get_chapter',
+                url: '<?= site_url('/admin/collect/get_chapter') ?>',
                 async: false,
                 dataType: 'text',
                 type: 'POST',
                 data: {
-                    url: '<?=$collect_url?>/' + ch.url,
+                    url: '<?=$book['chapter_url']?>/' + ch.url,
                     title: ch.title,
-                    collect_id: <?=$collect_id?>,
-                    story_id: '<?=$book['id']?>',
+                    collect_id: <?=$book['collect_id']?>,
+                    story_id: '<?=$book['story_id']?>',
                     order: ch.order ? ch.order : parseInt(<?=$order?>) + i
                 }
             }).responseText;
-            if (html=='失败') {
-                $('.collect').append($('<s>',{style:'color:red;'}).append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
+            if (html == '失败') {
+                $('#collect').append($('<s>', {style: 'color:red;'}).append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;'));
             } else {
-                $('.collect').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
+                $('#collect').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
+
+                console.log(key);
             }
-            $('.collect').scrollTop($('.collect')[0].scrollHeight);
+            $('#collect').scrollTop($('#collect').scrollHeight);
             i++;
-        })
+        });
+        $('.collect').append('采集完成.');
     });
 </script>
 <?php include VIEWPATH . "admin/iframe_footer.php" ?>

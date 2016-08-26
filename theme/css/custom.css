@@ -47,15 +47,14 @@
     max-width: 1280px;
 }
 
-
 .box {
     margin: 5px;
     width: 180px;
     border: 1px #ddd solid;
     padding: 5px;
-    -moz-border-radius: 5px;      /* Gecko browsers */
-    -webkit-border-radius: 5px;   /* Webkit browsers */
-    border-radius:5px;            /* W3C syntax */
+    -moz-border-radius: 5px; /* Gecko browsers */
+    -webkit-border-radius: 5px; /* Webkit browsers */
+    border-radius: 5px; /* W3C syntax */
 }
 
 .boxmsg {
@@ -80,6 +79,12 @@
     overflow-x: hidden;
 }
 
+.chapter-list li a {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 #content {
     font-size: 20px;
 }
@@ -99,7 +104,6 @@
 
 }
 
-
 .maskLayer {
     position: absolute;
     width: 100%;
@@ -118,7 +122,6 @@
     left: 50%;
     top: 40%
 }
-
 
 .fleft {
     float: left

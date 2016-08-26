@@ -58,14 +58,14 @@
             var title = $(this).parents('td').prev('td').text();
             BootstrapDialog.show({
                 title: '测试采集 - ' + title,
-                message: $('<div></div>').load('<?= SITEPATH ?>/admin/collect/test/' + id)
+                message: $('<div></div>').load('<?= SITEPATH ?>/admin/collect_setting/test/' + id)
             });
         });
 
         $('#addCapture').click(function () {
             BootstrapDialog.show({
                 title: '测试采集配置',
-                message: $('<div></div>').load('<?= SITEPATH ?>/admin/collect/edit/')
+                message: $('<div></div>').load('<?= SITEPATH ?>/admin/collect_setting/edit/')
             });
         });
 
@@ -74,7 +74,7 @@
             var title = $(this).parents('td').prev('td').text();
             BootstrapDialog.show({
                 title: '编辑采集配置 - ' + title,
-                message: $('<div></div>').load('<?= SITEPATH ?>/admin/collect/edit/' + id)
+                message: $('<div></div>').load('<?= SITEPATH ?>/admin/collect_setting/edit/' + id)
             });
         });
 
@@ -82,7 +82,7 @@
             if (!confirm('确认删除？？')) return;
             var tr = $(this).parents('tr');
             var id = $(this).parents('tr').attr('id');
-            $.get('<?=SITEPATH?>/admin/collect/delete/' + id, function () {
+            $.get('<?= site_url('/admin/collect_setting/delete/') ?>' + id, function () {
                 tr.remove();
             });
         });

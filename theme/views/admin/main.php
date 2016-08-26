@@ -8,31 +8,31 @@
                 <i class="icon-home"></i>
                 管理首页
             </a>
-            <a href="#" class="list-group-item" data-addtab="setting" url="<?= SITEPATH ?>/admin/setting">
+            <a href="#" class="list-group-item" data-addtab="setting" url="<?= site_url('/admin/setting')?>">
                 <i class="icon-cogs"></i>
                 系统设置
             </a>
-            <a href="#" class="list-group-item" data-addtab="category" url="<?= SITEPATH ?>/admin/category">
+            <a href="#" class="list-group-item" data-addtab="category" url="<?= site_url('/admin/category')?>">
                 <i class="icon-folder-open"></i>
                 分类设置
             </a>
-            <a href="#" class="list-group-item" data-addtab="story" url="<?= SITEPATH ?>/admin/story">
+            <a href="#" class="list-group-item" data-addtab="story" url="<?= site_url('/admin/story')?>">
                 <i class="icon-book"></i>
                 小说列表
             </a>
-            <a href="#" class="list-group-item" data-addtab="chapter_list" url="<?= SITEPATH ?>/admin/chapter/list">
+            <a href="#" class="list-group-item" data-addtab="chapter_list" url="<?= site_url('/admin/chapter/list')?>">
                 <i class="icon-list-alt"></i>
                 章节列表
             </a>
-            <a href="#" class="list-group-item" data-addtab="chapter" url="<?= SITEPATH ?>/admin/chapter">
+            <a href="#" class="list-group-item" data-addtab="chapter" url="<?= site_url('/admin/chapter')?>">
                 <i class="icon-file-text-alt"></i>
                 发布章节
             </a>
-            <a href="#" class="list-group-item" data-addtab="capture" url="<?= SITEPATH ?>/admin/collect">
+            <a href="#" class="list-group-item" data-addtab="capture" url="<?= site_url('/admin/collect_setting')?>">
                 <i class="icon-cog"></i>
                 采集设置
             </a>
-            <a href="#" class="list-group-item" data-addtab="capture_book" url="<?= SITEPATH ?>/admin/collect/get">
+            <a href="#" class="list-group-item" data-addtab="capture_book" url="<?= site_url('/admin/collect')?>">
                 <i class="icon-cloud-download"></i>
                 采集小说
             </a>

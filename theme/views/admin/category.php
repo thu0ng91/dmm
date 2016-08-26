@@ -80,7 +80,7 @@
         $('.deleteCategory').click(function() {
             if (!confirm('分类删除后，可能导致一些小说无法正常浏览。\n是否确定删除此分类！！！')) return;
             var id = $(this).parents('tr').attr('id'); //需要编辑的分类ID
-            $.get('<?=SITEPATH?>/admin/category/delete/'+id,function(data){
+            $.get('<?= site_url('/admin/category/delete/') ?>'+id,function(data){
                 if(data) {
                     alert(data);
                 } else {
