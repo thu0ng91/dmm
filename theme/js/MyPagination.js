@@ -41,7 +41,7 @@
 
                 cPage = page;
 
-                var scrollLeft = (page - 1) * (options.width + 18);
+                var scrollLeft = (page - 1) * (options.width + 20);
 
                 $content.animate({
                     scrollLeft: scrollLeft

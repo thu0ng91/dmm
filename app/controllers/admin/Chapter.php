@@ -49,20 +49,14 @@ class Chapter extends CI_Controller {
 
         if (!$story) show_error('您所提交的小说不存在，请检查后重新提交。');
 
-        $this->db->replace('chapter', $chapter);
-
+        if (!$chapter['id']) {
+            $this->chapter->insert($chapter);
+        } else {
+            $this->db->replace('chapter', $chapter);
+        }
         $this->db->cache_delete('admin', 'chapter');
         $this->db->cache_delete('chapter', $chapter['id']);
 
-        $chapter_id = $chapter['id']?$chapter['id']:$this->db->insert_id();
-        $update     = array(
-            'story_id'      => $chapter['story_id'],
-            'story_title'   => $story['title'],
-            'chapter_id'    => $chapter_id,
-            'chapter_title' => $chapter['title'],
-            'time'          => date('Y-m-d H:i:s')
-        );
-        $this->db->replace('update', $update);
         $this->db->set('last_update',date('Y-m-d H:i:s'))->where('id',$chapter['story_id'])->update('story');
         redirect('/admin/chapter/' . $type . '/' . $story['id']);
     }

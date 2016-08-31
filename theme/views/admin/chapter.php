@@ -67,6 +67,15 @@
         $('#chapterContent').summernote({
             'lang': 'zh-CN',
             'height': 300,
+            callbacks: {
+                'onInit': function() {
+                    $('<label>',{'class':'pull-right','id':'word'}).append('0 字 ').appendTo('.note-toolbar');
+                },
+                'onChange': function (contents) {
+                    var word = $(contents.replace(/(\s+)|(&nbsp;)+/g, "")).text().length;
+                    $('#word').text(word+' 字 ');
+                }
+            },
             'onImageUpload': function (files, editor, welEditable) {
                 sendFile(files[0], editor, welEditable);
             }
