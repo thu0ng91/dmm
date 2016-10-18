@@ -58,7 +58,7 @@
             var title = $(this).parents('td').prev('td').text();
             BootstrapDialog.show({
                 title: '测试采集 - ' + title,
-                message: $('<div></div>').load('<?= site_url('/admin/collect_setting/test/') ?>' + id)
+                message: $('<div></div>').load('<?= site_url('/admin/collect_setting/test/') ?>/' + id)
             });
         });
 
@@ -74,7 +74,7 @@
             var title = $(this).parents('td').prev('td').text();
             BootstrapDialog.show({
                 title: '编辑采集配置 - ' + title,
-                message: $('<div></div>').load('<?= site_url('/admin/collect_setting/edit/') ?>' + id)
+                message: $('<div></div>').load('<?= site_url('/admin/collect_setting/edit/') ?>/' + id)
             });
         });
 
@@ -82,7 +82,7 @@
             if (!confirm('确认删除？？')) return;
             var tr = $(this).parents('tr');
             var id = $(this).parents('tr').attr('id');
-            $.get('<?= site_url('/admin/collect_setting/delete/') ?>' + id, function () {
+            $.get('<?= site_url('/admin/collect_setting/delete/') ?>/' + id, function () {
                 tr.remove();
             });
         });

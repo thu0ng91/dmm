@@ -2,7 +2,8 @@
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                   aria-expanded="false" aria-controls="collapseOne">
                     查看规则
                     <i class="icon-hand-left"></i>
                 </a>
@@ -26,57 +27,68 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">站点设置</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">小说信息</a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">章节内容</a></li>                    
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                              data-toggle="tab">站点设置</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                               data-toggle="tab">小说信息</a></li>
+                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">章节内容</a>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <?php if (isset($collect)):?>
-                        <input type="hidden" name="id" value="<?=$collect['id']?>"/>
-                    <?php endif;?>
+                    <?php if (isset($collect)): ?>
+                        <input type="hidden" name="id" value="<?= $collect['id'] ?>"/>
+                    <?php endif; ?>
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <div class="form-group">
                             <label for="titleLabel">站点标题</label>
-                            <input type="text" class="form-control" id="site_title" name="site_title" placeholder="Title" value="<?= isset($collect) ? $collect['site_title'] : '' ?>">
+                            <input type="text" class="form-control" id="site_title" name="site_title"
+                                   placeholder="Title" value="<?= isset($collect) ? $collect['site_title'] : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">站点地址</label>
-                            <input type="text" class="form-control" id="site_url" name="site_url" placeholder="Site URL" value="<?= isset($collect) ? $collect['site_url'] : '' ?>">
+                            <input type="text" class="form-control" id="site_url" name="site_url" placeholder="Site URL"
+                                   value="<?= isset($collect) ? $collect['site_url'] : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">小说地址</label>
-                            <input type="text" class="form-control" id="book_url" name="book_url" placeholder="Book URL" value="<?= isset($collect) ? $collect['book_url'] : '' ?>">
+                            <input type="text" class="form-control" id="book_url" name="book_url" placeholder="Book URL"
+                                   value="<?= isset($collect) ? $collect['book_url'] : '' ?>">
                         </div>
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="profile">
                         <div class="form-group">
                             <label for="titleLabel">小说标题</label>
-                            <textarea class="form-control" name="book_title"><?= isset($collect) ? htmlspecialchars($collect['book_title']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="book_title"
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['book_title']) : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">小说作者</label>
-                            <textarea class="form-control" name="book_author"><?= isset($collect) ? htmlspecialchars($collect['book_author']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="book_author"
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['book_author']) : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">小说描述</label>
-                            <textarea class="form-control" name="book_desc"><?= isset($collect) ? htmlspecialchars($collect['book_desc']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="book_desc"
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['book_desc']) : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">小说图片</label>
-                            <textarea class="form-control" name="book_img"><?= isset($collect) ? htmlspecialchars($collect['book_img']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="book_img"
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['book_img']) : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">章节列表地址</label>
-                            <textarea class="form-control" name="book_list"><?= isset($collect) ? htmlspecialchars($collect['book_list']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="book_list"
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['book_list']) : '' ?>">
                         </div>
 
                     </div>
@@ -84,22 +96,26 @@
 
                         <div class="form-group">
                             <label for="titleLabel">章节地址及标题</label>
-                            <textarea class="form-control" name="chapter_list"><?= isset($collect) ? htmlspecialchars($collect['chapter_list']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="chapter_list"
+                                   value=" <?= isset($collect) ? htmlspecialchars($collect['chapter_list']) : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">章节内容地址前缀</label>
-                            <textarea class="form-control" name="chapter_url"><?= isset($collect) ? htmlspecialchars($collect['chapter_url']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="chapter_url"
+                                   value=" <?= isset($collect) ? htmlspecialchars($collect['chapter_url']) : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">章节内容</label>
-                            <textarea class="form-control" name="chapter_content"><?= isset($collect) ? htmlspecialchars($collect['chapter_content']) : '' ?></textarea>
+                            <input type="text" class="form-control" name="chapter_content"
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['chapter_content']) : '' ?>">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="titleLabel">测试书号ID</label>
-                            <input type="text" class="form-control" id="test_id" name="test_id" placeholder="Book URL" value="<?= isset($collect) ? $collect['test_id'] : '' ?>">
+                            <input type="text" class="form-control" id="test_id" name="test_id" placeholder="Book URL"
+                                   value="<?= isset($collect) ? $collect['test_id'] : '' ?>">
                         </div>
                     </div>
 
@@ -107,7 +123,7 @@
 
             </div>
 
-            
+
         </form>
     </div>
 </div>
