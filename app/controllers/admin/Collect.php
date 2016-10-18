@@ -37,7 +37,7 @@ class Collect extends CI_Controller {
             $where       = [
                 'collect_id' => $collect_id,
                 'book_id'    => $book_id,
-                'category'   => $category_id
+                'category_id'=> $category_id
             ];
         }
 
