@@ -27,7 +27,7 @@
                     $num = count($chapter_list);
                     for ($i = $num - 1; $i > ($num - 5); $i--): ?>
                         <div class="col-md-3">
-                            <a href="<?= $book['book_list'] ?><?= $chapter_list[$i]['url'] ?>"><?= $chapter_list[$i]['title'] ?></a>
+                            <a href="<?= $book['chapter_url'] . $chapter_list[$i]['url'] ?>"><?= $chapter_list[$i]['title'] ?></a>
                         </div>
                     <?php endfor; ?>
                     ...
