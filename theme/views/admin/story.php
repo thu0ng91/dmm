@@ -84,11 +84,10 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#story_list_table').dataTable({
+        var table=$('#story_list_table').DataTable({
             language: {
                 'url': '<?=THEMEPATH?>/js/dataTables.zh-CN.json'
             },
-            "stateSave": false,
             "processing": true,
             "serverSide": true,
             "order": [[4, "desc"]],
@@ -135,11 +134,11 @@
             if (!confirm('删除小说将同时删除所有章节！\r\n是否确认删除？')) return;
             var id = $(this).parents('tr').attr('id');
 
-            $.get('<?= site_url('/admin/story/delete/') ?>' + id, function (data) {
+            $.get('<?= site_url('/admin/story/delete/') ?>/' + id, function (data) {
                 if (data) {
                     show_error(data);
                 } else {
-                    window.location.href = '<?= site_url('/admin/story') ?>';
+                    table.row('#'+id).remove().draw();
                 }
             })
         });

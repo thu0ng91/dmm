@@ -102,7 +102,7 @@ ETO
 
         $this->db->delete('story', array('id' => $id));
         $this->db->delete('chapter', array('story_id' => $id)); //删除章节
-        $this->db->delete('update', array('story_id' => $id)); //删除更新
+        $this->db->delete('collect_cache', array('story_id' => $id)); //删除更新
         //redirect('/admin/story');
     }
 

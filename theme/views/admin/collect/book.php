@@ -48,7 +48,7 @@
             } else {
                 $('#collect').append(ch.title + ' ====> ' + html + '&nbsp;&nbsp;');
             }
-            $('#collect').scrollTop($('#collect').scrollHeight);
+            $('#collect').scrollTop($('#collect')[0].scrollHeight);
             i++;
         });
         $('#collect').append('采集完成.');

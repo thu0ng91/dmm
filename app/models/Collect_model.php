@@ -54,8 +54,14 @@ class Collect_model extends CI_Model {
         return $book_info;
     }
 
-    public function getChapterList() {
-        return $this->query->chapterList($this->book_list);
+    public function getChapterList($url,$collect_id=0) {
+        if ($collect_id) {
+            $site = $this->get($collect_id);
+            $this->query->site($site);
+        }
+        $url = $url ? $url : $this->book_list;
+
+        return $this->query->chapterList($url);
     }
 
     public function getChapter($url,$collect_id=0) {

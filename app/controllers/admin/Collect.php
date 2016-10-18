@@ -89,21 +89,19 @@ class Collect extends CI_Controller {
      *
      */
     function unique($arr1, $arr2) {
-        //var_dump($arr1);
+
         foreach ($arr2 as $key => $c) {
+
             $arr2[$key]['order'] = $key;
 
-            $j = 0;
-            foreach ($arr1 as $s) {
-                if ($c['title'] == $s['title']) {
+            foreach ($arr1 as $j=>$s) {
+                if (trim($c['title']) == trim($s['title'])) {
                     unset($arr2[$key]);
                     unset($arr1[$j]);
                     break;
                 }
-                $j++;
             }
         }
-        //var_dump($arr2);
         return $arr2;
     }
 
