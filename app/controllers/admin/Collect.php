@@ -89,7 +89,7 @@ class Collect extends CI_Controller {
      *
      */
     function unique($arr1, $arr2) {
-        var_dump($arr1);
+        //var_dump($arr1);
         foreach ($arr2 as $key => $c) {
             $arr2[$key]['order'] = $key;
 
@@ -103,7 +103,7 @@ class Collect extends CI_Controller {
                 $j++;
             }
         }
-        var_dump($arr2);
+        //var_dump($arr2);
         return $arr2;
     }
 
