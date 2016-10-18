@@ -94,7 +94,7 @@ class Collect_setting extends CI_Controller {
         ];
 
         $this->db->replace('collect', $collect);
-        redirect('admin/collect');
+        redirect('admin/collect_setting');
     }
 
 }
