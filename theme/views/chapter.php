@@ -33,13 +33,13 @@
 
 <ol class="breadcrumb">
     <li><a href="<?= SITEPATH ?>">首页</a></li>
-    <li><a href="<?= site_url('/category/') ?><?= $category['id'] ?>"><?= $category['title'] ?></a></li>
-    <li><a href=" <?= SITEPATH . '/story/' . $prev_next['story_id'] ?>"><?= $story['title'] ?></a></li>
+    <li><a href="<?= site_url('/category/'. $category['id']) ?>"><?= $category['title'] ?></a></li>
+    <li><a href=" <?= site_url( '/story/' . $prev_next['story_id']) ?>"><?= $story['title'] ?></a></li>
     <li class="active"><b><?= $chapter['title'] ?></b></li>
 
     <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
         <a class="btn btn-default"
-           href="<?= $prev_next['prev'] ? site_url(SITEPATH . '/chapter/' . $prev_next['prev']) : site_url(SITEPATH . '/story/' . $prev_next['story_id']) ?>"
+           href="<?= $prev_next['prev'] ? site_url( '/chapter/' . $prev_next['prev']) : site_url( '/story/' . $prev_next['story_id']) ?>"
            id="prev_url" title="上一章">
             <i class="icon-hand-left"></i>
         </a>
@@ -47,7 +47,7 @@
             <i class="icon-list-ul"></i>
         </button>
         <a class="btn btn-default"
-           href="<?= $prev_next['next'] ? site_url(SITEPATH . '/chapter/' . $prev_next['next']) : site_url(SITEPATH . '/story/' . $prev_next['story_id']) ?>"
+           href="<?= $prev_next['next'] ? site_url( '/chapter/' . $prev_next['next']) : site_url( '/story/' . $prev_next['story_id']) ?>"
            id="next_url" title="下一章">
             <i class="icon-hand-right"></i>
         </a>
