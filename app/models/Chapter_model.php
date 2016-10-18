@@ -51,20 +51,19 @@ class Chapter_model extends CI_Model {
         return $this->db->get('chapter')->result_array();
     }
 
-    /**
-     * @param null $story_id
-     * @param null $where
-     *
-     * @return mixed
-     */
-    public function all($story_id = null, $where = null) {
-        if ($where) {
-            $this->db->where($where);
-        }
-        if ($story_id) {
-            $this->db->where('story_id', $story_id);
-        }
-        return $this->db->count_all_results('chapter');
+    public function insert($chapter) {
+        //自动更新ID号
+        $sql='UPDATE chapter_id as a,chapter_id as b set a.id=(b.id+1)';
+
+        $this->db->query($sql);
+        $chapter_id=$this->db->select('id')->from('chapter_id')->limit(1)->get()->row_array();
+        $chapter['id']=$chapter_id['id'];
+        $table_name=$this->get_table_name($chapter['id']);
+        $this->db->replace($table_name,$chapter);
+    }
+
+    public function get_table_name($id) {
+        return 'chapter_'.intval($id)%10;
     }
 
     /**
@@ -111,4 +110,16 @@ class Chapter_model extends CI_Model {
 
         return preg_replace($patterns, $replace, $content);
     }
+
+    public function all($story_id = null, $where = null) {
+        $this->db->select('id');
+        if ($where) {
+            $this->db->where($where);
+        }
+        if ($story_id) {
+            $this->db->where('story_id', $story_id);
+        }
+        return $this->db->count_all_results('chapter');
+    }
+
 }
