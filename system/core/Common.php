@@ -61,7 +61,7 @@ if (!function_exists('is_php')) {
      */
     function is_php($version) {
         static $_is_php;
-        $version = (string) $version;
+        $version = (string)$version;
 
         if (!isset($_is_php[$version])) {
             $_is_php[$version] = version_compare(PHP_VERSION, $version, '>=');
@@ -105,12 +105,14 @@ if (!function_exists('is_really_writable')) {
             fclose($fp);
             @chmod($file, 0777);
             @unlink($file);
+
             return TRUE;
         } elseif (!is_file($file) OR ($fp = @fopen($file, 'ab')) === FALSE) {
             return FALSE;
         }
 
         fclose($fp);
+
         return TRUE;
     }
 }
@@ -132,7 +134,7 @@ if (!function_exists('load_class')) {
      * @return    object
      */
     function &load_class($class, $directory = 'libraries', $param = NULL) {
-        static $_classes = array();
+        static $_classes = [];
 
         // Does the class exist? If so, we're done...
         if (isset($_classes[$class])) {
@@ -143,7 +145,10 @@ if (!function_exists('load_class')) {
 
         // Look for the class first in the local application/libraries folder
         // then in the native system/libraries folder
-        foreach (array(APPPATH, BASEPATH) as $path) {
+        foreach ([
+                     APPPATH,
+                     BASEPATH
+                 ] as $path) {
             if (file_exists($path . $directory . '/' . $class . '.php')) {
                 $name = 'CI_' . $class;
 
@@ -177,6 +182,7 @@ if (!function_exists('load_class')) {
         is_loaded($class);
 
         $_classes[$class] = isset($param) ? new $name($param) : new $name();
+
         return $_classes[$class];
     }
 }
@@ -193,7 +199,7 @@ if (!function_exists('is_loaded')) {
      * @return    array
      */
     function &is_loaded($class = '') {
-        static $_is_loaded = array();
+        static $_is_loaded = [];
 
         if ($class !== '') {
             $_is_loaded[strtolower($class)] = $class;
@@ -216,12 +222,12 @@ if (!function_exists('get_config')) {
      *
      * @return    array
      */
-    function &get_config(Array $replace = array()) {
+    function &get_config(Array $replace = []) {
         static $config;
 
         if (empty($config)) {
             $file_path = APPPATH . 'config/config.php';
-            $found     = FALSE;
+            $found = FALSE;
             if (file_exists($file_path)) {
                 $found = TRUE;
                 require($file_path);
@@ -292,7 +298,7 @@ if (!function_exists('get_mimes')) {
             } elseif (file_exists(APPPATH . 'config/mimes.php')) {
                 $_mimes = include(APPPATH . 'config/mimes.php');
             } else {
-                $_mimes = array();
+                $_mimes = [];
             }
         }
 
@@ -447,8 +453,8 @@ if (!function_exists('set_status_header')) {
         }
 
         if (empty($text)) {
-            is_int($code) OR $code = (int) $code;
-            $stati = array(
+            is_int($code) OR $code = (int)$code;
+            $stati = [
                 100 => 'Continue',
                 101 => 'Switching Protocols',
                 200 => 'OK',
@@ -490,7 +496,7 @@ if (!function_exists('set_status_header')) {
                 503 => 'Service Unavailable',
                 504 => 'Gateway Timeout',
                 505 => 'HTTP Version Not Supported'
-            );
+            ];
 
             if (isset($stati[$code])) {
                 $text = $stati[$code];
@@ -552,7 +558,13 @@ if (!function_exists('_error_handler')) {
         $_error->log_exception($severity, $message, $filepath, $line);
 
         // Should we display the error?
-        if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors'))) {
+        if (str_ireplace([
+            'off',
+            'none',
+            'no',
+            'false',
+            'null'
+        ], '', ini_get('display_errors'))) {
             $_error->show_php_error($severity, $message, $filepath, $line);
         }
 
@@ -584,7 +596,13 @@ if (!function_exists('_exception_handler')) {
         $_error->log_exception('error', 'Exception: ' . $exception->getMessage(), $exception->getFile(), $exception->getLine());
 
         // Should we display the error?
-        if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors'))) {
+        if (str_ireplace([
+            'off',
+            'none',
+            'no',
+            'false',
+            'null'
+        ], '', ini_get('display_errors'))) {
             $_error->show_exception($exception);
         }
 
@@ -631,7 +649,7 @@ if (!function_exists('remove_invisible_characters')) {
      * @return    string
      */
     function remove_invisible_characters($str, $url_encoded = TRUE) {
-        $non_displayables = array();
+        $non_displayables = [];
 
         // every control character except newline (dec 10),
         // carriage return (dec 13) and horizontal tab (dec 09)
@@ -656,7 +674,7 @@ if (!function_exists('html_escape')) {
     /**
      * Returns HTML escaped variable.
      *
-     * @param    mixed $var          The input string or array of strings to be escaped.
+     * @param    mixed $var The input string or array of strings to be escaped.
      * @param    bool $double_encode $double_encode set to FALSE prevents escaping twice.
      *
      * @return    mixed            The escaped string or array of strings as a result.
@@ -703,7 +721,7 @@ if (!function_exists('_stringify_attributes')) {
             return ' ' . $attributes;
         }
 
-        $attributes = (array) $attributes;
+        $attributes = (array)$attributes;
 
         foreach ($attributes as $key => $val) {
             $atts .= ($js) ? $key . '=' . $val . ',' : ' ' . $key . '="' . $val . '"';
@@ -746,7 +764,7 @@ if (!function_exists('function_usable')) {
 
         if (function_exists($function_name)) {
             if (!isset($_suhosin_func_blacklist)) {
-                $_suhosin_func_blacklist = extension_loaded('suhosin') ? explode(',', trim(ini_get('suhosin.executor.func.blacklist'))) : array();
+                $_suhosin_func_blacklist = extension_loaded('suhosin') ? explode(',', trim(ini_get('suhosin.executor.func.blacklist'))) : [];
             }
 
             return !in_array($function_name, $_suhosin_func_blacklist, TRUE);
@@ -770,6 +788,7 @@ if (!function_exists('mkdirs')) {
 
         if (!mkdirs(dirname($dir), $mode)) {
             show_error('创建目录错误，请检查路径是否正确或可写!');
+
             return FALSE;
         }
 
@@ -790,12 +809,19 @@ if (!function_exists('grab_image')) {
 
         if ($url == "") return false;
         if ($filename == "") {
-            $ext     = strtolower(strrchr($url, ".")); //获取扩展名
-            $ext_arr = array(".gif", ".png", ".jpg", ".bmp");
+            $ext = strtolower(strrchr($url, ".")); //获取扩展名
+            $ext_arr = [
+                ".gif",
+                ".png",
+                ".jpg",
+                ".bmp"
+            ];
             //判断扩展名是否为图片
             if (!in_array($ext, $ext_arr)) return false;
             //我就随便将图片文件名保存为时间戳了，你可自行修改
             $filename = time() . $ext;
+        } else if (file_exists($directory . $filename)) {
+            return $directory . $filename;
         }
 
         if ($directory) {
@@ -848,9 +874,20 @@ if (!function_exists('get_encoding')) {
      * @return string
      */
     function get_encoding($data, $to = 'UTF-8') {
-        $encode_arr = array('UTF-8', 'ASCII', 'GBK', 'GB2312', 'BIG5', 'JIS', 'eucjp-win', 'sjis-win', 'EUC-JP');
-        $encoded    = mb_detect_encoding($data, $encode_arr);
-        $data       = mb_convert_encoding($data, $to, $encoded);
+        $encode_arr = [
+            'UTF-8',
+            'ASCII',
+            'GBK',
+            'GB2312',
+            'BIG5',
+            'JIS',
+            'eucjp-win',
+            'sjis-win',
+            'EUC-JP'
+        ];
+        $encoded = mb_detect_encoding($data, $encode_arr);
+        $data = mb_convert_encoding($data, $to, $encoded);
+
         return $data;
     }
 }

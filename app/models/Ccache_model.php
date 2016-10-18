@@ -58,7 +58,7 @@ class Ccache_model extends CI_Model {
         $book = $this->collect->getBookInfo($where['collect_id'], $where['book_id']);
         //$chapter_list = $this->collect->getChapterList();
 
-        $book_image = grab_image($book['book_img'], '', 'books/' . date('Y', time()) . '/');
+        $book_image = grab_image($book['book_img'], md5($book['book_title']), 'books/' . date('Y', time()) . '/');
 
         $story = $this->db->select('id')->where('title', $book['book_title'])->get('story')->row_array();
         if (!$story['title']) {
