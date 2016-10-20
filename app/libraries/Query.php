@@ -77,7 +77,7 @@ class Query {
     }
 
     private function filter($content) {
-        $pattern = "/(全集|全文阅读|下载|作者|作    者|：|:)/i";
+        $pattern = "/(全集|全文阅读|下载|作\s?者|：|:)/i";
         return preg_replace($pattern,'',$content);
     }
 
