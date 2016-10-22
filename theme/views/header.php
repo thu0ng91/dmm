@@ -89,7 +89,7 @@
                 <li><a href="<?= site_url('/admin') ?>">后台</a></li>
                 <?php foreach ($categories as $c): ?>
                     <li class='<?= isset($category_id) && ($category_id == $c['id']) ? 'active' : '' ?>'>
-                        <a href="<?=site_url(SITEPATH .'/category/'.$c['id'])?>"><?= $c['title'] ?></a>
+                        <a href="<?=site_url('/category/'.$c['id'])?>"><?= $c['title'] ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
