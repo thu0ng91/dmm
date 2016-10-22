@@ -138,7 +138,7 @@
                 if (data) {
                     show_error(data);
                 } else {
-                    table.row('#'+id).remove().draw();
+                    table.row('#'+id).remove().draw(false);
                 }
             })
         });
