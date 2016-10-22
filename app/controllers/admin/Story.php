@@ -163,11 +163,11 @@ ETO
                 $i++;
             }
 
-            $update = array(
+            /*$update = array(
                 'story_id' => $story_id, 'story_title' => $story['title'], 'chapter_id' => $this->db->insert_id(),
                 'chapter_title' => $chapters[count($chapters) - 1]['title'], 'time' => date('Y-m-d', time())
             );
-            $this->db->replace('update', $update);
+            $this->db->replace('update', $update);*/
             unlink($data["upload_data"]['full_path']);
             redirect('/admin/story');
         }
