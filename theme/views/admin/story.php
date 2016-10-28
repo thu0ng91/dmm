@@ -16,17 +16,11 @@
             </a>
         </div>
         <div class="pull-right" style="width:100px;">
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" id="selectCategoryName">
-                    选择分类 <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" id="selectCategory">
+            <select id="select_category">
                     <?php foreach ($categorys as $c): ?>
-                    <li id="<?= $c['id'] ?>"><a href="#"><?= $c['title'] ?></a></li>
+                    <option value="<?= $c['id'] ?>"><?= $c['title'] ?></option>
                     <?php endforeach; ?>
-                </ul>
-            </div>
+            </select>
         </div>            
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -136,6 +130,11 @@
             $('#category').val(id);
             $('#selectCategoryName').html($(this).text() + ' <span class="caret"></span>');
         });
+        
+        $('#select_category').change(function() {
+            var id=$(this).val();
+            window.location.href="<?= site_url('/admin/story/')?>/"+id;
+        })
 
         //编辑小说
         $('body').on('click', '.editStory', function () {
