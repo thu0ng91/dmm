@@ -39,6 +39,9 @@ class Query {
             }
         } else {
             $this->book['book_list'] = pq($this->html)->find($this->site['book_list'])->attr('href');
+            if (preg_match('/^((http|ftp|https):\/\/)?[\w-_\.]+(\/[\w-_:\.\[\]]+)*\/?$/',$this->book['book_list'])) {
+                $this->book['book_list']=$this->book['site_url'].$this->book['book_list'];
+            }
         }
 
         //解析章节地址
