@@ -17,6 +17,7 @@
         </div>
         <div class="pull-right" style="width:100px;">
             <select id="select_category">
+                <option value="0">所有分类</option>
                     <?php foreach ($categorys as $c): ?>
                     <option value="<?= $c['id'] ?>" <?= $c['id']==$category_id?'selected':''?> ><?= $c['title'] ?></option>
                     <?php endforeach; ?>
