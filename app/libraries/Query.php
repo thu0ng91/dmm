@@ -41,6 +41,7 @@ class Query {
             $this->book['book_list'] = pq($this->html)->find($this->site['book_list'])->attr('href');
             if (!preg_match('/^((http|https):\/\/)?[\w-_\.]+(\/[\w-_:\.\[\]]+)*\/?$/',$this->book['book_list'])) {
                 $this->book['book_list']=$this->book['site_url'].$this->book['book_list'];
+                echo $this->book['book_list'];
             }
         }
 
