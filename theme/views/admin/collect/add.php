@@ -97,13 +97,13 @@
                         <div class="form-group">
                             <label for="titleLabel">章节地址及标题</label>
                             <input type="text" class="form-control" name="chapter_list"
-                                   value=" <?= isset($collect) ? htmlspecialchars($collect['chapter_list']) : '' ?>">
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['chapter_list']) : '' ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="titleLabel">章节内容地址前缀</label>
                             <input type="text" class="form-control" name="chapter_url"
-                                   value=" <?= isset($collect) ? htmlspecialchars($collect['chapter_url']) : '' ?>">
+                                   value="<?= isset($collect) ? htmlspecialchars($collect['chapter_url']) : '' ?>">
                         </div>
 
                         <div class="form-group">
