@@ -13,17 +13,21 @@ class Story extends CI_Controller {
         $this->load->model('story_model', 'story');
     }
 
-    function index($page = 0) {
+    function index($category_id = null) {
         $this->load->model('category_model', 'category');
 
         $data['categorys'] = $this->category->get();
+        $data['category_id'] = $category_id;
 
         $this->load->view('admin/story', $data);
     }
 
-    function datatable() {
+    function datatable($category_id = null) {
         $search = $this->input->get_post('search');
         $this->load->library('Datatables');
+        if ($category_id) {
+            $this->datatables->where('category_id',$category_id);
+        }
         $this->datatables->select("story.id,category.title as category_title,story.title,author,time,last_update", false)
             ->from('story')
             ->join('category', 'story.category=category.id', 'left')
