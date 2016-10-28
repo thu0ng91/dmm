@@ -87,10 +87,18 @@ ETO
 
     function add() {
         $story = array(
-            'id' => $this->input->post('id'), 'title' => $this->input->post('title'),
-            'author' => $this->input->post('author'), 'category' => $this->input->post('category'),
-            'image' => $this->input->post('image'), 'desc' => $this->input->post('desc')
+            'id' => $this->input->post('id'), 
+            'title' => $this->input->post('title'),
+            'author' => $this->input->post('author'), 
+            'category' => $this->input->post('category'),
+            'image' => $this->input->post('image'), 
+            'last_update' => date('Y-m-d h:i:s'),
+            'desc' => $this->input->post('desc')
         );
+        
+        if (!$story['id']) {
+            $story['time'] = date('Y-m-d h:i:s');
+        }
 
         if (!$story['title']) show_error('小说标题没有输入，请返回重新填写。');
         $this->db->replace('story', $story);
@@ -159,15 +167,10 @@ ETO
             foreach ($chapters as $chapter) {
                 $chapter['order'] = $i;
                 $chapter['story_id'] = $story_id;
-                $this->db->replace('chapter', $chapter);
+                $this->chapter->insert($chapter);
                 $i++;
             }
 
-            /*$update = array(
-                'story_id' => $story_id, 'story_title' => $story['title'], 'chapter_id' => $this->db->insert_id(),
-                'chapter_title' => $chapters[count($chapters) - 1]['title'], 'time' => date('Y-m-d', time())
-            );
-            $this->db->replace('update', $update);*/
             unlink($data["upload_data"]['full_path']);
             redirect('/admin/story');
         }
