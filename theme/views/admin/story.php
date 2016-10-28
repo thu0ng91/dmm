@@ -15,6 +15,19 @@
                 上传文本文件
             </a>
         </div>
+        <div class="pull-right" style="width:100px;">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" id="selectCategoryName">
+                    选择分类 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="selectCategory">
+                    <?php foreach ($categorys as $c): ?>
+                    <li id="<?= $c['id'] ?>"><a href="#"><?= $c['title'] ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>            
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
         <div class="panel-body">
@@ -91,7 +104,7 @@
             "processing": true,
             "serverSide": true,
             "order": [[4, "desc"]],
-            "ajax": "<?= site_url('/admin/story/datatable/') ?>",
+            "ajax": "<?= site_url('/admin/story/datatable/'.$category_id) ?>",
             "columns": [
                 {"data": "title"},
                 {"data": "category_title"},
