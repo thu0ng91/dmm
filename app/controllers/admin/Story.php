@@ -92,14 +92,14 @@ ETO
             'author' => $this->input->post('author'), 
             'category' => $this->input->post('category'),
             'image' => $this->input->post('image'), 
-            'last_update' => date('Y-m-d h:i:s'),
+            'last_update' => date('Y-m-d H:i:s'),
             'desc' => $this->input->post('desc')
         );
         
         if (!$story['title']) show_error('小说标题没有输入，请返回重新填写。');
         
         if (!$story['id']) {
-            $story['time'] = date('Y-m-d h:i:s');
+            $story['time'] = date('Y-m-d H:i:s');
             $this->db->insert('story',$story);
         } else {
             $this->db->where('id',$story['id'])
