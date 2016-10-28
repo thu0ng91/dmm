@@ -26,7 +26,7 @@ class Story extends CI_Controller {
         $search = $this->input->get_post('search');
         $this->load->library('Datatables');
         if ($category_id) {
-            $this->datatables->where('category_id',$category_id);
+            $this->datatables->where('story.category_id',$category_id);
         }
         $this->datatables->select("story.id,category.title as category_title,story.title,author,time,last_update", false)
             ->from('story')
