@@ -18,7 +18,7 @@
         <div class="pull-right" style="width:100px;">
             <select id="select_category">
                     <?php foreach ($categorys as $c): ?>
-                    <option value="<?= $c['id'] ?>"><?= $c['title'] ?></option>
+                    <option value="<?= $c['id'] ?>" <?= $c['id']==$category_id?'selected':''?> ><?= $c['title'] ?></option>
                     <?php endforeach; ?>
             </select>
         </div>            
