@@ -28,11 +28,13 @@ class Story extends CI_Controller {
         if ($category_id) {
             $this->datatables->where('story.category',$category_id);
         }
+        if ($search['value']) {
+            $this->db->like('story.title', $search['value'])
+            ->or_like('story.author', $search['value']);
+        }
         $this->datatables->select("story.id,category.title as category_title,story.title,author,time,last_update", false)
             ->from('story')
             ->join('category', 'story.category=category.id', 'left')
-            ->like('story.title', $search['value'])
-            ->or_like('story.author', $search['value'])
             ->add_column('DT_RowId', '$1', 'id')
             ->add_column('action', <<<ETO
 <div class="dropdown">
